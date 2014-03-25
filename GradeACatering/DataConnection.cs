@@ -30,22 +30,54 @@ namespace GradeACatering
 
         public string AddFoodStuff(FoodStuff fs)
         {
-            //insert a foodstuff entry in the Foodstuffs table
+            //insert a foodstuff entry in the Foodstuff table
             return "work in progress";
             //return success or failure message
         }
 
         public string AddRecipeItem(Recipe r)
         {
-            //insert a recipe entry in the Recipes table
-            return "work in progress";
-            //return success or failure message
+            //insert a recipe entry in the BillOfMaterials table
+            try
+            {
+                string query = "insert into BillOfMaterials(Makes, MadeOf, Quantity) Values(?,?,?)";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount()+ " " + r.Unit;
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                return "Item added.";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
         }
 
         public List<Recipe> ListOfIngredients(string makesID)
         {
             //find all recipe elements that go into the foodstuff with this ID
-            return null;
+            string query = "select * from BillofMaterials where Makes = ?";
+            OleDbCommand cmd = new OleDbCommand(query, conn);
+            cmd.Parameters.Add("?", OleDbType.VarChar).Value = makesID;
+
+            conn.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+
+            List<Recipe> resultBOMs = new List<Recipe>();
+            while(reader.Read())
+            {
+                resultBOMs.Add(new Recipe(reader.GetString(0),reader.GetString(1),reader.GetString(2),reader.GetString(3)));
+            }
+            return resultBOMs;
         }
 
         public List<FoodStuff> ListRecipesBy(string filter, string value)
