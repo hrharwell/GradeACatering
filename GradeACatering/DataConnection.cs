@@ -26,17 +26,6 @@ namespace GradeACatering
             //conn.ConnectionString = connstr;
             conn = new OleDbConnection(connstr);
         }
-       
-        public void OpenDBConnection()
-        {
-            conn.Open();
-        }
-
-        public void CloseDBConnection()
-        {
-            conn.Close();
-        }
-
         //functions to read and write things to the database will go here.
 
         public string AddFoodStuff(FoodStuff fs)
@@ -86,6 +75,7 @@ namespace GradeACatering
 
         public List<string> TestSelectAll()
         {
+            //this isn't quite as neat as the equivalent code in VB.
             string query = "Select * from Testing";
             OleDbCommand cmd = new OleDbCommand(query, conn);
 
@@ -107,11 +97,16 @@ namespace GradeACatering
             {
                 string query = "insert into Testing(testID, testvalue) values (?,?)";
                 OleDbCommand cmd = new OleDbCommand(query, conn);
+                //parameterized queries need their parameters added in the order they're used in the query
+                //first is the placeholder character in the query string above
+                //next is the data type, for string data varchar probably works for most purposes
+                //next is the size of the parameter, for strings this is the length property
+                //set it equal to the variable you want to use in the query.
                 cmd.Parameters.Add("?", OleDbType.VarChar, inID.Length).Value = inID;
                 cmd.Parameters.Add("?", OleDbType.VarChar, inValue.Length).Value = inValue;
                 conn.Open();
 
-                int rowsAdded = cmd.ExecuteNonQuery();
+                int rowsAdded = cmd.ExecuteNonQuery(); //for insertions
 
                 return rowsAdded.ToString() + " rows added.";
             }
