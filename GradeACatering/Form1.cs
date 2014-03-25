@@ -13,6 +13,7 @@ namespace GradeACatering
     public partial class Form1 : Form
     {
         private FoodStuff fsTestItem;
+        private List<Recipe> lstRecipes = new List<Recipe>();
 
         public Form1()
         {
@@ -35,7 +36,7 @@ namespace GradeACatering
             string[] strTagList = fsTestItem.GetTags().Split('#');
             foreach(string element in strTagList)
                 cboTags.Items.Add(element);   
-            */       
+            */      
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
@@ -69,6 +70,49 @@ namespace GradeACatering
                 
                 MessageBox.Show(results+"\n"+insertResults);
             }
+
+        private void btnRecipeAdd_Click(object sender, EventArgs e)
+        {
+            if (txtRecipeMakes.Text == string.Empty || txtRecipeMadeOf.Text == string.Empty)
+            {
+                MessageBox.Show("Makes and MadeOf IDs cannot be blank.");
+            }
+            else
+            {
+                if (txtRecipeQty.Text == string.Empty)
+                {
+                    txtRecipeQty.Text = "NULL";
+                }
+                if (txtRecipeUnit.Text == string.Empty)
+                {
+                    txtRecipeUnit.Text = "NULL";
+                }
+                
+                lstRecipes.Add(new Recipe(txtRecipeMakes.Text, txtRecipeMadeOf.Text, txtRecipeQty.Text, txtRecipeUnit.Text));
+                ListViewItem lvi = new ListViewItem(lstRecipes.Last<Recipe>().Makes);
+                lvi.SubItems.Add(lstRecipes.Last<Recipe>().MadeOf);
+                lvi.SubItems.Add(lstRecipes.Last<Recipe>().FractionAmount());
+                lvi.SubItems.Add(lstRecipes.Last<Recipe>().Unit);
+
+                lbxRecipeList.Items.Add(lvi);
+
+                foreach(Control ctrl in gbxBOM.Controls)
+                {
+                    try
+                    {
+                        ((TextBox)ctrl).Clear();
+                    }
+                    catch (Exception ex) 
+                    {
+
+                    }
+                }
+
+            }
+        }
+
+
+
         }
       
 

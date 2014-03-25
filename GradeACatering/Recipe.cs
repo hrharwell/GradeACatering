@@ -79,16 +79,46 @@ namespace GradeACatering
             get { return unit; }
             set { unit = value; }
         }
-               
+
+        public string Amount()
+        {
+            return FractionAmount() + " " + Unit;
+        }       
+
         public string FractionAmount()
         {
-            return (qAmount.whole.ToString() + " " + qAmount.numerator.ToString() + "/" + qAmount.denominator.ToString());
+            if (qAmount.whole == 0 && qAmount.numerator == 0 && qAmount.denominator == 0)
+            {
+                return "NULL";
+            }
+            else
+            {
+                string returnstring = "";
+                if(qAmount.whole != 0)
+                {
+                    returnstring += qAmount.whole.ToString();
+                }
+
+                if(qAmount.whole != 0 && qAmount.numerator != 0 && qAmount.denominator != 0)
+                {
+                    returnstring += " ";
+                }
+                if(qAmount.numerator != 0 && qAmount.denominator != 0)
+                {
+                     returnstring += qAmount.numerator.ToString() + "/" + qAmount.denominator.ToString();
+                }
+
+                return returnstring;
+            }
+                
         } 
         
         public double DecimalAmount() //may not be needed but it's here
         {
             return (double)qAmount.whole + ((double)(qAmount.numerator) / (double)(qAmount.denominator));
         }
+
+        
 
     }
 }
