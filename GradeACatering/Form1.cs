@@ -32,11 +32,11 @@ namespace GradeACatering
         {
             fsTestItem = new FoodStuff();
             lblTestItem.Text = fsTestItem.ToString();
-           /* 
+            
             string[] strTagList = fsTestItem.GetTags().Split('#');
             foreach(string element in strTagList)
                 cboTags.Items.Add(element);   
-            */      
+                  
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
