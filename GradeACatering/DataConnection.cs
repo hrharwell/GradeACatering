@@ -26,37 +26,58 @@ namespace GradeACatering
             //conn.ConnectionString = connstr;
             conn = new OleDbConnection(connstr);
         }
-       
-        public void OpenDBConnection()
-        {
-            conn.Open();
-        }
-
-        public void CloseDBConnection()
-        {
-            conn.Close();
-        }
-
         //functions to read and write things to the database will go here.
 
         public string AddFoodStuff(FoodStuff fs)
         {
-            //insert a foodstuff entry in the Foodstuffs table
+            //insert a foodstuff entry in the Foodstuff table
             return "work in progress";
             //return success or failure message
         }
 
         public string AddRecipeItem(Recipe r)
         {
-            //insert a recipe entry in the Recipes table
-            return "work in progress";
-            //return success or failure message
+            //insert a recipe entry in the BillOfMaterials table
+            try
+            {
+                string query = "insert into BillOfMaterials(Makes, MadeOf, Quantity) Values(?,?,?)";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount()+ " " + r.Unit;
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                return "Item added.";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
         }
 
         public List<Recipe> ListOfIngredients(string makesID)
         {
             //find all recipe elements that go into the foodstuff with this ID
-            return null;
+            string query = "select * from BillofMaterials where Makes = ?";
+            OleDbCommand cmd = new OleDbCommand(query, conn);
+            cmd.Parameters.Add("?", OleDbType.VarChar).Value = makesID;
+
+            conn.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+
+            List<Recipe> resultBOMs = new List<Recipe>();
+            while(reader.Read())
+            {
+                resultBOMs.Add(new Recipe(reader.GetString(0),reader.GetString(1),reader.GetString(2),reader.GetString(3)));
+            }
+            return resultBOMs;
         }
 
         public List<FoodStuff> ListRecipesBy(string filter, string value)
@@ -86,6 +107,7 @@ namespace GradeACatering
 
         public List<string> TestSelectAll()
         {
+            //this isn't quite as neat as the equivalent code in VB.
             string query = "Select * from Testing";
             OleDbCommand cmd = new OleDbCommand(query, conn);
 
@@ -107,11 +129,16 @@ namespace GradeACatering
             {
                 string query = "insert into Testing(testID, testvalue) values (?,?)";
                 OleDbCommand cmd = new OleDbCommand(query, conn);
+                //parameterized queries need their parameters added in the order they're used in the query
+                //first is the placeholder character in the query string above
+                //next is the data type, for string data varchar probably works for most purposes
+                //next is the size of the parameter, for strings this is the length property
+                //set it equal to the variable you want to use in the query.
                 cmd.Parameters.Add("?", OleDbType.VarChar, inID.Length).Value = inID;
                 cmd.Parameters.Add("?", OleDbType.VarChar, inValue.Length).Value = inValue;
                 conn.Open();
 
-                int rowsAdded = cmd.ExecuteNonQuery();
+                int rowsAdded = cmd.ExecuteNonQuery(); //for insertions
 
                 return rowsAdded.ToString() + " rows added.";
             }

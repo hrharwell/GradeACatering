@@ -10,22 +10,24 @@ namespace GradeACatering
     {
         private struct Quantity
         {
+            //to avoid all the code needed to convert fractions to decimals and back again
+            //I'm going to save the quantities as fractions and mixed numbers instead of decimals
             public int whole;
             public int numerator;
             public int denominator;
-            public string unit;
         }
 
-        private string strMakes, strMadeOf;
+        private string strMakes, strMadeOf, unit;
         Quantity qAmount;
 
-        public Recipe()
+        public Recipe() //default constructor used for testing purposes only, may want to comment out or remove later on.
         {
             Makes = string.Empty;
             MadeOf = string.Empty;
             qAmount.whole = 0;
             qAmount.numerator = 0;
             qAmount.denominator = 1;
+            unit = "tsp";
             
         }
 
@@ -33,6 +35,7 @@ namespace GradeACatering
         {
             Makes = inMakes;
             MadeOf = inMadeOf;
+            Unit = inUnit;
 
             string[] split = inAmount.Split(' ');
 
@@ -50,15 +53,13 @@ namespace GradeACatering
                     int.TryParse(split[0], out qAmount.whole);
                 }
             }
-            else if(split.Length > 1) //more than one substring
+            else if(split.Length > 1) //more than one substring indicates a whole number came first...or they typed something in wrong...
             {
                 int.TryParse(split[0], out qAmount.whole);
                 string[] frac = split[0].Split('/');
                 int.TryParse(frac[0], out qAmount.numerator);
                 int.TryParse(frac[1], out qAmount.denominator);
             }
-
-
         }
                 
         public string Makes
@@ -75,18 +76,49 @@ namespace GradeACatering
 
         public string Unit
         {
-            get { return qAmount.unit; }
-            set { qAmount.unit = value; }
+            get { return unit; }
+            set { unit = value; }
         }
 
-        public double DecimalAmount()
+        public string Amount()
+        {
+            return FractionAmount() + " " + Unit;
+        }       
+
+        public string FractionAmount()
+        {
+            if (qAmount.whole == 0 && qAmount.numerator == 0 && qAmount.denominator == 0)
+            {
+                return "NULL";
+            }
+            else
+            {
+                string returnstring = "";
+                if(qAmount.whole != 0)
+                {
+                    returnstring += qAmount.whole.ToString();
+                }
+
+                if(qAmount.whole != 0 && qAmount.numerator != 0 && qAmount.denominator != 0)
+                {
+                    returnstring += " ";
+                }
+                if(qAmount.numerator != 0 && qAmount.denominator != 0)
+                {
+                     returnstring += qAmount.numerator.ToString() + "/" + qAmount.denominator.ToString();
+                }
+
+                return returnstring;
+            }
+                
+        } 
+        
+        public double DecimalAmount() //may not be needed but it's here
         {
             return (double)qAmount.whole + ((double)(qAmount.numerator) / (double)(qAmount.denominator));
         }
 
-        public string FractionalAmount()
-        {
-            return (qAmount.whole.ToString() + " " + qAmount.numerator.ToString() + "/" + qAmount.denominator.ToString());
-        }
+        
+
     }
 }

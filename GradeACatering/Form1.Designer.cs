@@ -41,6 +41,24 @@
             this.btnConvertDecToFrac = new System.Windows.Forms.Button();
             this.btnTestInsert = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.gbxBOM = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtRecipeMakes = new System.Windows.Forms.TextBox();
+            this.txtRecipeMadeOf = new System.Windows.Forms.TextBox();
+            this.txtRecipeQty = new System.Windows.Forms.TextBox();
+            this.txtRecipeUnit = new System.Windows.Forms.TextBox();
+            this.lbxRecipeList = new System.Windows.Forms.ListView();
+            this.lvcRecipeMakes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcRecipeMadeOf = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcRecipeQty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcRecipeUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnRecipeAdd = new System.Windows.Forms.Button();
+            this.btnRecipeRemove = new System.Windows.Forms.Button();
+            this.btnCommitRecipes = new System.Windows.Forms.Button();
+            this.gbxBOM.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -158,11 +176,159 @@
             this.label3.Text = "Will insert fractional string textbox and decimal textbox contents\r\nif there is t" +
     "ext in them, otherwise returns contents of Testing table.";
             // 
+            // gbxBOM
+            // 
+            this.gbxBOM.Controls.Add(this.btnCommitRecipes);
+            this.gbxBOM.Controls.Add(this.btnRecipeRemove);
+            this.gbxBOM.Controls.Add(this.btnRecipeAdd);
+            this.gbxBOM.Controls.Add(this.lbxRecipeList);
+            this.gbxBOM.Controls.Add(this.txtRecipeUnit);
+            this.gbxBOM.Controls.Add(this.txtRecipeQty);
+            this.gbxBOM.Controls.Add(this.txtRecipeMadeOf);
+            this.gbxBOM.Controls.Add(this.txtRecipeMakes);
+            this.gbxBOM.Controls.Add(this.label7);
+            this.gbxBOM.Controls.Add(this.label6);
+            this.gbxBOM.Controls.Add(this.label5);
+            this.gbxBOM.Controls.Add(this.label4);
+            this.gbxBOM.Location = new System.Drawing.Point(529, 75);
+            this.gbxBOM.Name = "gbxBOM";
+            this.gbxBOM.Size = new System.Drawing.Size(287, 416);
+            this.gbxBOM.TabIndex = 13;
+            this.gbxBOM.TabStop = false;
+            this.gbxBOM.Text = "Bill of Materials items";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(49, 32);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Makes";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(40, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Made Of";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(42, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Quantity";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(62, 113);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(26, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Unit";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txtRecipeMakes
+            // 
+            this.txtRecipeMakes.Location = new System.Drawing.Point(104, 29);
+            this.txtRecipeMakes.Name = "txtRecipeMakes";
+            this.txtRecipeMakes.Size = new System.Drawing.Size(100, 20);
+            this.txtRecipeMakes.TabIndex = 4;
+            // 
+            // txtRecipeMadeOf
+            // 
+            this.txtRecipeMadeOf.Location = new System.Drawing.Point(104, 56);
+            this.txtRecipeMadeOf.Name = "txtRecipeMadeOf";
+            this.txtRecipeMadeOf.Size = new System.Drawing.Size(100, 20);
+            this.txtRecipeMadeOf.TabIndex = 5;
+            // 
+            // txtRecipeQty
+            // 
+            this.txtRecipeQty.Location = new System.Drawing.Point(104, 83);
+            this.txtRecipeQty.Name = "txtRecipeQty";
+            this.txtRecipeQty.Size = new System.Drawing.Size(100, 20);
+            this.txtRecipeQty.TabIndex = 6;
+            // 
+            // txtRecipeUnit
+            // 
+            this.txtRecipeUnit.Location = new System.Drawing.Point(104, 110);
+            this.txtRecipeUnit.Name = "txtRecipeUnit";
+            this.txtRecipeUnit.Size = new System.Drawing.Size(100, 20);
+            this.txtRecipeUnit.TabIndex = 7;
+            // 
+            // lbxRecipeList
+            // 
+            this.lbxRecipeList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcRecipeMakes,
+            this.lvcRecipeMadeOf,
+            this.lvcRecipeQty,
+            this.lvcRecipeUnit});
+            this.lbxRecipeList.Location = new System.Drawing.Point(6, 173);
+            this.lbxRecipeList.Name = "lbxRecipeList";
+            this.lbxRecipeList.Size = new System.Drawing.Size(275, 186);
+            this.lbxRecipeList.TabIndex = 8;
+            this.lbxRecipeList.UseCompatibleStateImageBehavior = false;
+            this.lbxRecipeList.View = System.Windows.Forms.View.Details;
+            // 
+            // lvcRecipeMakes
+            // 
+            this.lvcRecipeMakes.Text = "Makes";
+            // 
+            // lvcRecipeMadeOf
+            // 
+            this.lvcRecipeMadeOf.Text = "Made Of";
+            // 
+            // lvcRecipeQty
+            // 
+            this.lvcRecipeQty.Text = "Quantity";
+            // 
+            // lvcRecipeUnit
+            // 
+            this.lvcRecipeUnit.Text = "Unit";
+            // 
+            // btnRecipeAdd
+            // 
+            this.btnRecipeAdd.Location = new System.Drawing.Point(129, 141);
+            this.btnRecipeAdd.Name = "btnRecipeAdd";
+            this.btnRecipeAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnRecipeAdd.TabIndex = 9;
+            this.btnRecipeAdd.Text = "Add";
+            this.btnRecipeAdd.UseVisualStyleBackColor = true;
+            this.btnRecipeAdd.Click += new System.EventHandler(this.btnRecipeAdd_Click);
+            // 
+            // btnRecipeRemove
+            // 
+            this.btnRecipeRemove.Location = new System.Drawing.Point(6, 365);
+            this.btnRecipeRemove.Name = "btnRecipeRemove";
+            this.btnRecipeRemove.Size = new System.Drawing.Size(75, 34);
+            this.btnRecipeRemove.TabIndex = 10;
+            this.btnRecipeRemove.Text = "Remove Selected";
+            this.btnRecipeRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnCommitRecipes
+            // 
+            this.btnCommitRecipes.Location = new System.Drawing.Point(206, 371);
+            this.btnCommitRecipes.Name = "btnCommitRecipes";
+            this.btnCommitRecipes.Size = new System.Drawing.Size(75, 23);
+            this.btnCommitRecipes.TabIndex = 11;
+            this.btnCommitRecipes.Text = "Save...";
+            this.btnCommitRecipes.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 515);
+            this.ClientSize = new System.Drawing.Size(854, 515);
+            this.Controls.Add(this.gbxBOM);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnTestInsert);
             this.Controls.Add(this.btnConvertDecToFrac);
@@ -179,6 +345,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.gbxBOM.ResumeLayout(false);
+            this.gbxBOM.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,6 +367,23 @@
         private System.Windows.Forms.Button btnConvertDecToFrac;
         private System.Windows.Forms.Button btnTestInsert;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox gbxBOM;
+        private System.Windows.Forms.Button btnCommitRecipes;
+        private System.Windows.Forms.Button btnRecipeRemove;
+        private System.Windows.Forms.Button btnRecipeAdd;
+        private System.Windows.Forms.ListView lbxRecipeList;
+        private System.Windows.Forms.ColumnHeader lvcRecipeMakes;
+        private System.Windows.Forms.ColumnHeader lvcRecipeMadeOf;
+        private System.Windows.Forms.ColumnHeader lvcRecipeQty;
+        private System.Windows.Forms.ColumnHeader lvcRecipeUnit;
+        private System.Windows.Forms.TextBox txtRecipeUnit;
+        private System.Windows.Forms.TextBox txtRecipeQty;
+        private System.Windows.Forms.TextBox txtRecipeMadeOf;
+        private System.Windows.Forms.TextBox txtRecipeMakes;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 
