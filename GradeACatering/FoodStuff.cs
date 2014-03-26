@@ -13,9 +13,9 @@ namespace GradeACatering
         private string strFSID, strName, strDirections, strUnit;
      
         // disabled until we figure out what form the tagging system needs to take
-        // private List<string> lstTags; //or would this be better as just a long, #-delineated string?...
+         private List<string> lstTags; //or would this be better as just a long, #-delineated string?...
         
-        private double dblCost;
+        private double dblCost;  //cost of the whole recipe
         private int intPrepTime, intCookTime, intServingSize; //in minutes
 
         public FoodStuff()
@@ -32,14 +32,15 @@ namespace GradeACatering
             intCookTime = 20;
             intServingSize = 1;
 
-            /*
+            
             lstTags = new List<string>();
             lstTags.Add("TestItem");
             lstTags.Add("PleaseIgnore");
             lstTags.Add("NotForResale");
-            */
+            
         }
 
+        
         public override string ToString()
         {
             string strOut = String.Concat("ID Number: ", ID, "\n",
@@ -48,10 +49,10 @@ namespace GradeACatering
                                           "Unit: ", Unit, "\n",
                                           "Cost: ", Cost, "\n",
                                           "Prep Time: ", PrepTime, "\n",
-                                          "Cook Time: ", CookTime, "\n");//,
-                                         // "Tags: ");
+                                          "Cook Time: ", CookTime, "\n",
+                                         "Tags: ");
 
-            // strOut = String.Concat(strOut,GetTags()); 
+             strOut = String.Concat(strOut,GetTags()); 
             
             return strOut;
         }
@@ -105,7 +106,7 @@ namespace GradeACatering
             set { intServingSize = value; }
         }
         //tag-related functions for reading, adding, and checking to see if a tag is present.
-        /*  Disabled until the tagging subsystem is better defined
+        /*  Disabled until the tagging subsystem is better defined */
         public string GetTags(int index = -1)
         { 
             if (index == -1)
@@ -144,7 +145,11 @@ namespace GradeACatering
             return success;
         }
 
-        /*
+        public double CostPerServing()
+        {
+            return Cost / ServingSize;
+        }
+       /* 
         public bool RemoveTag(string tag)
         {
          
@@ -152,8 +157,8 @@ namespace GradeACatering
             if (HasTag("#"+tag)
             {
             }
-        }
-        */
+        }*/
+        
 
     }
 }
