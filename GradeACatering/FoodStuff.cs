@@ -10,13 +10,13 @@ namespace GradeACatering
 {
     class FoodStuff
     {
-        private string strFSID, strName, strDirections, strUnit;
+        private string strFSID, strName, strDirections;//, strUnit;
      
         // disabled until we figure out what form the tagging system needs to take
          private List<string> lstTags; //or would this be better as just a long, #-delineated string?...
         
         private double dblCost;  //cost of the whole recipe
-        private int intPrepTime, intCookTime, intServingSize; //in minutes
+        private int intPrepTime, intCookTime, intServings; //in minutes
 
         public FoodStuff()
         {
@@ -26,11 +26,11 @@ namespace GradeACatering
             strFSID = "Item01";
             strName = "Test Item";
             strDirections = "1) Gather Things\n2) ???\n3) Profit (maybe)";
-            strUnit = "Instance";
+            //strUnit = "Instance";
             dblCost = 9.95;
             intPrepTime = 30;
             intCookTime = 20;
-            intServingSize = 1;
+            intServings = 1;
 
             
             lstTags = new List<string>();
@@ -46,11 +46,13 @@ namespace GradeACatering
             string strOut = String.Concat("ID Number: ", ID, "\n",
                                           "Item Name: ", Name, "\n",
                                           "Directions: ", Directions, "\n",
-                                          "Unit: ", Unit, "\n",
-                                          "Cost: ", Cost, "\n",
+                                          //"Unit: ", Unit, "\n",
                                           "Prep Time: ", PrepTime, "\n",
                                           "Cook Time: ", CookTime, "\n",
-                                         "Tags: ");
+                                          "Cost: $", Cost, "\n",
+                                          "Servings: ", Servings, "\n",
+                                          "Cost per Serving: $", CostPerServing(), "\n",
+                                          "Tags: ");
 
              strOut = String.Concat(strOut,GetTags()); 
             
@@ -74,13 +76,13 @@ namespace GradeACatering
             get { return strDirections; }
             //same as ID, only set during object creation
         }
-
+/*
         public string Unit //Might be replacing this later, don't get too attached
         {
             get { return strUnit; }
             //same as ID, only set during object creation
         }
-
+*/
         public double Cost
         {
             //needs a means of updating price values
@@ -100,10 +102,10 @@ namespace GradeACatering
             set { intCookTime = value; }
         }
 
-        public int ServingSize
+        public int Servings
         {
-            get { return intServingSize; }
-            set { intServingSize = value; }
+            get { return intServings; }
+            set { intServings = value; }
         }
         //tag-related functions for reading, adding, and checking to see if a tag is present.
         /*  Disabled until the tagging subsystem is better defined */
@@ -147,7 +149,7 @@ namespace GradeACatering
 
         public double CostPerServing()
         {
-            return Cost / ServingSize;
+            return Math.Round(Cost / Servings,2);
         }
        /* 
         public bool RemoveTag(string tag)
