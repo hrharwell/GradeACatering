@@ -20,8 +20,8 @@ namespace GradeACatering
 
         public FoodStuff()
         {
-            //empty constructor
-
+            //default constructor
+            //for testing only
             //Pregenerated testing stuff...
             strFSID = "Item01";
             strName = "Test Item";
@@ -40,6 +40,19 @@ namespace GradeACatering
             
         }
 
+        public FoodStuff(string inID, string inName, string inDirections = null, int inPrep = -1, int inCook = -1,
+                         double inCost = -1.0, int inServing = -1, List<string> inTags = null)
+        {
+            strFSID = inID;
+            strName = inName;
+            strDirections = inDirections;
+            dblCost = inCost;
+            intPrepTime = inPrep;
+            intCookTime = inCook;
+            intServings = inServing;
+
+            lstTags = inTags;
+        }
         
         public override string ToString()
         {
@@ -107,8 +120,12 @@ namespace GradeACatering
             get { return intServings; }
             set { intServings = value; }
         }
+        public double CostPerServing()
+        {
+            return Math.Round(Cost / Servings,2);
+        }
+       
         //tag-related functions for reading, adding, and checking to see if a tag is present.
-        /*  Disabled until the tagging subsystem is better defined */
         public string GetTags(int index = -1)
         { 
             if (index == -1)
@@ -116,7 +133,7 @@ namespace GradeACatering
                 string output = string.Empty;
                 for(int i = 0; i <= lstTags.Count-1; i++)
                 {
-                    output += String.Concat("#",lstTags.ElementAt<string>(i), " ");
+                    output += String.Concat(lstTags.ElementAt<string>(i), ", ");
                 }
                 return output;
             }
@@ -124,22 +141,23 @@ namespace GradeACatering
                 return lstTags.ElementAt<string>(index);
         }
 
-        public bool HasTag(string tagtofind)
+        public int HasTag(string tagtofind)
         {
-            //Iterate through the list of tags, returns true if a string matches, else returns false.
-            bool isFound = false;
-            for (int i = 0; (i <= lstTags.Count - 1) & !isFound; i++)
+            //Iterate through the list of tags, returns 0-based index in list if a string matches, else returns -1.
+            int isFound = -1;
+            for (int i = 0; (i <= lstTags.Count - 1) & isFound == -1; i++)
             {
                 if (tagtofind == lstTags.ElementAt<string>(i))
-                    isFound = true;
+                    isFound = i;
             }
             return isFound;
         }
 
         public bool AddTag(string tagtoadd)
         {
+            //Returns true if tag was added successfully, false if tag already exists.
             bool success = false;
-            if (HasTag(tagtoadd))
+            if (HasTag(tagtoadd) == -1)
             {
                 lstTags.Add(tagtoadd);
                 success = true;
@@ -147,19 +165,19 @@ namespace GradeACatering
             return success;
         }
 
-        public double CostPerServing()
-        {
-            return Math.Round(Cost / Servings,2);
-        }
-       /* 
+
         public bool RemoveTag(string tag)
-        {
-         
+        {         
+            //Returns true if tag was found and removed successfully, false if tag doesn't exist.
             bool success = false;
-            if (HasTag("#"+tag)
+            int targetIndex = HasTag(tag);
+            if (targetIndex >= 0)
             {
+                lstTags.RemoveAt(targetIndex);
+                success = true;
             }
-        }*/
+            return success;
+        }
         
 
     }

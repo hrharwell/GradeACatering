@@ -102,14 +102,6 @@
     <Compile Include="Conversions.cs" />
     <Compile Include="DataConnection.cs" />
     <Compile Include="DecimalToString.cs" />
-    <Compile Include="..\..\..\EntryForm.cs">
-      <SubType>Form</SubType>
-      <Link>EntryForm.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-      <Link>EntryForm.Designer.cs</Link>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,10 +118,6 @@
     <Compile Include="StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="..\..\..\EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-      <Link>EntryForm.resx</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

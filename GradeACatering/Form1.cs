@@ -35,8 +35,16 @@ namespace GradeACatering
             
             string[] strTagList = fsTestItem.GetTags().Split('#');
             foreach(string element in strTagList)
-                cboTags.Items.Add(element);   
-                  
+                cboTags.Items.Add(element);
+
+            lstRecipes = DataConnection.ListOfIngredients();
+            foreach (Recipe r in lstRecipes)
+            {
+                ListViewItem lvi = new ListViewItem(r.Makes);
+                lvi.SubItems.Add(r.MadeOf);
+                lvi.SubItems.Add(r.FractionAmount());
+                lvi.SubItems.Add(r.Unit);
+            }
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
@@ -53,17 +61,17 @@ namespace GradeACatering
         private void btnTestInsert_Click(object sender, EventArgs e)
         {
             string insertResults;
-            DataConnection dc = new DataConnection();
+            //DataConnection dc = new DataConnection();
             if (txtSourceFraction.Text != string.Empty && txtDecimal.Text != string.Empty)
             {            
-                insertResults = dc.TestInsert(txtSourceFraction.Text, txtDecimal.Text);
+                insertResults = DataConnection.TestInsert(txtSourceFraction.Text, txtDecimal.Text);
             }
             else
             {
                 insertResults = "No records added.";
             }
                 string results = string.Empty;
-                foreach(string s in dc.TestSelectAll())
+                foreach(string s in DataConnection.TestSelectAll())
                 {
                      results += s + "\n";
                 }
@@ -81,11 +89,11 @@ namespace GradeACatering
             {
                 if (txtRecipeQty.Text == string.Empty)
                 {
-                    txtRecipeQty.Text = "NULL";
+                    txtRecipeQty.Text = "NULL"; //null entries in the database are entirely okay
                 }
                 if (txtRecipeUnit.Text == string.Empty)
                 {
-                    txtRecipeUnit.Text = "NULL";
+                    txtRecipeUnit.Text = "NULL"; //base ingredients won't need quantity or units since they just refer to themselves
                 }
                 
                 lstRecipes.Add(new Recipe(txtRecipeMakes.Text, txtRecipeMadeOf.Text, txtRecipeQty.Text, txtRecipeUnit.Text));
@@ -95,26 +103,50 @@ namespace GradeACatering
                 lvi.SubItems.Add(lstRecipes.Last<Recipe>().Unit);
 
                 lbxRecipeList.Items.Add(lvi);
+                
 
                 foreach(Control ctrl in gbxBOM.Controls)
                 {
-                    try
-                    {
+                    if (ctrl is TextBox)
                         ((TextBox)ctrl).Clear();
-                    }
-                    catch (Exception ex) 
-                    {
-
-                    }
                 }
 
             }
         }
 
-
-
+        private void btnRecipeRemove_Click(object sender, EventArgs e)
+        {
+            DialogResult ConfirmRemoval = MessageBox.Show("Do you really want to remove these items?", "Confirm", MessageBoxButtons.YesNo);
+            if(ConfirmRemoval == DialogResult.Yes)
+            {
+                if (lbxRecipeList.SelectedIndices.Count == lbxRecipeList.Items.Count)
+                {
+                    lbxRecipeList.Items.Clear();
+                    lstRecipes.Clear();
+                }
+                else
+                {
+                    foreach (int i in lbxRecipeList.SelectedIndices)
+                    {
+                        lstRecipes.RemoveAt(i);
+                        lbxRecipeList.Items.RemoveAt(i);
+                    }
+                }
+            }
         }
-      
+
+        private void btnCommitRecipes_Click(object sender, EventArgs e)
+        {
+            foreach (Recipe r in lstRecipes)
+            {
+                DataConnection.AddRecipeItem(r);
+            }
+        }
+
+
 
     }
+      
+
+}
 

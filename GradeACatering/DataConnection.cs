@@ -7,7 +7,7 @@ using System.Data.OleDb;
 
 namespace GradeACatering
 {
-    class DataConnection
+    static class DataConnection
     {
         /*
          * ==================================================================================================
@@ -17,25 +17,31 @@ namespace GradeACatering
          * 
          * ==================================================================================================
          */
-        private OleDbConnection conn; // = new OleDbConnection();
-        private string connstr;
-        public DataConnection()
-        {
-            connstr = "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
-                      "Data Source = GradeACatering.accdb;"; //defaults, will make these changeable later.
-            //conn.ConnectionString = connstr;
-            conn = new OleDbConnection(connstr);
-        }
+       
+        private static string connstr= "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
+                                       "Data Source = GradeACatering.accdb;"; //defaults, we can make these changeable later if needed
+        private static OleDbConnection conn = new OleDbConnection(connstr);
+        
+        /*
+         * static class needs no constructor
+         public DataConnection()
+         {
+             connstr = "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
+                        "Data Source = GradeACatering.accdb;"; //defaults, will make these changeable later.
+             //conn.ConnectionString = connstr;
+             conn = new OleDbConnection(connstr);
+         }*/
+
         //functions to read and write things to the database will go here.
 
-        public string AddFoodStuff(FoodStuff fs)
+        public static string AddFoodStuff(FoodStuff fs)
         {
             //insert a foodstuff entry in the Foodstuff table
             return "work in progress";
             //return success or failure message
         }
 
-        public string AddRecipeItem(Recipe r)
+        public static string AddRecipeItem(Recipe r)
         {
             //insert a recipe entry in the BillOfMaterials table
             try
@@ -62,12 +68,18 @@ namespace GradeACatering
             
         }
 
-        public List<Recipe> ListOfIngredients(string makesID)
+        public static List<Recipe> ListOfIngredients(string makesID = "")
         {
             //find all recipe elements that go into the foodstuff with this ID
-            string query = "select * from BillofMaterials where Makes = ?";
+            //if no id given, returns contents of entire BillofMaterials table
+            string query = "select * from BillofMaterials";
+            if (makesID != "")
+            {
+                query += " where Makes = ?";
+            }
             OleDbCommand cmd = new OleDbCommand(query, conn);
-            cmd.Parameters.Add("?", OleDbType.VarChar).Value = makesID;
+            if(makesID != "")
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = makesID;
 
             conn.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -80,10 +92,10 @@ namespace GradeACatering
             return resultBOMs;
         }
 
-        public List<FoodStuff> ListRecipesBy(string filter, string value)
+        public static List<FoodStuff> ListRecipesBy(string filter, string value)
         {
-            //return a list of foodstuffs filtered based on this value
-            //i.e. the list of ingredients contains a particular ingredient.
+            //return a list of foodstuffs filtered based on the given filter's value
+            //i.e. the tag list contains a particular tag.
             return null;
         }
         /*
@@ -91,7 +103,7 @@ namespace GradeACatering
          * Test methods targeting the Test table in the database, remove prior to release
          * ===============================================================================
          */
-        public string TestConnection()
+        public static string TestConnection()
         {
             try
             {
@@ -105,7 +117,7 @@ namespace GradeACatering
             }
         }
 
-        public List<string> TestSelectAll()
+        public static List<string> TestSelectAll()
         {
             //this isn't quite as neat as the equivalent code in VB.
             string query = "Select * from Testing";
@@ -123,7 +135,7 @@ namespace GradeACatering
             return resultset;
         }
 
-        public string TestInsert(string inID, string inValue)
+        public static string TestInsert(string inID, string inValue)
         {
             try
             {
