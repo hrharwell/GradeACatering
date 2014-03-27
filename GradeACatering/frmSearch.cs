@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace GradeACatering
 {
-    public partial class StartForm : Form
+    public partial class frmSearch : Form
     {
-        public StartForm()
+        public frmSearch()
         {
             InitializeComponent();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
         }
     }
 }
