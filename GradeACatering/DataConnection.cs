@@ -34,9 +34,31 @@ namespace GradeACatering
 
         //functions to read and write things to the database will go here.
 
-        public static string AddFoodStuff(FoodStuff fs)
+        public static string AddFoodStuff(FoodStuff fs, List<Recipe> ingredients)
         {
             //insert a foodstuff entry in the Foodstuff table
+            //will use comma-delineated string for the tags
+            try
+            {
+                string query = "insert into Foodstuff values(?,?,?,?,?,?,?,?)";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;
+                //and the rest of them....
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                foreach (Recipe r in ingredients)
+                    AddRecipeItem(r);
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
             return "work in progress";
             //return success or failure message
         }
@@ -54,7 +76,7 @@ namespace GradeACatering
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
-
+                
                 return "Item added.";
             }
             catch (Exception ex)
@@ -66,6 +88,34 @@ namespace GradeACatering
                 conn.Close();
             }
             
+        }
+
+        public static string AddRecipeItem(List<Recipe> rlist)
+        {
+            //functionally very similar to the individual insertion but can do more than one at a time.
+            /*
+            try
+            {
+                string query = "insert into BillOfMaterials(Makes, MadeOf, Quantity) Values(?,?,?)";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount() + " " + r.Unit;
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                return "Item added.";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            */
         }
 
         public static List<Recipe> ListOfIngredients(string makesID = "")
@@ -89,6 +139,7 @@ namespace GradeACatering
             {
                 resultBOMs.Add(new Recipe(reader.GetString(0),reader.GetString(1),reader.GetString(2),reader.GetString(3)));
             }
+            conn.Close();
             return resultBOMs;
         }
 
@@ -132,6 +183,7 @@ namespace GradeACatering
             {
                 resultset.Add(reader.GetString(0) + " " + reader.GetString(1));
             }
+            conn.Close();
             return resultset;
         }
 
@@ -151,7 +203,7 @@ namespace GradeACatering
                 conn.Open();
 
                 int rowsAdded = cmd.ExecuteNonQuery(); //for insertions
-
+                conn.Close();
                 return rowsAdded.ToString() + " rows added.";
             }
             catch (Exception ex)

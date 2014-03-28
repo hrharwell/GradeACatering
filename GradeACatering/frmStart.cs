@@ -29,11 +29,7 @@ namespace GradeACatering
            efTest.ShowDialog();
         }
 
-        private void btnEntryfrm_Click(object sender, EventArgs e)
-        {
-            EntryForm efEntry = new EntryForm();
-            efEntry.ShowDialog(); 
-        }
+     
 
         private void btnNewMeal_Click(object sender, EventArgs e)
         {

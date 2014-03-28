@@ -32,16 +32,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutRecipeMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSearchfrm = new System.Windows.Forms.Button();
-            this.btnEntryfrm = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnNewMeal = new System.Windows.Forms.Button();
             this.btnMealOrders = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
-            this.fullScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutRecipeMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,6 +81,12 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
+            // fullScreenToolStripMenuItem
+            // 
+            this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
+            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.fullScreenToolStripMenuItem.Text = "Full Screen";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -89,6 +94,12 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutRecipeMeToolStripMenuItem
+            // 
+            this.aboutRecipeMeToolStripMenuItem.Name = "aboutRecipeMeToolStripMenuItem";
+            this.aboutRecipeMeToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.aboutRecipeMeToolStripMenuItem.Text = "About RecipeMe";
             // 
             // btnSearchfrm
             // 
@@ -100,19 +111,8 @@
             this.btnSearchfrm.UseVisualStyleBackColor = true;
             this.btnSearchfrm.Click += new System.EventHandler(this.btnSearchfrm_Click);
             // 
-            // btnEntryfrm
-            // 
-            this.btnEntryfrm.Location = new System.Drawing.Point(165, 31);
-            this.btnEntryfrm.Name = "btnEntryfrm";
-            this.btnEntryfrm.Size = new System.Drawing.Size(124, 51);
-            this.btnEntryfrm.TabIndex = 3;
-            this.btnEntryfrm.Text = "New Entry";
-            this.btnEntryfrm.UseVisualStyleBackColor = true;
-            this.btnEntryfrm.Click += new System.EventHandler(this.btnEntryfrm_Click);
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnEntryfrm);
             this.groupBox1.Controls.Add(this.btnSearchfrm);
             this.groupBox1.Location = new System.Drawing.Point(41, 86);
             this.groupBox1.Name = "groupBox1";
@@ -161,18 +161,6 @@
             this.btnTestfrm.UseVisualStyleBackColor = true;
             this.btnTestfrm.Click += new System.EventHandler(this.btnTestfrm_Click);
             // 
-            // fullScreenToolStripMenuItem
-            // 
-            this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
-            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fullScreenToolStripMenuItem.Text = "Full Screen";
-            // 
-            // aboutRecipeMeToolStripMenuItem
-            // 
-            this.aboutRecipeMeToolStripMenuItem.Name = "aboutRecipeMeToolStripMenuItem";
-            this.aboutRecipeMeToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.aboutRecipeMeToolStripMenuItem.Text = "About RecipeMe";
-            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,7 +191,6 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Button btnSearchfrm;
-        private System.Windows.Forms.Button btnEntryfrm;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnNewMeal;
