@@ -93,15 +93,19 @@ namespace GradeACatering
         public static string AddRecipeItem(List<Recipe> rlist)
         {
             //functionally very similar to the individual insertion but can do more than one at a time.
-            /*
+           
             try
             {
-                string query = "insert into BillOfMaterials(Makes, MadeOf, Quantity) Values(?,?,?)";
-                OleDbCommand cmd = new OleDbCommand(query, conn);
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount() + " " + r.Unit;
-
+                string query = "insert into BillOfMaterials(Makes, MadeOf, Quantity) Values";
+                //Values(?,?,?)";
+                OleDbCommand cmd = new OleDbCommand();
+                foreach (Recipe r in rlist)
+                {
+                    query += "(?,?,?)";
+                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
+                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
+                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount() + " " + r.Unit;
+                }
                 conn.Open();
                 cmd.ExecuteNonQuery();
 
@@ -115,7 +119,8 @@ namespace GradeACatering
             {
                 conn.Close();
             }
-            */
+            
+            
         }
 
         public static List<Recipe> ListOfIngredients(string makesID = "")
