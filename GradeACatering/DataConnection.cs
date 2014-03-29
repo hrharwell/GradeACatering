@@ -34,17 +34,8 @@ namespace GradeACatering
             if (conn.State != System.Data.ConnectionState.Open)
                 conn.Close();
         }
-        /*
-         * static class needs no constructor
-         public DataConnection()
-         {
-             connstr = "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
-                        "Data Source = GradeACatering.accdb;"; //defaults, will make these changeable later.
-             //conn.ConnectionString = connstr;
-             conn = new OleDbConnection(connstr);
-         }*/
-
-        //functions to read and write things to the database will go here.
+        
+        //functions to read from, update in, and add to the database
 
         public static string AddFoodStuff(FoodStuff fs, List<Recipe> ingredients)
         {
@@ -91,6 +82,10 @@ namespace GradeACatering
 
             //TODO:
             //verify the record exists, if it does then update the designated column with the new value.
+            
+            //Potentially ugly hack to make this work is to just update every field regardless of whether they were
+            //altered or not, overwriting with the same values for unaltered fields.
+            //it might be slower but would save the headache of trying to pick and choose the fields we need to write to.
             
         }
 
@@ -178,6 +173,8 @@ namespace GradeACatering
             }
         }
 
+        
+
         public static List<Recipe> ListOfIngredients(string makesID = "")
         {
             //find all recipe elements that go into the foodstuff with this ID
@@ -201,6 +198,39 @@ namespace GradeACatering
             }
             DataConnection.CloseConnection();
             return resultRMs;
+        }
+
+        public static List<FoodStuff> ListAllFoodstuffs()
+        {
+            //displays all foodstuffs that are not atomic items (that is, base ingredients
+            //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are identical
+            //are atomic items.  These are the ones we DO NOT want this function to return.
+
+            List<FoodStuff> lstFoods = new List<FoodStuff>();
+            string query = "Select * from Foodstuffs where FoodstuffID = (select Makes from RecipeMaterials where Makes != MadeOf)";
+            OleDbCommand cmd = new OleDbCommand(query, conn);
+            DataConnection.OpenConnection();
+            OleDbDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                           reader.GetString(1),
+                                           reader.GetString(2),
+                                           reader.GetInt32(3),
+                                           reader.GetInt32(4),
+                                           reader.GetDouble(5),
+                                           reader.GetInt32(6));
+                //tokenize the tags from their long string stored in the database.
+                string[] strTagList = reader.GetString(7).Split(',');
+                foreach (string t in strTagList)
+                    fs.AddTag(t);
+                
+
+                lstFoods.Add(fs);
+            }
+            return lstFoods;
         }
 
         public static List<FoodStuff> ListRecipesBy(string filter, string value)
