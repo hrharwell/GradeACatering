@@ -19,13 +19,13 @@ namespace GradeACatering
 
         private void btnSearchfrm_Click(object sender, EventArgs e)
         {
-            frmSearch Search = new frmSearch();
+            frmSearchRecipes Search = new frmSearchRecipes();
             Search.ShowDialog();
         }
 
         private void btnTestfrm_Click(object sender, EventArgs e)
         {
-           Form1 Testform = new Form1();
+           frmTest Testform = new frmTest();
            Testform.ShowDialog();
         }
 
@@ -46,7 +46,13 @@ namespace GradeACatering
         private void button2_Click(object sender, EventArgs e)
         {
             frmNewIngredient NewIngredient = new frmNewIngredient();
-            NewIngredient.Show();
+            NewIngredient.ShowDialog();
+        }
+
+        private void btnSeeAllRecipes_Click(object sender, EventArgs e)
+        {
+            frmShowAllRecipes ShowAllRecipes = new frmShowAllRecipes();
+            ShowAllRecipes.ShowDialog();
         }
     }
 }

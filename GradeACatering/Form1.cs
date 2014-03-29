@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace GradeACatering
 {
-    public partial class Form1 : Form
+    public partial class frmTest : Form
     {
         private FoodStuff fsTestItem;
         private List<Recipe> lstRecipes = new List<Recipe>();
 
-        public Form1()
+        public frmTest()
         {
             InitializeComponent();
         }

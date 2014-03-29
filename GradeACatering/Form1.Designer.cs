@@ -1,6 +1,6 @@
 ﻿namespace GradeACatering
 {
-    partial class Form1
+    partial class frmTest
     {
         /// <summary>
         /// Required designer variable.
@@ -326,7 +326,7 @@
             this.label4.Text = "Makes";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Form1
+            // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -345,8 +345,8 @@
             this.Controls.Add(this.cboTags);
             this.Controls.Add(this.lblTestItem);
             this.Controls.Add(this.btnExit);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "frmTest";
+            this.Text = "Test Form!";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.gbxBOM.ResumeLayout(false);
             this.gbxBOM.PerformLayout();
