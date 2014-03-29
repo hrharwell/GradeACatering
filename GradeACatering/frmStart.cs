@@ -19,28 +19,34 @@ namespace GradeACatering
 
         private void btnSearchfrm_Click(object sender, EventArgs e)
         {
-            frmSearch efSearch = new frmSearch();
-            efSearch.ShowDialog();
+            frmSearch Search = new frmSearch();
+            Search.ShowDialog();
         }
 
         private void btnTestfrm_Click(object sender, EventArgs e)
         {
-           Form1 efTest = new Form1();
-           efTest.ShowDialog();
+           Form1 Testform = new Form1();
+           Testform.ShowDialog();
         }
 
      
 
         private void btnNewMeal_Click(object sender, EventArgs e)
         {
-            frmMealCreate efMealCreate = new frmMealCreate();
-            efMealCreate.ShowDialog();
+            frmMealCreate MealCreate = new frmMealCreate();
+            MealCreate.ShowDialog();
         }
 
         private void btnNewRecipe_Click(object sender, EventArgs e)
         {
-            frmRecipeEntry efRecipeEntry = new frmRecipeEntry();
-            efRecipeEntry.ShowDialog();
+            frmRecipeEntry RecipeEntry = new frmRecipeEntry();
+            RecipeEntry.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmNewIngredient NewIngredient = new frmNewIngredient();
+            NewIngredient.Show();
         }
     }
 }

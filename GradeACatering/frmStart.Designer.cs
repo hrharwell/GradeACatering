@@ -42,9 +42,13 @@
             this.btnMealOrders = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
             this.btnNewRecipe = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRawIngr = new System.Windows.Forms.Button();
+            this.btnAddIngr = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -173,11 +177,42 @@
             this.btnNewRecipe.UseVisualStyleBackColor = true;
             this.btnNewRecipe.Click += new System.EventHandler(this.btnNewRecipe_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnRawIngr);
+            this.groupBox3.Controls.Add(this.btnAddIngr);
+            this.groupBox3.Location = new System.Drawing.Point(423, 60);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(161, 156);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Recipes";
+            // 
+            // btnRawIngr
+            // 
+            this.btnRawIngr.Location = new System.Drawing.Point(18, 83);
+            this.btnRawIngr.Name = "btnRawIngr";
+            this.btnRawIngr.Size = new System.Drawing.Size(124, 51);
+            this.btnRawIngr.TabIndex = 3;
+            this.btnRawIngr.Text = "Add Basic Ingredients";
+            this.btnRawIngr.UseVisualStyleBackColor = true;
+            // 
+            // btnAddIngr
+            // 
+            this.btnAddIngr.Location = new System.Drawing.Point(18, 26);
+            this.btnAddIngr.Name = "btnAddIngr";
+            this.btnAddIngr.Size = new System.Drawing.Size(124, 51);
+            this.btnAddIngr.TabIndex = 2;
+            this.btnAddIngr.Text = "Add Ingredient ";
+            this.btnAddIngr.UseVisualStyleBackColor = true;
+            this.btnAddIngr.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 347);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnTestfrm);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -190,6 +225,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,5 +247,8 @@
         private System.Windows.Forms.ToolStripMenuItem fullScreenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutRecipeMeToolStripMenuItem;
         private System.Windows.Forms.Button btnNewRecipe;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnRawIngr;
+        private System.Windows.Forms.Button btnAddIngr;
     }
 }

@@ -49,10 +49,10 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
         {
-            if (lsvIngrediants.Items.Count != -1)
-            {
-                
-            }
+            //if (lsvIngrediants.SelectedIndices )
+            //{
+              
+            //}
         }
     }
 }

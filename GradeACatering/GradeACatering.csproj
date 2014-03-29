@@ -112,6 +112,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FoodStuff.cs" />
+    <Compile Include="frmEntrySpash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntrySpash.Designer.cs">
+      <DependentUpon>frmEntrySpash.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMealCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntrySpash.resx">
+      <DependentUpon>frmEntrySpash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMealCreate.resx">
       <DependentUpon>frmMealCreate.cs</DependentUpon>
