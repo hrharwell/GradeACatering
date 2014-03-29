@@ -105,12 +105,6 @@
     <Compile Include="Conversions.cs" />
     <Compile Include="DataConnection.cs" />
     <Compile Include="DecimalToString.cs" />
-    <Compile Include="EntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +124,12 @@
     <Compile Include="frmNewIngredient.Designer.cs">
       <DependentUpon>frmNewIngredient.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRecipeEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecipeEntry.Designer.cs">
+      <DependentUpon>frmRecipeEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,9 +145,6 @@
     <Compile Include="frmStart.Designer.cs">
       <DependentUpon>frmStart.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewIngredient.resx">
       <DependentUpon>frmNewIngredient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecipeEntry.resx">
+      <DependentUpon>frmRecipeEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearch.resx">
       <DependentUpon>frmSearch.cs</DependentUpon>

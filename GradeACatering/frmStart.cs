@@ -36,5 +36,11 @@ namespace GradeACatering
             frmMealCreate efMealCreate = new frmMealCreate();
             efMealCreate.ShowDialog();
         }
+
+        private void btnNewRecipe_Click(object sender, EventArgs e)
+        {
+            frmRecipeEntry efRecipeEntry = new frmRecipeEntry();
+            efRecipeEntry.ShowDialog();
+        }
     }
 }

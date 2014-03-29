@@ -41,6 +41,7 @@
             this.btnNewMeal = new System.Windows.Forms.Button();
             this.btnMealOrders = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
+            this.btnNewRecipe = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,6 +114,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnNewRecipe);
             this.groupBox1.Controls.Add(this.btnSearchfrm);
             this.groupBox1.Location = new System.Drawing.Point(41, 86);
             this.groupBox1.Name = "groupBox1";
@@ -161,6 +163,16 @@
             this.btnTestfrm.UseVisualStyleBackColor = true;
             this.btnTestfrm.Click += new System.EventHandler(this.btnTestfrm_Click);
             // 
+            // btnNewRecipe
+            // 
+            this.btnNewRecipe.Location = new System.Drawing.Point(179, 31);
+            this.btnNewRecipe.Name = "btnNewRecipe";
+            this.btnNewRecipe.Size = new System.Drawing.Size(124, 51);
+            this.btnNewRecipe.TabIndex = 3;
+            this.btnNewRecipe.Text = "Enter Recipe";
+            this.btnNewRecipe.UseVisualStyleBackColor = true;
+            this.btnNewRecipe.Click += new System.EventHandler(this.btnNewRecipe_Click);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,5 +210,6 @@
         private System.Windows.Forms.Button btnTestfrm;
         private System.Windows.Forms.ToolStripMenuItem fullScreenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutRecipeMeToolStripMenuItem;
+        private System.Windows.Forms.Button btnNewRecipe;
     }
 }

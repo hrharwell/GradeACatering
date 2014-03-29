@@ -305,6 +305,7 @@
             this.btnAddIng.TabIndex = 9;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
             // 
             // lsvIngrediants
             // 
