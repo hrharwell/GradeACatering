@@ -33,7 +33,7 @@ namespace GradeACatering
             fsTestItem = new FoodStuff();
             lblTestItem.Text = fsTestItem.ToString();
             
-            string[] strTagList = fsTestItem.GetTags().Split('#');
+            string[] strTagList = fsTestItem.GetTags().Split(',');
             foreach(string element in strTagList)
                 cboTags.Items.Add(element);
 

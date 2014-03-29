@@ -135,8 +135,8 @@ namespace GradeACatering
                 string output = string.Empty;
                 for(int i = 0; i <= lstTags.Count-1; i++)
                 {
-                    output += String.Concat(lstTags.ElementAt<string>(i), ", ");
-                    //when splitting this string back into individual tags, use ", " as the demarcation
+                    output += String.Concat(lstTags.ElementAt<string>(i), ",");
+                    //when splitting this string back into individual tags, use "," as the demarcation
                 }
                 return output;
             }
