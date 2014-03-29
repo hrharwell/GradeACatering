@@ -13,11 +13,10 @@ namespace GradeACatering
         private string strFSID, strName, strDirections;//, strUnit;
      
         // disabled until we figure out what form the tagging system needs to take
-         private List<string> lstTags; //or would this be better as just a long, #-delineated string?...
-        
-        private double dblCost;  //cost of the whole recipe
+        private List<string> lstTags; //or would this be better as just a long, #-delineated string?...    
         private int intPrepTime, intCookTime, intServings; //in minutes
-
+        private double dblCost;  //cost of the whole recipe
+       
         public FoodStuff()
         {
             //default constructor
@@ -27,10 +26,10 @@ namespace GradeACatering
             strName = "Test Item";
             strDirections = "1) Gather Things\n2) ???\n3) Profit (maybe)";
             //strUnit = "Instance";
-            dblCost = 9.95;
             intPrepTime = 30;
             intCookTime = 20;
             intServings = 1;
+            dblCost = 9.95;
 
             
             lstTags = new List<string>();
@@ -43,6 +42,7 @@ namespace GradeACatering
         public FoodStuff(string inID, string inName, string inDirections = null, int inPrep = -1, int inCook = -1,
                          double inCost = -1.0, int inServing = -1, List<string> inTags = null)
         {
+            //This is a constructor for generating a placeholder item: basically just a name and ID
             strFSID = inID;
             strName = inName;
             strDirections = inDirections;
@@ -87,7 +87,8 @@ namespace GradeACatering
         public string Directions
         {
             get { return strDirections; }
-            //same as ID, only set during object creation
+            //on the off-chance they find a better way of making something, this lets the directions be updatable.
+            set { strDirections = value; }
         }
 /*
         public string Unit //Might be replacing this later, don't get too attached
@@ -128,18 +129,22 @@ namespace GradeACatering
         //tag-related functions for reading, adding, and checking to see if a tag is present.
         public string GetTags(int index = -1)
         { 
+            //returns a tag based on its index value.  -1 will return the entire list of tags.
             if (index == -1)
             {
                 string output = string.Empty;
                 for(int i = 0; i <= lstTags.Count-1; i++)
                 {
                     output += String.Concat(lstTags.ElementAt<string>(i), ", ");
+                    //when splitting this string back into individual tags, use ", " as the demarcation
                 }
                 return output;
             }
             else
                 return lstTags.ElementAt<string>(index);
         }
+
+        
 
         public int HasTag(string tagtofind)
         {
