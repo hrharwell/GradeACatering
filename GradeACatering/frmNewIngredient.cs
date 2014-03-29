@@ -39,5 +39,10 @@ int intI = lsvIngrediants.Items.Count;
     }
            
 }
+
+private void textBox1_TextChanged(object sender, EventArgs e)
+{
+    
+}
 }
 }

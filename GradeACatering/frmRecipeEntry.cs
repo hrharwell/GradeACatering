@@ -12,15 +12,18 @@ namespace GradeACatering
 {
     public partial class frmRecipeEntry : Form
     {
+        Boolean blnValid = false;
+
         public frmRecipeEntry()
         {
             InitializeComponent();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmNewIngredient efNewIngr = new frmNewIngredient();
-            efNewIngr.ShowDialog();
+            frmNewIngredient NewIngrFrm = new frmNewIngredient();
+            NewIngrFrm.ShowDialog();
         }
 
         private void btnAddIng_Click(object sender, EventArgs e)
@@ -58,11 +61,29 @@ namespace GradeACatering
         private void btnSaveRecipe_Click(object sender, EventArgs e)
         {
             DialogResult button = MessageBox.Show("Are you sure you want to save this data?", "Save Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+           
+    //        if (blnValid = true)
+    //{
+    //    Add stuff into food stuff class and into database
+    //}
+	{
+		 
+	}
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
+           
+            DialogResult button = MessageBox.Show("Unsaved data will be lost, are you sure you want to leave?", "Unsaved Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             ActiveForm.Close();
+           
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            int intI = DataConnection.ListOfIngredients().Count;
+            
+            
         }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtCookDirections = new System.Windows.Forms.TextBox();
+            this.txtPrepDirections = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveRecipe = new System.Windows.Forms.Button();
@@ -50,20 +50,20 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCookTime = new System.Windows.Forms.TextBox();
+            this.txtPrepTime = new System.Windows.Forms.TextBox();
+            this.txtPriceSold = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtNotes = new System.Windows.Forms.TextBox();
+            this.txtTags = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
@@ -76,8 +76,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox6);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.txtCookDirections);
+            this.groupBox2.Controls.Add(this.txtPrepDirections);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(550, 24);
@@ -87,21 +87,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Directions";
             // 
-            // textBox6
+            // txtCookDirections
             // 
-            this.textBox6.Location = new System.Drawing.Point(18, 166);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(213, 110);
-            this.textBox6.TabIndex = 8;
+            this.txtCookDirections.Location = new System.Drawing.Point(18, 166);
+            this.txtCookDirections.Multiline = true;
+            this.txtCookDirections.Name = "txtCookDirections";
+            this.txtCookDirections.Size = new System.Drawing.Size(213, 110);
+            this.txtCookDirections.TabIndex = 8;
             // 
-            // textBox5
+            // txtPrepDirections
             // 
-            this.textBox5.Location = new System.Drawing.Point(18, 38);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(213, 110);
-            this.textBox5.TabIndex = 7;
+            this.txtPrepDirections.Location = new System.Drawing.Point(18, 38);
+            this.txtPrepDirections.Multiline = true;
+            this.txtPrepDirections.Name = "txtPrepDirections";
+            this.txtPrepDirections.Size = new System.Drawing.Size(213, 110);
+            this.txtPrepDirections.TabIndex = 7;
             // 
             // label5
             // 
@@ -272,12 +272,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox9);
+            this.groupBox1.Controls.Add(this.txtServingSize);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtCookTime);
+            this.groupBox1.Controls.Add(this.txtPrepTime);
+            this.groupBox1.Controls.Add(this.txtPriceSold);
+            this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label3);
@@ -290,12 +290,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Info";
             // 
-            // textBox9
+            // txtServingSize
             // 
-            this.textBox9.Location = new System.Drawing.Point(132, 135);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(54, 20);
-            this.textBox9.TabIndex = 10;
+            this.txtServingSize.Location = new System.Drawing.Point(132, 135);
+            this.txtServingSize.Name = "txtServingSize";
+            this.txtServingSize.Size = new System.Drawing.Size(54, 20);
+            this.txtServingSize.TabIndex = 10;
             // 
             // label10
             // 
@@ -306,33 +306,36 @@
             this.label10.TabIndex = 9;
             this.label10.Text = "Serving Size/unit";
             // 
-            // textBox4
+            // txtCookTime
             // 
-            this.textBox4.Location = new System.Drawing.Point(131, 113);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(54, 20);
-            this.textBox4.TabIndex = 8;
+            this.txtCookTime.Location = new System.Drawing.Point(131, 113);
+            this.txtCookTime.Name = "txtCookTime";
+            this.txtCookTime.Size = new System.Drawing.Size(54, 20);
+            this.txtCookTime.TabIndex = 8;
             // 
-            // textBox3
+            // txtPrepTime
             // 
-            this.textBox3.Location = new System.Drawing.Point(131, 88);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(54, 20);
-            this.textBox3.TabIndex = 7;
+            this.txtPrepTime.Location = new System.Drawing.Point(131, 88);
+            this.txtPrepTime.Name = "txtPrepTime";
+            this.txtPrepTime.Size = new System.Drawing.Size(54, 20);
+            this.txtPrepTime.TabIndex = 7;
             // 
-            // textBox2
+            // txtPriceSold
             // 
-            this.textBox2.Location = new System.Drawing.Point(131, 64);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(54, 20);
-            this.textBox2.TabIndex = 6;
+            this.txtPriceSold.Location = new System.Drawing.Point(131, 64);
+            this.txtPriceSold.Name = "txtPriceSold";
+            this.txtPriceSold.Size = new System.Drawing.Size(54, 20);
+            this.txtPriceSold.TabIndex = 6;
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(70, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtName.Location = new System.Drawing.Point(70, 38);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(115, 20);
+            this.txtName.TabIndex = 5;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // label8
             // 
@@ -381,8 +384,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox7);
-            this.groupBox4.Controls.Add(this.textBox8);
+            this.groupBox4.Controls.Add(this.txtNotes);
+            this.groupBox4.Controls.Add(this.txtTags);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Location = new System.Drawing.Point(298, 314);
@@ -392,21 +395,21 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
             // 
-            // textBox7
+            // txtNotes
             // 
-            this.textBox7.Location = new System.Drawing.Point(246, 38);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(213, 110);
-            this.textBox7.TabIndex = 8;
+            this.txtNotes.Location = new System.Drawing.Point(246, 38);
+            this.txtNotes.Multiline = true;
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(213, 110);
+            this.txtNotes.TabIndex = 8;
             // 
-            // textBox8
+            // txtTags
             // 
-            this.textBox8.Location = new System.Drawing.Point(18, 38);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(213, 110);
-            this.textBox8.TabIndex = 7;
+            this.txtTags.Location = new System.Drawing.Point(18, 38);
+            this.txtTags.Multiline = true;
+            this.txtTags.Name = "txtTags";
+            this.txtTags.Size = new System.Drawing.Size(213, 110);
+            this.txtTags.TabIndex = 7;
             // 
             // label14
             // 
@@ -475,8 +478,8 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtCookDirections;
+        private System.Windows.Forms.TextBox txtPrepDirections;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSaveRecipe;
@@ -496,20 +499,20 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox txtServingSize;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCookTime;
+        private System.Windows.Forms.TextBox txtPrepTime;
+        private System.Windows.Forms.TextBox txtPriceSold;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtNotes;
+        private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnClear;
