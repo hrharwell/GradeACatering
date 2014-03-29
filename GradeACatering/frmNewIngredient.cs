@@ -19,7 +19,7 @@ public partial class frmNewIngredient : Form
 
     private void button2_Click(object sender, EventArgs e)
     {
-            
+        ActiveForm.Close();      
     }
 
 private void btnAddIng_Click(object sender, EventArgs e)

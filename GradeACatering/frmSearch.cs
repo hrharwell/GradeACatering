@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GradeACatering
 {
-    public partial class frmSearch : Form
+    public partial class frmSearchRecipes : Form
     {
-        public frmSearch()
+        public frmSearchRecipes()
         {
             InitializeComponent();
         }
@@ -24,7 +24,19 @@ namespace GradeACatering
 
         private void button2_Click(object sender, EventArgs e)
         {
+         
             ActiveForm.Close();
+        }
+
+        private void frmSearchRecipes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDisplayRecipe_Click(object sender, EventArgs e)
+        {
+            frmDisplayRecipe DisplayRecipe = new frmDisplayRecipe();
+            DisplayRecipe.ShowDialog();
         }
     }
 }
