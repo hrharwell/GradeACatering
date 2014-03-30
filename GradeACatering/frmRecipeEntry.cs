@@ -60,8 +60,80 @@ namespace GradeACatering
 
         private void btnSaveRecipe_Click(object sender, EventArgs e)
         {
-            DialogResult button = MessageBox.Show("Are you sure you want to save this data?", "Save Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-           
+            /*
+             * Here's what this is needing to do:
+             * Validate the various fields on the form:
+             *      Name must exist
+             *      Rest are optional but if they do exist:
+             *          PriceSold is a double
+             *          ServingSize, PrepTime, CookTime are integers
+             *      Check if entries in the ingredients list (which are matched to foodstuffs) exist
+             *      in the foodstuff master list.
+             *          If they do exist, get their IDs and generate Recipe items to link this new item to them.
+             *          If they do NOT exist, prompt user whether to make generic entries for them
+             *              (i.e. ID and Name, rest being null)
+             *              Then make Recipe entries from these new foodstuffs we just made.
+             *      Once that's done, we can push to database...I think...
+             *          -Dustin
+             */
+            if (true) //really this is the level you'd do validation at
+            {
+                DialogResult button = MessageBox.Show("Are you sure you want to save this data?", "Save Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if (button == DialogResult.Yes)
+                {
+                    //they clicked yes, go about adding it
+                    //generate the id
+                    string newID = txtName.Text.Substring(0, 4);//grab the first 3 or 4 characters of the name
+                    newID += (frmStart.fsMasterList.Count()+1).ToString("0000#");
+                    List<string> newTags = new List<String>();
+                    for (int i = 0; i <= lbxTags.Items.Count; i++)
+			        {
+			            newTags.Add(lbxTags.Items[i].ToString());
+			        }
+                    FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtPrepDirections.Text + "\n\n" + txtCookDirections.Text,
+                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPrepTime.Text),
+                                                    Convert.ToInt32(txtServingSize.Text), newTags);
+                    List<Recipe> newItemIngredients = new List<Recipe>();
+                    if(lsvIngrediants.Items.Count == 0)
+                    {
+                        //no ingredients listed, so treat this as an atomic item?
+                        //which kind of defeats the purpose of the separate ingredient entry but whatever
+                        //FIX IT LATER
+                        newItemIngredients.Add(new Recipe(newID, newID,"",""));
+                        //atomic items have the same Makes and MadeOf IDs. (i.e. all-purpose flour is made of itself)
+                    }
+                    else
+                    {
+                        foreach(ListViewItem lvi in lsvIngrediants.Items)
+                        {
+                            //check to see whether the item exists or not.
+                            //preferably in the master list on frmStart...
+                            if (frmStart.fsMasterList.Exists(Foodstuff => Foodstuff.Name == lvi.SubItems[0].Text))
+                            {
+                                newItemIngredients.Add(new Recipe(newID, (frmStart.fsMasterList.Find(FoodStuff => FoodStuff.Name == lvi.SubItems[0].Text)).ID,
+                                                       lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                            }
+                            else
+                            {
+                                //Did not find a match...
+                                //Complain that items don't exist or are undefined?
+                                //make dummy entries?
+                                //what do we want to do?
+
+                                //maybe prompt them for whether they want to go ahead and make a blank entry?
+                                MessageBox.Show("One or more of these ingredients couldn't be found.  Would you like to add them?", "", MessageBoxButtons.YesNoCancel);
+                            }
+			            }
+                    }
+                    
+                    frmStart.fsMasterList.Add(newFS);
+
+
+                    DataConnection.AddFoodStuff(newFS, newItemIngredients);
+                }
+
+            }
+            //    FoodStuff fs = new FoodStuff(txtName.Text,
     //        if (blnValid = true)
     //{
     //    Add stuff into food stuff class and into database
@@ -81,8 +153,19 @@ namespace GradeACatering
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
+            //take this out later
+            /*
             int intI = DataConnection.ListOfIngredients().Count;
-            
+            for (int i = 0; i < intI; i++)
+            {
+                if (txtName.Text == "Something in the Database")
+                {
+                    frmStart.fsMasterList.Count();
+                    //Create unique Id with name and autogenerated number
+                    //Enable all txt boxes in form to be filled
+                    
+                }
+            }*/
             
         }
     }

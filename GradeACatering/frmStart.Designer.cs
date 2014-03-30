@@ -37,16 +37,16 @@
             this.aboutRecipeMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSearchfrm = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSeeAllRecipes = new System.Windows.Forms.Button();
+            this.btnNewRecipe = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnNewMeal = new System.Windows.Forms.Button();
             this.btnMealOrders = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
-            this.btnNewRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnAddIngr = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSeeAllRecipes = new System.Windows.Forms.Button();
             this.bbtnShowAllIngredient = new System.Windows.Forms.Button();
+            this.btnAddIngr = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -130,6 +130,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recipes";
             // 
+            // btnSeeAllRecipes
+            // 
+            this.btnSeeAllRecipes.Location = new System.Drawing.Point(25, 109);
+            this.btnSeeAllRecipes.Name = "btnSeeAllRecipes";
+            this.btnSeeAllRecipes.Size = new System.Drawing.Size(124, 51);
+            this.btnSeeAllRecipes.TabIndex = 4;
+            this.btnSeeAllRecipes.Text = "Show All Recipes";
+            this.btnSeeAllRecipes.UseVisualStyleBackColor = true;
+            this.btnSeeAllRecipes.Click += new System.EventHandler(this.btnSeeAllRecipes_Click);
+            // 
+            // btnNewRecipe
+            // 
+            this.btnNewRecipe.Location = new System.Drawing.Point(179, 31);
+            this.btnNewRecipe.Name = "btnNewRecipe";
+            this.btnNewRecipe.Size = new System.Drawing.Size(124, 51);
+            this.btnNewRecipe.TabIndex = 3;
+            this.btnNewRecipe.Text = "Enter New Recipe";
+            this.btnNewRecipe.UseVisualStyleBackColor = true;
+            this.btnNewRecipe.Click += new System.EventHandler(this.btnNewRecipe_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label2);
@@ -141,6 +161,15 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Meals";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "*Coming Soon";
             // 
             // btnNewMeal
             // 
@@ -171,16 +200,6 @@
             this.btnTestfrm.UseVisualStyleBackColor = true;
             this.btnTestfrm.Click += new System.EventHandler(this.btnTestfrm_Click);
             // 
-            // btnNewRecipe
-            // 
-            this.btnNewRecipe.Location = new System.Drawing.Point(179, 31);
-            this.btnNewRecipe.Name = "btnNewRecipe";
-            this.btnNewRecipe.Size = new System.Drawing.Size(124, 51);
-            this.btnNewRecipe.TabIndex = 3;
-            this.btnNewRecipe.Text = "Enter New Recipe";
-            this.btnNewRecipe.UseVisualStyleBackColor = true;
-            this.btnNewRecipe.Click += new System.EventHandler(this.btnNewRecipe_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.bbtnShowAllIngredient);
@@ -192,6 +211,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ingredients";
             // 
+            // bbtnShowAllIngredient
+            // 
+            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(18, 103);
+            this.bbtnShowAllIngredient.Name = "bbtnShowAllIngredient";
+            this.bbtnShowAllIngredient.Size = new System.Drawing.Size(124, 51);
+            this.bbtnShowAllIngredient.TabIndex = 3;
+            this.bbtnShowAllIngredient.Text = "Show All Ingredients";
+            this.bbtnShowAllIngredient.UseVisualStyleBackColor = true;
+            // 
             // btnAddIngr
             // 
             this.btnAddIngr.Location = new System.Drawing.Point(18, 26);
@@ -201,34 +229,6 @@
             this.btnAddIngr.Text = "Add New Ingredient ";
             this.btnAddIngr.UseVisualStyleBackColor = true;
             this.btnAddIngr.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "*Coming Soon";
-            // 
-            // btnSeeAllRecipes
-            // 
-            this.btnSeeAllRecipes.Location = new System.Drawing.Point(25, 109);
-            this.btnSeeAllRecipes.Name = "btnSeeAllRecipes";
-            this.btnSeeAllRecipes.Size = new System.Drawing.Size(124, 51);
-            this.btnSeeAllRecipes.TabIndex = 4;
-            this.btnSeeAllRecipes.Text = "Show All Recipes";
-            this.btnSeeAllRecipes.UseVisualStyleBackColor = true;
-            this.btnSeeAllRecipes.Click += new System.EventHandler(this.btnSeeAllRecipes_Click);
-            // 
-            // bbtnShowAllIngredient
-            // 
-            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(18, 103);
-            this.bbtnShowAllIngredient.Name = "bbtnShowAllIngredient";
-            this.bbtnShowAllIngredient.Size = new System.Drawing.Size(124, 51);
-            this.bbtnShowAllIngredient.TabIndex = 3;
-            this.bbtnShowAllIngredient.Text = "Show All Ingredients";
-            this.bbtnShowAllIngredient.UseVisualStyleBackColor = true;
             // 
             // frmStart
             // 
@@ -244,6 +244,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmStart";
             this.Text = "Main Menu";
+            this.Load += new System.EventHandler(this.frmStart_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

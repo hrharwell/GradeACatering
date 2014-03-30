@@ -62,12 +62,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtNotes = new System.Windows.Forms.TextBox();
-            this.txtTags = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
+            this.lbxTags = new System.Windows.Forms.ListBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnAddToTagList = new System.Windows.Forms.Button();
+            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -384,8 +386,10 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtNotes);
-            this.groupBox4.Controls.Add(this.txtTags);
+            this.groupBox4.Controls.Add(this.btnRemoveSelectedTag);
+            this.groupBox4.Controls.Add(this.btnAddToTagList);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.lbxTags);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Location = new System.Drawing.Point(298, 314);
@@ -394,22 +398,6 @@
             this.groupBox4.TabIndex = 21;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
-            // 
-            // txtNotes
-            // 
-            this.txtNotes.Location = new System.Drawing.Point(246, 38);
-            this.txtNotes.Multiline = true;
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(213, 110);
-            this.txtNotes.TabIndex = 8;
-            // 
-            // txtTags
-            // 
-            this.txtTags.Location = new System.Drawing.Point(18, 38);
-            this.txtTags.Multiline = true;
-            this.txtTags.Name = "txtTags";
-            this.txtTags.Size = new System.Drawing.Size(213, 110);
-            this.txtTags.TabIndex = 7;
             // 
             // label14
             // 
@@ -448,6 +436,39 @@
             this.btnReturn.Text = "Return to Main Menu";
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // lbxTags
+            // 
+            this.lbxTags.FormattingEnabled = true;
+            this.lbxTags.Location = new System.Drawing.Point(18, 58);
+            this.lbxTags.Name = "lbxTags";
+            this.lbxTags.Size = new System.Drawing.Size(211, 95);
+            this.lbxTags.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(139, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // btnAddToTagList
+            // 
+            this.btnAddToTagList.Location = new System.Drawing.Point(163, 30);
+            this.btnAddToTagList.Name = "btnAddToTagList";
+            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
+            this.btnAddToTagList.TabIndex = 9;
+            this.btnAddToTagList.Text = "Add Tag";
+            this.btnAddToTagList.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveSelectedTag
+            // 
+            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 119);
+            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
+            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
+            this.btnRemoveSelectedTag.TabIndex = 10;
+            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
+            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
             // 
             // frmRecipeEntry
             // 
@@ -511,11 +532,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnReturn;
+        private System.Windows.Forms.Button btnAddToTagList;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox lbxTags;
+        private System.Windows.Forms.Button btnRemoveSelectedTag;
     }
 }
