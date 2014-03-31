@@ -12,7 +12,7 @@ namespace GradeACatering
 {
     public partial class frmRecipeEntry : Form
     {
-        Boolean blnValid = false;
+        string ErrMessage;
 
         public frmRecipeEntry()
         {
@@ -34,6 +34,9 @@ namespace GradeACatering
                 lsvIngredients.Items.Add(cboIng.Text);
                 lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
                 lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
 
             }
             else
@@ -42,12 +45,26 @@ namespace GradeACatering
                 MessageBox.Show(ErrMessage);
             }
         }
+        public IEnumerable<Control> GetAll(Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, type)).Concat(controls).Where
+                   (c => c.GetType() == type);
+        }
 
         private void btnNewFrm_Click(object sender, EventArgs e)
         {
            //Clear the form....
-           
-            
+            var cntrlCollections = GetAll(this,typeof(TextBox));
+
+            foreach (Control ctrl in cntrlCollections )
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Text = " ";
+                }
+            }
         }
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
@@ -81,7 +98,8 @@ namespace GradeACatering
              *      Once that's done, we can push to database...I think...
              *          -Dustin
              */
-            if (true) //really this is the level you'd do validation at
+            blnValidate();
+            if (blnValidate() == true) //really this is the level you'd do validation at
             {
                 DialogResult button = MessageBox.Show("Are you sure you want to save this data?", "Save Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (button == DialogResult.Yes)
@@ -164,6 +182,10 @@ namespace GradeACatering
                 }
 
             }
+            else
+            {
+                MessageBox.Show(ErrMessage);
+            }
             //    FoodStuff fs = new FoodStuff(txtName.Text,
     //        if (blnValid = true)
     //{
@@ -199,5 +221,109 @@ namespace GradeACatering
             }*/
             
         }
+
+        public Boolean blnValidate()
+    {
+            Boolean blnValid = false;
+       
+       
+             if (txtName.Text == "" )
+        {
+         blnValid = false;
+         if (txtPriceSold.Text != "")
+         {
+             string Str = txtPriceSold.Text.Trim();
+             double Num;
+             double MaxNum = 100000;
+             
+             if (double.TryParse(Str, out Num))
+             {
+                 if (Num > MaxNum)
+                 {
+                     blnValid = false;
+                     ErrMessage = "Invalid number";
+                 }
+             }
+             else
+             {
+                 blnValid = false;
+                 ErrMessage = "Please enter a numerical price";
+             }
+         }
+        
+       }  return blnValid;
+          
+            
+        
+        
+        
+    }
+
+        private void btnAddToTagList_Click(object sender, EventArgs e)
+        {
+            
+            lbxTags.Items.Add(txtTags.Text);
+        }
+
+        private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
+        {
+            lbxTags.SelectedItems.Clear();
+        }
+
+        private void btnAddIng_Click_1(object sender, EventArgs e)
+        {
+            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);
+                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
+
+            }
+            else
+            {
+                ErrMessage = "Please Enter an Ingredient";
+                MessageBox.Show(ErrMessage);
+            }   
+        }
+
+        private void btnDeleteIng_Click_1(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            }
+
+            
+        }
+
+        private void btnEditIng_Click(object sender, EventArgs e)
+        {
+            
+           /*Adds the names of the items to the cbo.text
+            * 
+            * The deletes the old ingredient from the lsvView
+            * 
+            * 
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            } */
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //  Create new Ingredient Form
+
+            frmNewIngredient NewIngrFrm = new frmNewIngredient();
+
+            // Add the name and qty and unit type to new form then open it
+
+            NewIngrFrm.ShowDialog();
+        }
+       
     }
 }

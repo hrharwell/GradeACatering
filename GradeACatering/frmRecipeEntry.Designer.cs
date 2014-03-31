@@ -64,10 +64,9 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
             this.btnAddToTagList = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTags = new System.Windows.Forms.TextBox();
             this.lbxTags = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
@@ -155,47 +154,47 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(176, 182);
+            this.button1.Location = new System.Drawing.Point(178, 184);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 21;
+            this.button1.TabIndex = 31;
             this.button1.Text = "Define Item";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(182, 223);
+            this.label11.Location = new System.Drawing.Point(184, 225);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 13);
-            this.label11.TabIndex = 18;
+            this.label11.TabIndex = 30;
             this.label11.Text = "Type";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(145, 223);
+            this.label9.Location = new System.Drawing.Point(147, 225);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(23, 13);
-            this.label9.TabIndex = 17;
+            this.label9.TabIndex = 29;
             this.label9.Text = "Qty";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 223);
+            this.label6.Location = new System.Drawing.Point(21, 225);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 16;
+            this.label6.TabIndex = 28;
             this.label6.Text = "Name";
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(148, 239);
+            this.txtQty.Location = new System.Drawing.Point(150, 241);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(31, 20);
-            this.txtQty.TabIndex = 15;
+            this.txtQty.TabIndex = 27;
             // 
             // cboUnit
             // 
@@ -203,47 +202,49 @@
             this.cboUnit.Items.AddRange(new object[] {
             "lb",
             "oz"});
-            this.cboUnit.Location = new System.Drawing.Point(185, 239);
+            this.cboUnit.Location = new System.Drawing.Point(187, 241);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(66, 21);
-            this.cboUnit.TabIndex = 13;
+            this.cboUnit.TabIndex = 26;
             // 
             // cboIng
             // 
             this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(18, 239);
+            this.cboIng.Location = new System.Drawing.Point(20, 241);
             this.cboIng.Name = "cboIng";
             this.cboIng.Size = new System.Drawing.Size(121, 21);
-            this.cboIng.TabIndex = 12;
+            this.cboIng.TabIndex = 25;
             // 
             // btnEditIng
             // 
-            this.btnEditIng.Location = new System.Drawing.Point(60, 182);
+            this.btnEditIng.Location = new System.Drawing.Point(62, 184);
             this.btnEditIng.Name = "btnEditIng";
             this.btnEditIng.Size = new System.Drawing.Size(45, 23);
-            this.btnEditIng.TabIndex = 11;
+            this.btnEditIng.TabIndex = 24;
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
+            this.btnEditIng.Visible = false;
+            this.btnEditIng.Click += new System.EventHandler(this.btnEditIng_Click);
             // 
             // btnDeleteIng
             // 
-            this.btnDeleteIng.Location = new System.Drawing.Point(111, 182);
+            this.btnDeleteIng.Location = new System.Drawing.Point(113, 184);
             this.btnDeleteIng.Name = "btnDeleteIng";
             this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
-            this.btnDeleteIng.TabIndex = 10;
+            this.btnDeleteIng.TabIndex = 23;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
-            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click_1);
             // 
             // btnAddIng
             // 
-            this.btnAddIng.Location = new System.Drawing.Point(18, 182);
+            this.btnAddIng.Location = new System.Drawing.Point(20, 184);
             this.btnAddIng.Name = "btnAddIng";
             this.btnAddIng.Size = new System.Drawing.Size(36, 23);
-            this.btnAddIng.TabIndex = 9;
+            this.btnAddIng.TabIndex = 22;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
-            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click_1);
             // 
             // lsvIngredients
             // 
@@ -388,13 +389,12 @@
             // 
             this.groupBox4.Controls.Add(this.btnRemoveSelectedTag);
             this.groupBox4.Controls.Add(this.btnAddToTagList);
-            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.txtTags);
             this.groupBox4.Controls.Add(this.lbxTags);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Location = new System.Drawing.Point(298, 314);
+            this.groupBox4.Location = new System.Drawing.Point(363, 314);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(499, 164);
+            this.groupBox4.Size = new System.Drawing.Size(329, 164);
             this.groupBox4.TabIndex = 21;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
@@ -407,6 +407,7 @@
             this.btnRemoveSelectedTag.TabIndex = 10;
             this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
             this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
+            this.btnRemoveSelectedTag.Click += new System.EventHandler(this.btnRemoveSelectedTag_Click);
             // 
             // btnAddToTagList
             // 
@@ -416,13 +417,14 @@
             this.btnAddToTagList.TabIndex = 9;
             this.btnAddToTagList.Text = "Add Tag";
             this.btnAddToTagList.UseVisualStyleBackColor = true;
+            this.btnAddToTagList.Click += new System.EventHandler(this.btnAddToTagList_Click);
             // 
-            // textBox1
+            // txtTags
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(139, 20);
-            this.textBox1.TabIndex = 8;
+            this.txtTags.Location = new System.Drawing.Point(18, 32);
+            this.txtTags.Name = "txtTags";
+            this.txtTags.Size = new System.Drawing.Size(139, 20);
+            this.txtTags.TabIndex = 8;
             // 
             // lbxTags
             // 
@@ -440,15 +442,6 @@
             this.label14.Size = new System.Drawing.Size(175, 13);
             this.label14.TabIndex = 5;
             this.label14.Text = "Tags (Ex. #Jon Doe\'s#Favorite Pie)";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(243, 11);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(84, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Additional Notes";
             // 
             // btnClear
             // 
@@ -505,16 +498,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSaveRecipe;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtQty;
-        private System.Windows.Forms.ComboBox cboUnit;
-        private System.Windows.Forms.ComboBox cboIng;
-        private System.Windows.Forms.Button btnEditIng;
-        private System.Windows.Forms.Button btnDeleteIng;
-        private System.Windows.Forms.Button btnAddIng;
         private System.Windows.Forms.ListView lsvIngredients;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -532,13 +515,22 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnAddToTagList;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Button btnRemoveSelectedTag;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtQty;
+        private System.Windows.Forms.ComboBox cboUnit;
+        private System.Windows.Forms.ComboBox cboIng;
+        private System.Windows.Forms.Button btnEditIng;
+        private System.Windows.Forms.Button btnDeleteIng;
+        private System.Windows.Forms.Button btnAddIng;
     }
 }

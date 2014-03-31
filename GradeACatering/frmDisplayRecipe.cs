@@ -16,5 +16,102 @@ namespace GradeACatering
         {
             InitializeComponent();
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
+        }
+
+        private void btnEditRecipe_Click(object sender, EventArgs e)
+        {
+            if (btnEditRecipe.Text == "Edit Recipe")
+            {
+               txtName.Enabled = true;
+            txtPriceSold.Enabled = true;
+            txtPrepTime.Enabled = true;
+            txtCookTime.Enabled = true;
+            txtCookDir.Enabled = true;
+            txtPrepDir.Enabled = true;
+            txtTags.Enabled = true;
+            txtServingSize.Enabled = true;
+            cboIng.Enabled = true;
+            cboUnit.Enabled = true;
+            txtQty.Enabled = true;
+            btnAddIng.Enabled = true;
+            btnEditIng.Enabled = true;
+            btnDeleteIng.Enabled = true;
+            btnEditRecipe.Text = "Save";
+  
+            }
+            else
+            {
+                //Save Data...once we figure out how
+
+                //then
+                btnEditRecipe.Text = "Edit Recipe";
+                txtName.Enabled = false;
+                txtPriceSold.Enabled = false;
+                txtPrepTime.Enabled = false;
+                txtCookTime.Enabled = false;
+                txtCookDir.Enabled = false;
+                txtPrepDir.Enabled = false;
+                txtTags.Enabled = false;
+                txtServingSize.Enabled = false;
+                cboIng.Enabled = false;
+                cboUnit.Enabled =false;
+                txtQty.Enabled = false;
+                btnAddIng.Enabled = false;
+                btnEditIng.Enabled = false;
+                btnDeleteIng.Enabled = false;
+            }
+           
+            //foreach (TextBox textbox in frmDisplayRecipe.);
+            //{
+                
+            //}
+        }
+
+        private void btnAddIng_Click(object sender, EventArgs e)
+        {
+            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);
+                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
+
+            }
+            else
+            {
+                string ErrMessage = "Please Enter an Ingredient";
+                MessageBox.Show(ErrMessage);
+            }
+        }
+
+        private void btnDeleteIng_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            }
+        }
+
+        private void btnAddToTagList_Click(object sender, EventArgs e)
+        {
+            lbxTags.Items.Add(txtTags.Text);
+        }
+
+        private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
+        {
+            lbxTags.SelectedItems.Clear();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            lblComingSoon.Visible = true;
+        }
     }
 }
