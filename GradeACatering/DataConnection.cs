@@ -48,10 +48,10 @@ namespace GradeACatering
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Directions;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.PrepTime;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.CookTime;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Cost;
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Servings;
+                cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.PrepTime;
+                cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.CookTime;
+                cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Cost;
+                cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Servings;
                 //Comma-and-space delineated list of the tags.
                 //When tokenizing or splitting tags, use ", " for the demarcation.
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.GetTags();
@@ -208,7 +208,7 @@ namespace GradeACatering
             List<FoodStuff> lstFoods = new List<FoodStuff>();
             try
             {              
-                string query = "Select * from Foodstuffs where FoodstuffID = (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
+                string query = "Select * from Foodstuff where FoodstuffID = (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 DataConnection.OpenConnection();
                 OleDbDataReader reader = cmd.ExecuteReader();

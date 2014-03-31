@@ -91,10 +91,13 @@ namespace GradeACatering
                     string newID = txtName.Text.Substring(0, 4);//grab the first 3 or 4 characters of the name
                     newID += (frmStart.fsMasterList.Count()+1).ToString("0000#");
                     List<string> newTags = new List<String>();
-                    for (int i = 0; i <= lbxTags.Items.Count; i++)
-			        {
-			            newTags.Add(lbxTags.Items[i].ToString());
-			        }
+                    if (lbxTags.Items.Count > 0)
+                    {
+                        for (int i = 0; i <= lbxTags.Items.Count; i++)
+                        {
+                            newTags.Add(lbxTags.Items[i].ToString());
+                        }
+                    }
                     FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtPrepDirections.Text + "\n\n" + txtCookDirections.Text,
                                                     Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPrepTime.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);

@@ -32,5 +32,22 @@ namespace GradeACatering
         {
             // Open recipe entry with fill in data
         }
+
+        private void frmShowAllRecipes_Load(object sender, EventArgs e)
+        {
+
+          // Imports all items from the recipes list into listview...
+            foreach (FoodStuff fs in DataConnection.ListAllFoodstuffs())
+            {
+                ListViewItem lsvItem = new ListViewItem(fs.Name);
+                lsvItem.SubItems.Add(fs.Servings.ToString());
+                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C"));
+                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                lsvAllRecipes.Items.Add(lsvItem);
+            }
+         
+        }
     }
 }

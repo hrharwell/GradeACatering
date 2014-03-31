@@ -33,20 +33,33 @@
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.btnReturnToMenu = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lsvAllRecipes
             // 
-            this.lsvAllRecipes.Location = new System.Drawing.Point(41, 86);
+            this.lsvAllRecipes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lsvAllRecipes.Location = new System.Drawing.Point(41, 55);
             this.lsvAllRecipes.Name = "lsvAllRecipes";
-            this.lsvAllRecipes.Size = new System.Drawing.Size(642, 347);
+            this.lsvAllRecipes.Size = new System.Drawing.Size(548, 347);
             this.lsvAllRecipes.TabIndex = 0;
             this.lsvAllRecipes.UseCompatibleStateImageBehavior = false;
             this.lsvAllRecipes.View = System.Windows.Forms.View.Details;
             // 
             // btnOpenRecipe
             // 
-            this.btnOpenRecipe.Location = new System.Drawing.Point(41, 459);
+            this.btnOpenRecipe.Location = new System.Drawing.Point(41, 430);
             this.btnOpenRecipe.Name = "btnOpenRecipe";
             this.btnOpenRecipe.Size = new System.Drawing.Size(84, 44);
             this.btnOpenRecipe.TabIndex = 1;
@@ -56,7 +69,7 @@
             // 
             // btnEditRecipe
             // 
-            this.btnEditRecipe.Location = new System.Drawing.Point(150, 459);
+            this.btnEditRecipe.Location = new System.Drawing.Point(143, 430);
             this.btnEditRecipe.Name = "btnEditRecipe";
             this.btnEditRecipe.Size = new System.Drawing.Size(84, 44);
             this.btnEditRecipe.TabIndex = 2;
@@ -66,7 +79,7 @@
             // 
             // btnReturnToMenu
             // 
-            this.btnReturnToMenu.Location = new System.Drawing.Point(599, 459);
+            this.btnReturnToMenu.Location = new System.Drawing.Point(505, 430);
             this.btnReturnToMenu.Name = "btnReturnToMenu";
             this.btnReturnToMenu.Size = new System.Drawing.Size(84, 44);
             this.btnReturnToMenu.TabIndex = 3;
@@ -83,11 +96,41 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Select a recipe to either display or edit.";
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 180;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Servings";
+            this.columnHeader2.Width = 90;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Price";
+            this.columnHeader3.Width = 57;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Cost/Serving";
+            this.columnHeader4.Width = 80;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Prep Time";
+            this.columnHeader5.Width = 64;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Cook Time";
+            this.columnHeader6.Width = 73;
+            // 
             // frmShowAllRecipes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 526);
+            this.ClientSize = new System.Drawing.Size(637, 483);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReturnToMenu);
             this.Controls.Add(this.btnEditRecipe);
@@ -108,6 +151,12 @@
         private System.Windows.Forms.Button btnEditRecipe;
         private System.Windows.Forms.Button btnReturnToMenu;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
 
     }
 }
