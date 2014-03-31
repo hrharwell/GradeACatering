@@ -104,6 +104,16 @@ namespace GradeACatering
                             newTags.Add(lbxTags.Items[i].ToString());
                         }
                     }
+                    //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
+                    if (txtPrepTime.Text == "")
+                        txtPrepTime.Text = "-1";
+                    if (txtCookTime.Text == "")
+                        txtCookTime.Text = "-1";
+                    if (txtServingSize.Text == "")
+                        txtServingSize.Text = "-1";
+                    if (txtPriceSold.Text == "")
+                        txtPriceSold.Text = "-1.0";
+
                     FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtPrepDirections.Text + "\n\n" + txtCookDirections.Text,
                                                     Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPrepTime.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);

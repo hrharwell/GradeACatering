@@ -47,8 +47,10 @@ namespace GradeACatering
                 //database will auto-default to NULL for the rest.
                 string query = "insert into Foodstuff(FoodstuffID, Name"; //these two must always be there
 
+                DataConnection.OpenConnection();
                 OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
                 rdItemCount.Read();
+                DataConnection.CloseConnection();
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;    
