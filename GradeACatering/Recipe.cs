@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GradeACatering
 {
-   public class Recipe
+    public class Recipe
     {
         private struct Quantity
         {

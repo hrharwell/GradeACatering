@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GradeACatering
 {
- public   class FoodStuff
+    public class FoodStuff
     {
         private string strFSID, strName, strDirections;//, strUnit;
      

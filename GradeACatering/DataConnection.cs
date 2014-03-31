@@ -205,30 +205,41 @@ namespace GradeACatering
             //displays all foodstuffs that are not atomic items (that is, base ingredients
             //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are identical
             //are atomic items.  These are the ones we DO NOT want this function to return.
-
             List<FoodStuff> lstFoods = new List<FoodStuff>();
-            string query = "Select * from Foodstuffs where FoodstuffID = (select Makes from RecipeMaterials where Makes != MadeOf)";
-            OleDbCommand cmd = new OleDbCommand(query, conn);
-            DataConnection.OpenConnection();
-            OleDbDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-
-                FoodStuff fs = new FoodStuff(reader.GetString(0),
-                                           reader.GetString(1),
-                                           reader.GetString(2),
-                                           reader.GetInt32(3),
-                                           reader.GetInt32(4),
-                                           reader.GetDouble(5),
-                                           reader.GetInt32(6));
-                //tokenize the tags from their long string stored in the database.
-                string[] strTagList = reader.GetString(7).Split(',');
-                foreach (string t in strTagList)
-                    fs.AddTag(t);
+            try
+            {              
+                string query = "Select * from Foodstuffs where FoodstuffID = (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                DataConnection.OpenConnection();
+                OleDbDataReader reader = cmd.ExecuteReader();
                 
+                while (reader.Read())
+                {
 
-                lstFoods.Add(fs);
+                    FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                               reader.GetString(1),
+                                               reader.GetString(2),
+                                               reader.GetInt32(3),
+                                               reader.GetInt32(4),
+                                               reader.GetDouble(5),
+                                               reader.GetInt32(6));
+                    //tokenize the tags from their long string stored in the database.
+                    string[] strTagList = reader.GetString(7).Split(',');
+                    foreach (string t in strTagList)
+                        fs.AddTag(t);
+
+
+                    lstFoods.Add(fs);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                //don't do anything, apparently can't post messageboxes out of this thing
+            }
+            finally
+             {
+                DataConnection.CloseConnection();
             }
             return lstFoods;
         }
