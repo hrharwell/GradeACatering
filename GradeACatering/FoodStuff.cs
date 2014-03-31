@@ -16,6 +16,11 @@ namespace GradeACatering
         private List<string> lstTags; //or would this be better as just a long, #-delineated string?...    
         private int intPrepTime, intCookTime, intServings; //in minutes
         private double dblCost;  //cost of the whole recipe
+
+        //possible todo:
+        //new fields for Category (breakfast, lunch, dinner, dessert)
+        //               Cookbook (which book it came from?)
+        //               Author (of cookbook?)
        
         public FoodStuff()
         {
