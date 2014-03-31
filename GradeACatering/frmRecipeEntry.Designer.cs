@@ -45,7 +45,7 @@
             this.btnEditIng = new System.Windows.Forms.Button();
             this.btnDeleteIng = new System.Windows.Forms.Button();
             this.btnAddIng = new System.Windows.Forms.Button();
-            this.lsvIngrediants = new System.Windows.Forms.ListView();
+            this.lsvIngredients = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -62,14 +62,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
+            this.btnAddToTagList = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbxTags = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.lbxTags = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnAddToTagList = new System.Windows.Forms.Button();
-            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -145,7 +145,7 @@
             this.groupBox3.Controls.Add(this.btnEditIng);
             this.groupBox3.Controls.Add(this.btnDeleteIng);
             this.groupBox3.Controls.Add(this.btnAddIng);
-            this.groupBox3.Controls.Add(this.lsvIngrediants);
+            this.groupBox3.Controls.Add(this.lsvIngredients);
             this.groupBox3.Location = new System.Drawing.Point(276, 24);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(268, 284);
@@ -245,18 +245,18 @@
             this.btnAddIng.UseVisualStyleBackColor = true;
             this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
             // 
-            // lsvIngrediants
+            // lsvIngredients
             // 
-            this.lsvIngrediants.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lsvIngrediants.Location = new System.Drawing.Point(18, 19);
-            this.lsvIngrediants.Name = "lsvIngrediants";
-            this.lsvIngrediants.Size = new System.Drawing.Size(229, 159);
-            this.lsvIngrediants.TabIndex = 8;
-            this.lsvIngrediants.UseCompatibleStateImageBehavior = false;
-            this.lsvIngrediants.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
+            this.lsvIngredients.Name = "lsvIngredients";
+            this.lsvIngredients.Size = new System.Drawing.Size(229, 159);
+            this.lsvIngredients.TabIndex = 8;
+            this.lsvIngredients.UseCompatibleStateImageBehavior = false;
+            this.lsvIngredients.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -399,6 +399,39 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
             // 
+            // btnRemoveSelectedTag
+            // 
+            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 119);
+            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
+            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
+            this.btnRemoveSelectedTag.TabIndex = 10;
+            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
+            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
+            // 
+            // btnAddToTagList
+            // 
+            this.btnAddToTagList.Location = new System.Drawing.Point(163, 30);
+            this.btnAddToTagList.Name = "btnAddToTagList";
+            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
+            this.btnAddToTagList.TabIndex = 9;
+            this.btnAddToTagList.Text = "Add Tag";
+            this.btnAddToTagList.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(139, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // lbxTags
+            // 
+            this.lbxTags.FormattingEnabled = true;
+            this.lbxTags.Location = new System.Drawing.Point(18, 58);
+            this.lbxTags.Name = "lbxTags";
+            this.lbxTags.Size = new System.Drawing.Size(211, 95);
+            this.lbxTags.TabIndex = 7;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -436,39 +469,6 @@
             this.btnReturn.Text = "Return to Main Menu";
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // lbxTags
-            // 
-            this.lbxTags.FormattingEnabled = true;
-            this.lbxTags.Location = new System.Drawing.Point(18, 58);
-            this.lbxTags.Name = "lbxTags";
-            this.lbxTags.Size = new System.Drawing.Size(211, 95);
-            this.lbxTags.TabIndex = 7;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(18, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(139, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // btnAddToTagList
-            // 
-            this.btnAddToTagList.Location = new System.Drawing.Point(163, 30);
-            this.btnAddToTagList.Name = "btnAddToTagList";
-            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
-            this.btnAddToTagList.TabIndex = 9;
-            this.btnAddToTagList.Text = "Add Tag";
-            this.btnAddToTagList.UseVisualStyleBackColor = true;
-            // 
-            // btnRemoveSelectedTag
-            // 
-            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 119);
-            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
-            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
-            this.btnRemoveSelectedTag.TabIndex = 10;
-            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
-            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
             // 
             // frmRecipeEntry
             // 
@@ -515,7 +515,7 @@
         private System.Windows.Forms.Button btnEditIng;
         private System.Windows.Forms.Button btnDeleteIng;
         private System.Windows.Forms.Button btnAddIng;
-        private System.Windows.Forms.ListView lsvIngrediants;
+        private System.Windows.Forms.ListView lsvIngredients;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

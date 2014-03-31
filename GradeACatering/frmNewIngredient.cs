@@ -26,10 +26,10 @@ private void btnAddIng_Click(object sender, EventArgs e)
 {
     if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
 {
-int intI = lsvIngrediants.Items.Count;
-	lsvIngrediants.Items.Add(cboIng.Text);
-    lsvIngrediants.Items[intI].SubItems.Add(txtQty.Text);
-    lsvIngrediants.Items[intI].SubItems.Add(cboUnit.Text);
+int intI = lsvIngredients.Items.Count;
+	lsvIngredients.Items.Add(cboIng.Text);
+    lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
                 
 }
     else
@@ -43,6 +43,28 @@ int intI = lsvIngrediants.Items.Count;
 private void textBox1_TextChanged(object sender, EventArgs e)
 {
     
+}
+
+private void btnDeleteIng_Click(object sender, EventArgs e)
+{
+    if (lsvIngredients.SelectedIndices.Count > 0 )
+    {
+        lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+    }
+    else if (lsvIngredients.Items.Count > 0)
+    {
+        string ErrMessage = "Please select an Item";
+        MessageBox.Show(ErrMessage);
+    }
+    else
+    {
+        MessageBox.Show("List is empty, please at an item.");
+    }
+}
+
+private void btnReturn_Click(object sender, EventArgs e)
+{
+    ActiveForm.Close();
 }
 }
 }

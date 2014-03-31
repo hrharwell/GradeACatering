@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lsvAllRecipes = new System.Windows.Forms.ListView();
             this.btnOpenRecipe = new System.Windows.Forms.Button();
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.btnReturnToMenu = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listView1
+            // lsvAllRecipes
             // 
-            this.listView1.Location = new System.Drawing.Point(41, 86);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(642, 347);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lsvAllRecipes.Location = new System.Drawing.Point(41, 86);
+            this.lsvAllRecipes.Name = "lsvAllRecipes";
+            this.lsvAllRecipes.Size = new System.Drawing.Size(642, 347);
+            this.lsvAllRecipes.TabIndex = 0;
+            this.lsvAllRecipes.UseCompatibleStateImageBehavior = false;
+            this.lsvAllRecipes.View = System.Windows.Forms.View.Details;
             // 
             // btnOpenRecipe
             // 
@@ -92,9 +92,10 @@
             this.Controls.Add(this.btnReturnToMenu);
             this.Controls.Add(this.btnEditRecipe);
             this.Controls.Add(this.btnOpenRecipe);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lsvAllRecipes);
             this.Name = "frmShowAllRecipes";
             this.Text = "All Recipes";
+            this.Load += new System.EventHandler(this.frmShowAllRecipes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,7 +103,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lsvAllRecipes;
         private System.Windows.Forms.Button btnOpenRecipe;
         private System.Windows.Forms.Button btnEditRecipe;
         private System.Windows.Forms.Button btnReturnToMenu;

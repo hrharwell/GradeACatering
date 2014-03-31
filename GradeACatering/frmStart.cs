@@ -62,8 +62,8 @@ namespace GradeACatering
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-            fsMasterList = DataConnection.ListAllFoodstuffs();
-            recMasterList = DataConnection.ListOfIngredients();
+           fsMasterList = DataConnection.ListAllFoodstuffs();
+           recMasterList = DataConnection.ListOfIngredients();
         }
     }
 }

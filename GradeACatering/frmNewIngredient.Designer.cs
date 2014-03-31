@@ -47,12 +47,11 @@
             this.btnEditIng = new System.Windows.Forms.Button();
             this.btnDeleteIng = new System.Windows.Forms.Button();
             this.btnAddIng = new System.Windows.Forms.Button();
-            this.lsvIngrediants = new System.Windows.Forms.ListView();
+            this.lsvIngredients = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSaveRecipe = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -144,7 +143,7 @@
             this.groupBox3.Controls.Add(this.btnEditIng);
             this.groupBox3.Controls.Add(this.btnDeleteIng);
             this.groupBox3.Controls.Add(this.btnAddIng);
-            this.groupBox3.Controls.Add(this.lsvIngrediants);
+            this.groupBox3.Controls.Add(this.lsvIngredients);
             this.groupBox3.Location = new System.Drawing.Point(267, 14);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(253, 288);
@@ -231,6 +230,7 @@
             this.btnDeleteIng.TabIndex = 10;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
             // 
             // btnAddIng
             // 
@@ -242,18 +242,18 @@
             this.btnAddIng.UseVisualStyleBackColor = true;
             this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
             // 
-            // lsvIngrediants
+            // lsvIngredients
             // 
-            this.lsvIngrediants.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lsvIngrediants.Location = new System.Drawing.Point(18, 19);
-            this.lsvIngrediants.Name = "lsvIngrediants";
-            this.lsvIngrediants.Size = new System.Drawing.Size(229, 159);
-            this.lsvIngrediants.TabIndex = 8;
-            this.lsvIngrediants.UseCompatibleStateImageBehavior = false;
-            this.lsvIngrediants.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
+            this.lsvIngredients.Name = "lsvIngredients";
+            this.lsvIngredients.Size = new System.Drawing.Size(229, 159);
+            this.lsvIngredients.TabIndex = 8;
+            this.lsvIngredients.UseCompatibleStateImageBehavior = false;
+            this.lsvIngredients.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -271,44 +271,34 @@
             // 
             // btnSaveRecipe
             // 
-            this.btnSaveRecipe.Location = new System.Drawing.Point(138, 232);
+            this.btnSaveRecipe.Location = new System.Drawing.Point(157, 272);
             this.btnSaveRecipe.Name = "btnSaveRecipe";
             this.btnSaveRecipe.Size = new System.Drawing.Size(90, 45);
             this.btnSaveRecipe.TabIndex = 13;
             this.btnSaveRecipe.Text = "Save Item";
             this.btnSaveRecipe.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(37, 232);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 45);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(37, 297);
+            this.btnReturn.Location = new System.Drawing.Point(12, 272);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(90, 45);
             this.btnReturn.TabIndex = 15;
             this.btnReturn.Text = "Return to Main Menu";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // frmNewIngredient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 406);
+            this.ClientSize = new System.Drawing.Size(570, 329);
             this.Controls.Add(this.btnReturn);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSaveRecipe);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmNewIngredient";
-            this.Text = "New Ingrediant";
+            this.Text = "New Ingredient";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -336,12 +326,11 @@
         private System.Windows.Forms.Button btnEditIng;
         private System.Windows.Forms.Button btnDeleteIng;
         private System.Windows.Forms.Button btnAddIng;
-        private System.Windows.Forms.ListView lsvIngrediants;
+        private System.Windows.Forms.ListView lsvIngredients;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button btnSaveRecipe;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtIngUnit;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnReturn;

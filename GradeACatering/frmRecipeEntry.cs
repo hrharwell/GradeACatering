@@ -30,10 +30,10 @@ namespace GradeACatering
         {
             if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
             {
-                int intI = lsvIngrediants.Items.Count;
-                lsvIngrediants.Items.Add(cboIng.Text);
-                lsvIngrediants.Items[intI].SubItems.Add(txtQty.Text);
-                lsvIngrediants.Items[intI].SubItems.Add(cboUnit.Text);
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);
+                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
 
             }
             else
@@ -52,10 +52,15 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
         {
-            //if (lsvIngrediants.SelectedIndices )
-            //{
-              
-            //}
+            if (lsvIngredients.SelectedIndices.Count > 0)
+            {
+                lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+            }
+            else if (lsvIngredients.Items.Count > 0)
+            {
+                string ErrMessage = "Please select an Item";
+                MessageBox.Show(ErrMessage);
+            }
         }
 
         private void btnSaveRecipe_Click(object sender, EventArgs e)
@@ -94,7 +99,7 @@ namespace GradeACatering
                                                     Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPrepTime.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
-                    if(lsvIngrediants.Items.Count == 0)
+                    if(lsvIngredients.Items.Count == 0)
                     {
                         //no ingredients listed, so treat this as an atomic item?
                         //which kind of defeats the purpose of the separate ingredient entry but whatever
@@ -104,7 +109,7 @@ namespace GradeACatering
                     }
                     else
                     {
-                        foreach(ListViewItem lvi in lsvIngrediants.Items)
+                        foreach(ListViewItem lvi in lsvIngredients.Items)
                         {
                             //check to see whether the item exists or not.
                             //preferably in the master list on frmStart...
