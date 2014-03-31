@@ -30,7 +30,6 @@
         {
             this.lsvAllRecipes = new System.Windows.Forms.ListView();
             this.btnOpenRecipe = new System.Windows.Forms.Button();
-            this.btnEditRecipe = new System.Windows.Forms.Button();
             this.btnReturnToMenu = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,16 +65,6 @@
             this.btnOpenRecipe.Text = "Display Recipe";
             this.btnOpenRecipe.UseVisualStyleBackColor = true;
             this.btnOpenRecipe.Click += new System.EventHandler(this.btnOpenRecipe_Click);
-            // 
-            // btnEditRecipe
-            // 
-            this.btnEditRecipe.Location = new System.Drawing.Point(143, 430);
-            this.btnEditRecipe.Name = "btnEditRecipe";
-            this.btnEditRecipe.Size = new System.Drawing.Size(84, 44);
-            this.btnEditRecipe.TabIndex = 2;
-            this.btnEditRecipe.Text = "Edit Recipe";
-            this.btnEditRecipe.UseVisualStyleBackColor = true;
-            this.btnEditRecipe.Click += new System.EventHandler(this.btnEditRecipe_Click);
             // 
             // btnReturnToMenu
             // 
@@ -133,7 +122,6 @@
             this.ClientSize = new System.Drawing.Size(637, 483);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReturnToMenu);
-            this.Controls.Add(this.btnEditRecipe);
             this.Controls.Add(this.btnOpenRecipe);
             this.Controls.Add(this.lsvAllRecipes);
             this.Name = "frmShowAllRecipes";
@@ -148,7 +136,6 @@
 
         private System.Windows.Forms.ListView lsvAllRecipes;
         private System.Windows.Forms.Button btnOpenRecipe;
-        private System.Windows.Forms.Button btnEditRecipe;
         private System.Windows.Forms.Button btnReturnToMenu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColumnHeader columnHeader1;

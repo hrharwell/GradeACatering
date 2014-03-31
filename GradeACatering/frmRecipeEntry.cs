@@ -34,6 +34,9 @@ namespace GradeACatering
                 lsvIngredients.Items.Add(cboIng.Text);
                 lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
                 lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
 
             }
             else
@@ -254,13 +257,63 @@ namespace GradeACatering
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            lbxTags.Items.Clear();
+            lbxTags.SelectedItems.Clear();
         }
 
         private void btnAddIng_Click_1(object sender, EventArgs e)
         {
+            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);
+                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
+
+            }
+            else
+            {
+                ErrMessage = "Please Enter an Ingredient";
+                MessageBox.Show(ErrMessage);
+            }   
+        }
+
+        private void btnDeleteIng_Click_1(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            }
+
             
         }
-        
+
+        private void btnEditIng_Click(object sender, EventArgs e)
+        {
+            
+           /*Adds the names of the items to the cbo.text
+            * 
+            * The deletes the old ingredient from the lsvView
+            * 
+            * 
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            } */
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //  Create new Ingredient Form
+
+            frmNewIngredient NewIngrFrm = new frmNewIngredient();
+
+            // Add the name and qty and unit type to new form then open it
+
+            NewIngrFrm.ShowDialog();
+        }
+       
     }
 }

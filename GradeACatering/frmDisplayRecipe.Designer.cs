@@ -30,10 +30,6 @@
         {
             this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtNotes = new System.Windows.Forms.TextBox();
-            this.txtTags = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtCookDir = new System.Windows.Forms.TextBox();
             this.txtPrepDir = new System.Windows.Forms.TextBox();
@@ -42,7 +38,7 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lsvIngrediants = new System.Windows.Forms.ListView();
+            this.lsvIngredients = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,6 +64,12 @@
             this.btnEditIng = new System.Windows.Forms.Button();
             this.btnDeleteIng = new System.Windows.Forms.Button();
             this.btnAddIng = new System.Windows.Forms.Button();
+            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
+            this.btnAddToTagList = new System.Windows.Forms.Button();
+            this.txtTags = new System.Windows.Forms.TextBox();
+            this.lbxTags = new System.Windows.Forms.ListBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblComingSoon = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,53 +84,21 @@
             this.btnPrint.TabIndex = 29;
             this.btnPrint.Text = "Print Recipe";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.txtNotes);
+            this.groupBox4.Controls.Add(this.btnRemoveSelectedTag);
+            this.groupBox4.Controls.Add(this.btnAddToTagList);
             this.groupBox4.Controls.Add(this.txtTags);
+            this.groupBox4.Controls.Add(this.lbxTags);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Location = new System.Drawing.Point(309, 332);
+            this.groupBox4.Location = new System.Drawing.Point(384, 332);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(499, 164);
+            this.groupBox4.Size = new System.Drawing.Size(321, 164);
             this.groupBox4.TabIndex = 28;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
-            // 
-            // txtNotes
-            // 
-            this.txtNotes.Location = new System.Drawing.Point(246, 38);
-            this.txtNotes.Multiline = true;
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(213, 110);
-            this.txtNotes.TabIndex = 8;
-            // 
-            // txtTags
-            // 
-            this.txtTags.Location = new System.Drawing.Point(18, 38);
-            this.txtTags.Multiline = true;
-            this.txtTags.Name = "txtTags";
-            this.txtTags.Size = new System.Drawing.Size(213, 110);
-            this.txtTags.TabIndex = 7;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(175, 13);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Tags (Ex. #Jon Doe\'s#Favorite Pie)";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(243, 11);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(84, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Additional Notes";
             // 
             // groupBox2
             // 
@@ -209,7 +179,7 @@
             this.groupBox3.Controls.Add(this.btnEditIng);
             this.groupBox3.Controls.Add(this.btnDeleteIng);
             this.groupBox3.Controls.Add(this.btnAddIng);
-            this.groupBox3.Controls.Add(this.lsvIngrediants);
+            this.groupBox3.Controls.Add(this.lsvIngredients);
             this.groupBox3.Location = new System.Drawing.Point(287, 42);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(268, 284);
@@ -217,18 +187,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
             // 
-            // lsvIngrediants
+            // lsvIngredients
             // 
-            this.lsvIngrediants.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lsvIngrediants.Location = new System.Drawing.Point(18, 19);
-            this.lsvIngrediants.Name = "lsvIngrediants";
-            this.lsvIngrediants.Size = new System.Drawing.Size(229, 166);
-            this.lsvIngrediants.TabIndex = 8;
-            this.lsvIngrediants.UseCompatibleStateImageBehavior = false;
-            this.lsvIngrediants.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
+            this.lsvIngredients.Name = "lsvIngredients";
+            this.lsvIngredients.Size = new System.Drawing.Size(229, 166);
+            this.lsvIngredients.TabIndex = 8;
+            this.lsvIngredients.UseCompatibleStateImageBehavior = false;
+            this.lsvIngredients.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -433,6 +403,7 @@
             this.btnEditIng.TabIndex = 34;
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
+            this.btnEditIng.Visible = false;
             // 
             // btnDeleteIng
             // 
@@ -443,6 +414,7 @@
             this.btnDeleteIng.TabIndex = 33;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
             // 
             // btnAddIng
             // 
@@ -453,12 +425,68 @@
             this.btnAddIng.TabIndex = 32;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
+            // 
+            // btnRemoveSelectedTag
+            // 
+            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 121);
+            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
+            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
+            this.btnRemoveSelectedTag.TabIndex = 16;
+            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
+            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
+            this.btnRemoveSelectedTag.Click += new System.EventHandler(this.btnRemoveSelectedTag_Click);
+            // 
+            // btnAddToTagList
+            // 
+            this.btnAddToTagList.Location = new System.Drawing.Point(163, 32);
+            this.btnAddToTagList.Name = "btnAddToTagList";
+            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
+            this.btnAddToTagList.TabIndex = 15;
+            this.btnAddToTagList.Text = "Add Tag";
+            this.btnAddToTagList.UseVisualStyleBackColor = true;
+            this.btnAddToTagList.Click += new System.EventHandler(this.btnAddToTagList_Click);
+            // 
+            // txtTags
+            // 
+            this.txtTags.Location = new System.Drawing.Point(18, 34);
+            this.txtTags.Name = "txtTags";
+            this.txtTags.Size = new System.Drawing.Size(139, 20);
+            this.txtTags.TabIndex = 14;
+            // 
+            // lbxTags
+            // 
+            this.lbxTags.FormattingEnabled = true;
+            this.lbxTags.Location = new System.Drawing.Point(18, 60);
+            this.lbxTags.Name = "lbxTags";
+            this.lbxTags.Size = new System.Drawing.Size(211, 95);
+            this.lbxTags.TabIndex = 13;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 18);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(175, 13);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "Tags (Ex. #Jon Doe\'s#Favorite Pie)";
+            // 
+            // lblComingSoon
+            // 
+            this.lblComingSoon.AutoSize = true;
+            this.lblComingSoon.Location = new System.Drawing.Point(32, 392);
+            this.lblComingSoon.Name = "lblComingSoon";
+            this.lblComingSoon.Size = new System.Drawing.Size(140, 13);
+            this.lblComingSoon.TabIndex = 30;
+            this.lblComingSoon.Text = "* Print Feature Coming Soon";
+            this.lblComingSoon.Visible = false;
             // 
             // frmDisplayRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 538);
+            this.Controls.Add(this.lblComingSoon);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -477,6 +505,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -484,10 +513,6 @@
 
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtNotes;
-        private System.Windows.Forms.TextBox txtTags;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtCookDir;
         private System.Windows.Forms.TextBox txtPrepDir;
@@ -496,7 +521,7 @@
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnEditRecipe;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListView lsvIngrediants;
+        private System.Windows.Forms.ListView lsvIngredients;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -522,6 +547,12 @@
         private System.Windows.Forms.Button btnEditIng;
         private System.Windows.Forms.Button btnDeleteIng;
         private System.Windows.Forms.Button btnAddIng;
+        private System.Windows.Forms.Button btnRemoveSelectedTag;
+        private System.Windows.Forms.Button btnAddToTagList;
+        private System.Windows.Forms.TextBox txtTags;
+        private System.Windows.Forms.ListBox lbxTags;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblComingSoon;
 
     }
 }

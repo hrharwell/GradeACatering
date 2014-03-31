@@ -34,7 +34,6 @@ namespace GradeACatering
             txtPrepDir.Enabled = true;
             txtTags.Enabled = true;
             txtServingSize.Enabled = true;
-            txtNotes.Enabled = true;
             cboIng.Enabled = true;
             cboUnit.Enabled = true;
             txtQty.Enabled = true;
@@ -58,7 +57,6 @@ namespace GradeACatering
                 txtPrepDir.Enabled = false;
                 txtTags.Enabled = false;
                 txtServingSize.Enabled = false;
-                txtNotes.Enabled = false;
                 cboIng.Enabled = false;
                 cboUnit.Enabled =false;
                 txtQty.Enabled = false;
@@ -71,6 +69,49 @@ namespace GradeACatering
             //{
                 
             //}
+        }
+
+        private void btnAddIng_Click(object sender, EventArgs e)
+        {
+            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);
+                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
+
+            }
+            else
+            {
+                string ErrMessage = "Please Enter an Ingredient";
+                MessageBox.Show(ErrMessage);
+            }
+        }
+
+        private void btnDeleteIng_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                lsvIngredients.Items.Remove(eachItem);
+            }
+        }
+
+        private void btnAddToTagList_Click(object sender, EventArgs e)
+        {
+            lbxTags.Items.Add(txtTags.Text);
+        }
+
+        private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
+        {
+            lbxTags.SelectedItems.Clear();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            lblComingSoon.Visible = true;
         }
     }
 }
