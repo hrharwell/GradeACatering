@@ -17,7 +17,7 @@ namespace GradeACatering
             public int denominator;
         }
 
-        private string strMakes, strMadeOf, unit;
+        private string strMakes, strMadeOf, strUnit;
         Quantity qAmount;
 
         public Recipe() //default constructor used for testing purposes only, may want to comment out or remove later on.
@@ -27,8 +27,19 @@ namespace GradeACatering
             qAmount.whole = 0;
             qAmount.numerator = 0;
             qAmount.denominator = 1;
-            unit = "tsp";
+            strUnit = "tsp";
             
+        }
+
+        public Recipe(string inMakes, string inMadeOf)
+        {
+            //constructor for making self-reference entries (for atomic items i.e. base ingredients)
+            Makes = inMakes;
+            MadeOf = inMadeOf;
+            strUnit = "";
+            qAmount.whole = 0;
+            qAmount.numerator = 0;
+            qAmount.denominator = 0;
         }
 
         public Recipe(string inMakes, string inMadeOf, string inAmount, string inUnit)
@@ -76,8 +87,8 @@ namespace GradeACatering
 
         public string Unit
         {
-            get { return unit; }
-            set { unit = value; }
+            get { return strUnit; }
+            set { strUnit = value; }
         }
 
         public string Amount()

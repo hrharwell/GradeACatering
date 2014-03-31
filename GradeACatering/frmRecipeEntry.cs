@@ -88,8 +88,14 @@ namespace GradeACatering
                 {
                     //they clicked yes, go about adding it
                     //generate the id
-                    string newID = txtName.Text.Substring(0, 4);//grab the first 3 or 4 characters of the name
-                    newID += (frmStart.fsMasterList.Count()+1).ToString("0000#");
+                    string newID = txtName.Text.Substring(0, Math.Max(txtName.Text.Split(' ')[0].Length,4));//grab the first up to 4 characters of the name
+                    
+                    //newID += (frmStart.fsMasterList.Count()+1).ToString("0000#");
+                    //this line above needs to go in DataConnection, asking how many items with
+                    //the same 4-letter prefix are in the table and tacking it on to the end of the key value
+                    //before trying to insert, hopefully this will remedy any duplicate key issues.
+                    //don't try to base it on the masterlist...
+
                     List<string> newTags = new List<String>();
                     if (lbxTags.Items.Count > 0)
                     {
@@ -107,7 +113,7 @@ namespace GradeACatering
                         //no ingredients listed, so treat this as an atomic item?
                         //which kind of defeats the purpose of the separate ingredient entry but whatever
                         //FIX IT LATER
-                        newItemIngredients.Add(new Recipe(newID, newID,"",""));
+                        newItemIngredients.Add(new Recipe(newID, newID));
                         //atomic items have the same Makes and MadeOf IDs. (i.e. all-purpose flour is made of itself)
                     }
                     else
@@ -116,9 +122,11 @@ namespace GradeACatering
                         {
                             //check to see whether the item exists or not.
                             //preferably in the master list on frmStart...
-                            if (frmStart.fsMasterList.Exists(Foodstuff => Foodstuff.Name == lvi.SubItems[0].Text))
+                            if (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0)
                             {
-                                newItemIngredients.Add(new Recipe(newID, (frmStart.fsMasterList.Find(FoodStuff => FoodStuff.Name == lvi.SubItems[0].Text)).ID,
+                                //this is all hugely dependent on there being actual things in the master lists
+                                //would it be better to hit the database for each pass through the loop?
+                                newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
                                                        lvi.SubItems[1].Text, lvi.SubItems[2].Text));
                             }
                             else
@@ -129,14 +137,19 @@ namespace GradeACatering
                                 //what do we want to do?
 
                                 //maybe prompt them for whether they want to go ahead and make a blank entry?
-                                MessageBox.Show("One or more of these ingredients couldn't be found.  Would you like to add them?", "", MessageBoxButtons.YesNoCancel);
+                                //MessageBox.Show("One or more of these ingredients couldn't be found.  Would you like to add them?", "", MessageBoxButtons.YesNoCancel);
+
+                                //making dummy entries
+                                string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Max(txtName.Text.Split(' ')[0].Length,4));//grab the first up to 4 characters of the name
+                                newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
+                                FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
+                                DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
+                                newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                                
                             }
 			            }
                     }
-                    
-                    frmStart.fsMasterList.Add(newFS);
-
-
+                  
                     DataConnection.AddFoodStuff(newFS, newItemIngredients);
                 }
 
