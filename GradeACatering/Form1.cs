@@ -44,6 +44,7 @@ namespace GradeACatering
                 lvi.SubItems.Add(r.MadeOf);
                 lvi.SubItems.Add(r.FractionAmount());
                 lvi.SubItems.Add(r.Unit);
+                lbxRecipeList.Items.Add(lvi);
             }
         }
 
