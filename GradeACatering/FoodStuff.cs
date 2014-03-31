@@ -44,7 +44,7 @@ namespace GradeACatering
             
         }
 
-        public FoodStuff(string inID, string inName, string inDirections = null, int inPrep = -1, int inCook = -1,
+        public FoodStuff(string inID, string inName, string inDirections = "", int inPrep = -1, int inCook = -1,
                          double inCost = -1.0, int inServing = -1, List<string> inTags = null)
         {
             //This is a constructor for generating a placeholder item: basically just a name and ID
@@ -133,9 +133,11 @@ namespace GradeACatering
        
         //tag-related functions for reading, adding, and checking to see if a tag is present.
         public string GetTags(int index = -1)
-        { 
+        {
+            if (lstTags == null)
+                return ""; //firstly, if it's null spit out an empty string            
             //returns a tag based on its index value.  -1 will return the entire list of tags.
-            if (index == -1)
+            else if (index == -1)
             {
                 string output = string.Empty;
                 for(int i = 0; i <= lstTags.Count-1; i++)

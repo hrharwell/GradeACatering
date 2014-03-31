@@ -18,9 +18,7 @@ namespace GradeACatering
 
     public partial class frmStart : Form//, MasterLists
     {
-        public static List<FoodStuff> fsMasterList;
-        public static List<Recipe> recMasterList;
-
+      
         public frmStart()
         {
             InitializeComponent();
@@ -30,8 +28,7 @@ namespace GradeACatering
         
         private void frmStart_Load(object sender, EventArgs e)
         {
-            fsMasterList  = new List<FoodStuff>(DataConnection.ListAllFoodstuffs());
-            recMasterList  = new List<Recipe>(DataConnection.ListOfIngredients());
+           // MessageBox.Show("Foodstuff table contains " + DataConnection.NumFoodstuffs().ToString() + " items.\nRecipeMaterials table contains " + DataConnection.NumRecipeMaterials().ToString() + " items.");
         }
 
         private void btnSearchfrm_Click(object sender, EventArgs e)
