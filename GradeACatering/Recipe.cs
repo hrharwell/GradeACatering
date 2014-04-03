@@ -100,7 +100,7 @@ namespace GradeACatering
         {
             if (qAmount.whole == 0 && qAmount.numerator == 0 && qAmount.denominator == 0)
             {
-                return "NULL";
+                return DBNull.Value.ToString();
             }
             else
             {

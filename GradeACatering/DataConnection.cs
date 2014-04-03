@@ -56,7 +56,7 @@ namespace GradeACatering
                 cmd.Connection = conn;    
                 
                 //if statements for each value to add, and its associated parameter                           
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID + Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
                 int intParameterCount = 2;
                 if (fs.Directions != "")
@@ -140,9 +140,9 @@ namespace GradeACatering
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
-
+                //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 //if statements for each value to add, and its associated parameter                           
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID + Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
                 int intParameterCount = 2;
                 if (fs.Directions != "")
@@ -240,13 +240,13 @@ namespace GradeACatering
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
                 int intParameterCounter = 2;
-                if(r.FractionAmount() == "")
+                if(r.FractionAmount() != "")
                 {
                     query += " , Quantity";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount();
                     intParameterCounter++;
                 }
-                if(r.Amount() == "")
+                if(r.Unit != "")
                 {
                     query += ", Unit";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Unit;

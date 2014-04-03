@@ -194,7 +194,7 @@
             this.txtQty.Location = new System.Drawing.Point(150, 241);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(31, 20);
-            this.txtQty.TabIndex = 27;
+            this.txtQty.TabIndex = 26;
             // 
             // cboUnit
             // 
@@ -205,7 +205,7 @@
             this.cboUnit.Location = new System.Drawing.Point(187, 241);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(66, 21);
-            this.cboUnit.TabIndex = 26;
+            this.cboUnit.TabIndex = 27;
             // 
             // cboIng
             // 
@@ -431,6 +431,7 @@
             this.lbxTags.FormattingEnabled = true;
             this.lbxTags.Location = new System.Drawing.Point(18, 58);
             this.lbxTags.Name = "lbxTags";
+            this.lbxTags.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lbxTags.Size = new System.Drawing.Size(211, 95);
             this.lbxTags.TabIndex = 7;
             // 
