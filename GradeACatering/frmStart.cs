@@ -69,6 +69,11 @@ namespace GradeACatering
             ShowAllRecipes.ShowDialog();
         }
 
+        private void bbtnShowAllIngredient_Click(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }

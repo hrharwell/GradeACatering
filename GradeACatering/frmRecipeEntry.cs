@@ -257,7 +257,11 @@ namespace GradeACatering
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            lbxTags.SelectedItems.Clear();
+            for (int x = lbxTags.SelectedIndices.Count - 1; x >= 0; x--)
+            {
+                int idx = lbxTags.SelectedIndices[x];
+                lbxTags.Items.RemoveAt(idx);
+            } 
         }
 
         private void btnAddIng_Click_1(object sender, EventArgs e)
@@ -308,10 +312,29 @@ namespace GradeACatering
         {
             //  Create new Ingredient Form
 
+
             frmNewIngredient NewIngrFrm = new frmNewIngredient();
 
             // Add the name and qty and unit type to new form then open it
 
+            NewIngrFrm.ShowDialog();
+        }
+
+        private void lsvIngredients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lsvIngredients.SelectedIndices.Count > 1)
+            {
+                btnEditIng.Enabled = false;
+            }
+            else
+            {
+                btnEditIng.Enabled = true;
+            }
+        }
+
+        private void btnDefineItem_Click(object sender, EventArgs e)
+        {
+            frmNewIngredient NewIngrFrm = new frmNewIngredient();
             NewIngrFrm.ShowDialog();
         }
        
