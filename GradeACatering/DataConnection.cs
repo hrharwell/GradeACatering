@@ -409,11 +409,13 @@ namespace GradeACatering
         public static List<FoodStuff> FindFoodstuffsNamed(string inName)
         {
             //return a list of foodstuffs whose names contain the passed in value
+            //does not distinguish between base ingredients and final items.
              List<FoodStuff> lstFoods = new List<FoodStuff>();
              try
              {
-                 string query = "Select * from Foodstuff where Name contains inName";
+                 string query = "Select * from Foodstuff where Name like ?";
                  OleDbCommand cmd = new OleDbCommand(query, conn);
+                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = "*" + inName + "*";
                  OleDbDataReader reader = cmd.ExecuteReader();
 
                  while (reader.Read())
