@@ -331,13 +331,13 @@ namespace GradeACatering
 
         public static List<FoodStuff> ListAllFoodstuffs()
         {
-            //displays all foodstuffs that are not atomic items (that is, base ingredients
+            //displays all foodstuffs that are not atomic items (that is, base ingredients)
             //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are identical
             //are atomic items.  These are the ones we DO NOT want this function to return.
             List<FoodStuff> lstFoods = new List<FoodStuff>();
             try
             {              
-                string query = "Select * from Foodstuff where FoodstuffID = (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
+                string query = "Select * from Foodstuff where FoodstuffID in (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 DataConnection.OpenConnection();
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -368,6 +368,39 @@ namespace GradeACatering
             }
             finally
              {
+                DataConnection.CloseConnection();
+            }
+            return lstFoods;
+        }
+
+        public static List<FoodStuff> ListAllIngredients()
+        {
+            //displays all foodstuffs that ARE atomic items (that is, base ingredients)
+            //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are different
+            //are the ones we DO want this function to return.
+            List<FoodStuff> lstFoods = new List<FoodStuff>();
+            try
+            {
+                string query = "Select * from Foodstuff where FoodstuffID in (select Makes from RecipeMaterials where Makes = MadeOf)"; //Not equals for Access is <> not !=
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                DataConnection.OpenConnection();
+                OleDbDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                               reader.GetString(1));
+                    lstFoods.Add(fs);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //don't do anything, apparently can't post messageboxes out of this thing
+            }
+            finally
+            {
                 DataConnection.CloseConnection();
             }
             return lstFoods;
