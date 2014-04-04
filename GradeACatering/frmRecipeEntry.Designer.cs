@@ -35,7 +35,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -69,6 +68,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
+            this.btnDefineItem = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -134,7 +134,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnDefineItem);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label6);
@@ -151,16 +151,6 @@
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(178, 184);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Define Item";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label11
             // 
@@ -252,12 +242,14 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.lsvIngredients.FullRowSelect = true;
             this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
             this.lsvIngredients.Name = "lsvIngredients";
             this.lsvIngredients.Size = new System.Drawing.Size(229, 159);
             this.lsvIngredients.TabIndex = 8;
             this.lsvIngredients.UseCompatibleStateImageBehavior = false;
             this.lsvIngredients.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -464,6 +456,16 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
+            // btnDefineItem
+            // 
+            this.btnDefineItem.Location = new System.Drawing.Point(173, 184);
+            this.btnDefineItem.Name = "btnDefineItem";
+            this.btnDefineItem.Size = new System.Drawing.Size(71, 23);
+            this.btnDefineItem.TabIndex = 32;
+            this.btnDefineItem.Text = "Define Item";
+            this.btnDefineItem.UseVisualStyleBackColor = true;
+            this.btnDefineItem.Click += new System.EventHandler(this.btnDefineItem_Click);
+            // 
             // frmRecipeEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,7 +525,6 @@
         private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Button btnRemoveSelectedTag;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
@@ -533,5 +534,6 @@
         private System.Windows.Forms.Button btnEditIng;
         private System.Windows.Forms.Button btnDeleteIng;
         private System.Windows.Forms.Button btnAddIng;
+        private System.Windows.Forms.Button btnDefineItem;
     }
 }

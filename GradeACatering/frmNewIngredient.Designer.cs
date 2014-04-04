@@ -221,6 +221,7 @@
             this.btnEditIng.TabIndex = 11;
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
+            this.btnEditIng.Click += new System.EventHandler(this.btnEditIng_Click);
             // 
             // btnDeleteIng
             // 
@@ -248,12 +249,14 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.lsvIngredients.FullRowSelect = true;
             this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
             this.lsvIngredients.Name = "lsvIngredients";
             this.lsvIngredients.Size = new System.Drawing.Size(229, 159);
             this.lsvIngredients.TabIndex = 8;
             this.lsvIngredients.UseCompatibleStateImageBehavior = false;
             this.lsvIngredients.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
             // 
             // columnHeader1
             // 

@@ -38,5 +38,14 @@ namespace GradeACatering
             frmDisplayRecipe DisplayRecipe = new frmDisplayRecipe();
             DisplayRecipe.ShowDialog();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+      
+
+       
     }
 }

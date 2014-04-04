@@ -219,6 +219,7 @@
             this.bbtnShowAllIngredient.TabIndex = 3;
             this.bbtnShowAllIngredient.Text = "Show All Ingredients";
             this.bbtnShowAllIngredient.UseVisualStyleBackColor = true;
+            this.bbtnShowAllIngredient.Click += new System.EventHandler(this.bbtnShowAllIngredient_Click);
             // 
             // btnAddIngr
             // 
