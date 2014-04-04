@@ -62,7 +62,7 @@ namespace GradeACatering
             {
                 if (ctrl is TextBox)
                 {
-                    ctrl.Text = " ";
+                    ctrl.Text = string.Empty;
                 }
             }
         }
@@ -98,22 +98,18 @@ namespace GradeACatering
              *      Once that's done, we can push to database...I think...
              *          -Dustin
              */
-            blnValidate();
-            if (blnValidate() == true) //really this is the level you'd do validation at
+            
+            if (blnValidate()) //really this is the level you'd do validation at
             {
                 DialogResult button = MessageBox.Show("Are you sure you want to save this data?", "Save Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (button == DialogResult.Yes)
                 {
                     //they clicked yes, go about adding it
                     //generate the id
-                    string newID = txtName.Text.Substring(0, Math.Max(txtName.Text.Split(' ')[0].Length,4));//grab the first up to 4 characters of the name
+                    string newID = txtName.Text.Substring(0, Math.Min(txtName.Text.Split(' ')[0].Length,4));//grab the first up to 4 characters of the name
+                    //get the item count and add one.
+                    newID += (DataConnection.NumFoodstuffs() + 1).ToString("0000#");
                     
-                    //newID += (frmStart.fsMasterList.Count()+1).ToString("0000#");
-                    //this line above needs to go in DataConnection, asking how many items with
-                    //the same 4-letter prefix are in the table and tacking it on to the end of the key value
-                    //before trying to insert, hopefully this will remedy any duplicate key issues.
-                    //don't try to base it on the masterlist...
-
                     List<string> newTags = new List<String>();
                     if (lbxTags.Items.Count > 0)
                     {
@@ -122,15 +118,26 @@ namespace GradeACatering
                             newTags.Add(lbxTags.Items[i].ToString());
                         }
                     }
+                    //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
+                    if (txtPrepTime.Text == "")
+                        txtPrepTime.Text = "-1";
+                    if (txtCookTime.Text == "")
+                        txtCookTime.Text = "-1";
+                    if (txtServingSize.Text == "")
+                        txtServingSize.Text = "-1";
+                    if (txtPriceSold.Text == "")
+                        txtPriceSold.Text = "-1.0";
+
                     FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtPrepDirections.Text + "\n\n" + txtCookDirections.Text,
-                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPrepTime.Text),
+                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
                     if(lsvIngredients.Items.Count == 0)
                     {
                         //no ingredients listed, so treat this as an atomic item?
                         //which kind of defeats the purpose of the separate ingredient entry but whatever
-                        //FIX IT LATER
+                        //FIX IT LATER                     
+                        
                         newItemIngredients.Add(new Recipe(newID, newID));
                         //atomic items have the same Makes and MadeOf IDs. (i.e. all-purpose flour is made of itself)
                     }
@@ -139,29 +146,21 @@ namespace GradeACatering
                         foreach(ListViewItem lvi in lsvIngredients.Items)
                         {
                             //check to see whether the item exists or not.
-                            //preferably in the master list on frmStart...
                             if (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0)
                             {
-                                //this is all hugely dependent on there being actual things in the master lists
-                                //would it be better to hit the database for each pass through the loop?
-                                newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
+                               newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
                                                        lvi.SubItems[1].Text, lvi.SubItems[2].Text));
                             }
                             else
                             {
                                 //Did not find a match...
-                                //Complain that items don't exist or are undefined?
-                                //make dummy entries?
-                                //what do we want to do?
-
-                                //maybe prompt them for whether they want to go ahead and make a blank entry?
-                                //MessageBox.Show("One or more of these ingredients couldn't be found.  Would you like to add them?", "", MessageBoxButtons.YesNoCancel);
-
                                 //making dummy entries
-                                string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Max(txtName.Text.Split(' ')[0].Length,4));//grab the first up to 4 characters of the name
+
+                                string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
                                 newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
                                 FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
                                 DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
+
                                 newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
                                 
                             }
@@ -212,13 +211,13 @@ namespace GradeACatering
             
         }
 
-        public Boolean blnValidate()
-    {
-            Boolean blnValid = false;
+       public Boolean blnValidate()
+       {
+            Boolean blnValid = true;
        
        
-             if (txtName.Text == "" )
-        {
+       if (txtName.Text == "" )
+       {
          blnValid = false;
          if (txtPriceSold.Text != "")
          {
@@ -239,14 +238,11 @@ namespace GradeACatering
                  blnValid = false;
                  ErrMessage = "Please enter a numerical price";
              }
-         }
+          }
         
-       }  return blnValid;
-          
-            
-        
-        
-        
+        }  
+       return blnValid;
+             
     }
 
         private void btnAddToTagList_Click(object sender, EventArgs e)
@@ -257,11 +253,11 @@ namespace GradeACatering
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            for (int x = lbxTags.SelectedIndices.Count - 1; x >= 0; x--)
+
+            for (int i = lbxTags.SelectedIndices.Count -1 ; i >= 0;  i++)
             {
-                int idx = lbxTags.SelectedIndices[x];
-                lbxTags.Items.RemoveAt(idx);
-            } 
+                lbxTags.Items.RemoveAt(lbxTags.SelectedIndices[i]);
+            }
         }
 
         private void btnAddIng_Click_1(object sender, EventArgs e)

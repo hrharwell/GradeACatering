@@ -81,6 +81,8 @@ namespace GradeACatering
         {
             get{ return strFSID; }
             //no set since this is only set through the constructor
+            //disregarding the above, testing something
+            set { strFSID = value; }
         }
         
         public string Name

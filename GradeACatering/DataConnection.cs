@@ -47,14 +47,16 @@ namespace GradeACatering
                 //database will auto-default to NULL for the rest.
                 string query = "insert into Foodstuff(FoodstuffID, Name"; //these two must always be there
 
+                DataConnection.OpenConnection();
                 OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
                 rdItemCount.Read();
+                DataConnection.CloseConnection();
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;    
                 
                 //if statements for each value to add, and its associated parameter                           
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID + Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
                 int intParameterCount = 2;
                 if (fs.Directions != "")
@@ -138,9 +140,9 @@ namespace GradeACatering
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
-
+                //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 //if statements for each value to add, and its associated parameter                           
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID + Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
                 int intParameterCount = 2;
                 if (fs.Directions != "")
@@ -238,13 +240,13 @@ namespace GradeACatering
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
                 int intParameterCounter = 2;
-                if(r.FractionAmount() == "")
+                if(r.FractionAmount() != "")
                 {
                     query += " , Quantity";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount();
                     intParameterCounter++;
                 }
-                if(r.Amount() == "")
+                if(r.Unit != "")
                 {
                     query += ", Unit";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Unit;
@@ -329,13 +331,13 @@ namespace GradeACatering
 
         public static List<FoodStuff> ListAllFoodstuffs()
         {
-            //displays all foodstuffs that are not atomic items (that is, base ingredients
+            //displays all foodstuffs that are not atomic items (that is, base ingredients)
             //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are identical
             //are atomic items.  These are the ones we DO NOT want this function to return.
             List<FoodStuff> lstFoods = new List<FoodStuff>();
             try
             {              
-                string query = "Select * from Foodstuff where FoodstuffID = (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
+                string query = "Select * from Foodstuff where FoodstuffID in (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 DataConnection.OpenConnection();
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -366,6 +368,39 @@ namespace GradeACatering
             }
             finally
              {
+                DataConnection.CloseConnection();
+            }
+            return lstFoods;
+        }
+
+        public static List<FoodStuff> ListAllIngredients()
+        {
+            //displays all foodstuffs that ARE atomic items (that is, base ingredients)
+            //this is determined by the RecipeMaterials entries:  items where the Makes and MadeOf fields are different
+            //are the ones we DO want this function to return.
+            List<FoodStuff> lstFoods = new List<FoodStuff>();
+            try
+            {
+                string query = "Select * from Foodstuff where FoodstuffID in (select Makes from RecipeMaterials where Makes = MadeOf)"; //Not equals for Access is <> not !=
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                DataConnection.OpenConnection();
+                OleDbDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                               reader.GetString(1));
+                    lstFoods.Add(fs);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //don't do anything, apparently can't post messageboxes out of this thing
+            }
+            finally
+            {
                 DataConnection.CloseConnection();
             }
             return lstFoods;

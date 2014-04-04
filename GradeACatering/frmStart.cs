@@ -10,12 +10,7 @@ using System.Windows.Forms;
 
 namespace GradeACatering
 {
-    //public interface MasterLists
-    //{
-
-    //}
-
-
+  
     public partial class frmStart : Form//, MasterLists
     {
       
@@ -23,12 +18,26 @@ namespace GradeACatering
         {
             InitializeComponent();
         }
-        //desginating these as public until we figure out a better way of granting
-        //access without exposing them to the whole wide world
-        
+
+        static int intFoodstuffCount;
+        static int intRecipeMaterialCount;
+
         private void frmStart_Load(object sender, EventArgs e)
         {
-           // MessageBox.Show("Foodstuff table contains " + DataConnection.NumFoodstuffs().ToString() + " items.\nRecipeMaterials table contains " + DataConnection.NumRecipeMaterials().ToString() + " items.");
+            intFoodstuffCount = DataConnection.NumFoodstuffs();
+            intRecipeMaterialCount = DataConnection.NumRecipeMaterials();
+        }
+
+        public int FoodstuffCount
+        {
+            get { return intFoodstuffCount; }
+            set { intFoodstuffCount = value; }               
+        }
+
+        public int RecipeMaterialCount
+        {
+            get { return intRecipeMaterialCount; }
+            set { intFoodstuffCount = value; }
         }
 
         private void btnSearchfrm_Click(object sender, EventArgs e)
@@ -41,9 +50,7 @@ namespace GradeACatering
         {
            frmTest Testform = new frmTest();
            Testform.ShowDialog();
-        }
-
-     
+        }     
 
         private void btnNewMeal_Click(object sender, EventArgs e)
         {
@@ -67,13 +74,11 @@ namespace GradeACatering
         {
             frmShowAllRecipes ShowAllRecipes = new frmShowAllRecipes();
             ShowAllRecipes.ShowDialog();
-        }
-
+        }       
         private void bbtnShowAllIngredient_Click(object sender, EventArgs e)
         {
 
         }
 
-        
     }
 }
