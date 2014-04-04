@@ -30,6 +30,11 @@
         {
             this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
+            this.btnAddToTagList = new System.Windows.Forms.Button();
+            this.txtTags = new System.Windows.Forms.TextBox();
+            this.lbxTags = new System.Windows.Forms.ListBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtCookDir = new System.Windows.Forms.TextBox();
             this.txtPrepDir = new System.Windows.Forms.TextBox();
@@ -38,6 +43,16 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            this.cboUnit = new System.Windows.Forms.ComboBox();
+            this.cboIng = new System.Windows.Forms.ComboBox();
+            this.btnEditIng = new System.Windows.Forms.Button();
+            this.btnDeleteIng = new System.Windows.Forms.Button();
+            this.btnAddIng = new System.Windows.Forms.Button();
             this.lsvIngredients = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,21 +69,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtQty = new System.Windows.Forms.TextBox();
-            this.cboUnit = new System.Windows.Forms.ComboBox();
-            this.cboIng = new System.Windows.Forms.ComboBox();
-            this.btnEditIng = new System.Windows.Forms.Button();
-            this.btnDeleteIng = new System.Windows.Forms.Button();
-            this.btnAddIng = new System.Windows.Forms.Button();
-            this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
-            this.btnAddToTagList = new System.Windows.Forms.Button();
-            this.txtTags = new System.Windows.Forms.TextBox();
-            this.lbxTags = new System.Windows.Forms.ListBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.lblComingSoon = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -99,6 +99,50 @@
             this.groupBox4.TabIndex = 28;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Categorize";
+            // 
+            // btnRemoveSelectedTag
+            // 
+            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 121);
+            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
+            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
+            this.btnRemoveSelectedTag.TabIndex = 16;
+            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
+            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
+            this.btnRemoveSelectedTag.Click += new System.EventHandler(this.btnRemoveSelectedTag_Click);
+            // 
+            // btnAddToTagList
+            // 
+            this.btnAddToTagList.Location = new System.Drawing.Point(163, 32);
+            this.btnAddToTagList.Name = "btnAddToTagList";
+            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
+            this.btnAddToTagList.TabIndex = 15;
+            this.btnAddToTagList.Text = "Add Tag";
+            this.btnAddToTagList.UseVisualStyleBackColor = true;
+            this.btnAddToTagList.Click += new System.EventHandler(this.btnAddToTagList_Click);
+            // 
+            // txtTags
+            // 
+            this.txtTags.Location = new System.Drawing.Point(18, 34);
+            this.txtTags.Name = "txtTags";
+            this.txtTags.Size = new System.Drawing.Size(139, 20);
+            this.txtTags.TabIndex = 14;
+            // 
+            // lbxTags
+            // 
+            this.lbxTags.FormattingEnabled = true;
+            this.lbxTags.Location = new System.Drawing.Point(18, 60);
+            this.lbxTags.Name = "lbxTags";
+            this.lbxTags.Size = new System.Drawing.Size(211, 95);
+            this.lbxTags.TabIndex = 13;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 18);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(175, 13);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "Tags (Ex. #Jon Doe\'s#Favorite Pie)";
             // 
             // groupBox2
             // 
@@ -187,18 +231,119 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
             // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(176, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(71, 23);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "Define Item";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(182, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(31, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Type";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(145, 232);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(23, 13);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Qty";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 232);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Name";
+            // 
+            // txtQty
+            // 
+            this.txtQty.Enabled = false;
+            this.txtQty.Location = new System.Drawing.Point(148, 248);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(31, 20);
+            this.txtQty.TabIndex = 37;
+            // 
+            // cboUnit
+            // 
+            this.cboUnit.Enabled = false;
+            this.cboUnit.FormattingEnabled = true;
+            this.cboUnit.Items.AddRange(new object[] {
+            "lb",
+            "oz"});
+            this.cboUnit.Location = new System.Drawing.Point(185, 248);
+            this.cboUnit.Name = "cboUnit";
+            this.cboUnit.Size = new System.Drawing.Size(66, 21);
+            this.cboUnit.TabIndex = 36;
+            // 
+            // cboIng
+            // 
+            this.cboIng.Enabled = false;
+            this.cboIng.FormattingEnabled = true;
+            this.cboIng.Location = new System.Drawing.Point(18, 248);
+            this.cboIng.Name = "cboIng";
+            this.cboIng.Size = new System.Drawing.Size(121, 21);
+            this.cboIng.TabIndex = 35;
+            // 
+            // btnEditIng
+            // 
+            this.btnEditIng.Enabled = false;
+            this.btnEditIng.Location = new System.Drawing.Point(60, 191);
+            this.btnEditIng.Name = "btnEditIng";
+            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
+            this.btnEditIng.TabIndex = 34;
+            this.btnEditIng.Text = "Edit";
+            this.btnEditIng.UseVisualStyleBackColor = true;
+            this.btnEditIng.Click += new System.EventHandler(this.btnEditIng_Click);
+            // 
+            // btnDeleteIng
+            // 
+            this.btnDeleteIng.Enabled = false;
+            this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
+            this.btnDeleteIng.Name = "btnDeleteIng";
+            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
+            this.btnDeleteIng.TabIndex = 33;
+            this.btnDeleteIng.Text = "Delete";
+            this.btnDeleteIng.UseVisualStyleBackColor = true;
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
+            // 
+            // btnAddIng
+            // 
+            this.btnAddIng.Enabled = false;
+            this.btnAddIng.Location = new System.Drawing.Point(18, 191);
+            this.btnAddIng.Name = "btnAddIng";
+            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
+            this.btnAddIng.TabIndex = 32;
+            this.btnAddIng.Text = "Add";
+            this.btnAddIng.UseVisualStyleBackColor = true;
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
+            // 
             // lsvIngredients
             // 
             this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.lsvIngredients.FullRowSelect = true;
             this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
             this.lsvIngredients.Name = "lsvIngredients";
             this.lsvIngredients.Size = new System.Drawing.Size(229, 166);
             this.lsvIngredients.TabIndex = 8;
             this.lsvIngredients.UseCompatibleStateImageBehavior = false;
             this.lsvIngredients.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -208,6 +353,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Qty";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader2.Width = 37;
             // 
             // columnHeader3
@@ -327,149 +473,6 @@
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID Number";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(176, 191);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 41;
-            this.button1.Text = "Define Item";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(182, 232);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 13);
-            this.label11.TabIndex = 40;
-            this.label11.Text = "Type";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(145, 232);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 13);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Qty";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 232);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Name";
-            // 
-            // txtQty
-            // 
-            this.txtQty.Enabled = false;
-            this.txtQty.Location = new System.Drawing.Point(148, 248);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(31, 20);
-            this.txtQty.TabIndex = 37;
-            // 
-            // cboUnit
-            // 
-            this.cboUnit.Enabled = false;
-            this.cboUnit.FormattingEnabled = true;
-            this.cboUnit.Items.AddRange(new object[] {
-            "lb",
-            "oz"});
-            this.cboUnit.Location = new System.Drawing.Point(185, 248);
-            this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Size = new System.Drawing.Size(66, 21);
-            this.cboUnit.TabIndex = 36;
-            // 
-            // cboIng
-            // 
-            this.cboIng.Enabled = false;
-            this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(18, 248);
-            this.cboIng.Name = "cboIng";
-            this.cboIng.Size = new System.Drawing.Size(121, 21);
-            this.cboIng.TabIndex = 35;
-            // 
-            // btnEditIng
-            // 
-            this.btnEditIng.Enabled = false;
-            this.btnEditIng.Location = new System.Drawing.Point(60, 191);
-            this.btnEditIng.Name = "btnEditIng";
-            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
-            this.btnEditIng.TabIndex = 34;
-            this.btnEditIng.Text = "Edit";
-            this.btnEditIng.UseVisualStyleBackColor = true;
-            this.btnEditIng.Visible = false;
-            // 
-            // btnDeleteIng
-            // 
-            this.btnDeleteIng.Enabled = false;
-            this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
-            this.btnDeleteIng.Name = "btnDeleteIng";
-            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
-            this.btnDeleteIng.TabIndex = 33;
-            this.btnDeleteIng.Text = "Delete";
-            this.btnDeleteIng.UseVisualStyleBackColor = true;
-            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
-            // 
-            // btnAddIng
-            // 
-            this.btnAddIng.Enabled = false;
-            this.btnAddIng.Location = new System.Drawing.Point(18, 191);
-            this.btnAddIng.Name = "btnAddIng";
-            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
-            this.btnAddIng.TabIndex = 32;
-            this.btnAddIng.Text = "Add";
-            this.btnAddIng.UseVisualStyleBackColor = true;
-            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
-            // 
-            // btnRemoveSelectedTag
-            // 
-            this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 121);
-            this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
-            this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
-            this.btnRemoveSelectedTag.TabIndex = 16;
-            this.btnRemoveSelectedTag.Text = "Remove\r\nSelected";
-            this.btnRemoveSelectedTag.UseVisualStyleBackColor = true;
-            this.btnRemoveSelectedTag.Click += new System.EventHandler(this.btnRemoveSelectedTag_Click);
-            // 
-            // btnAddToTagList
-            // 
-            this.btnAddToTagList.Location = new System.Drawing.Point(163, 32);
-            this.btnAddToTagList.Name = "btnAddToTagList";
-            this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
-            this.btnAddToTagList.TabIndex = 15;
-            this.btnAddToTagList.Text = "Add Tag";
-            this.btnAddToTagList.UseVisualStyleBackColor = true;
-            this.btnAddToTagList.Click += new System.EventHandler(this.btnAddToTagList_Click);
-            // 
-            // txtTags
-            // 
-            this.txtTags.Location = new System.Drawing.Point(18, 34);
-            this.txtTags.Name = "txtTags";
-            this.txtTags.Size = new System.Drawing.Size(139, 20);
-            this.txtTags.TabIndex = 14;
-            // 
-            // lbxTags
-            // 
-            this.lbxTags.FormattingEnabled = true;
-            this.lbxTags.Location = new System.Drawing.Point(18, 60);
-            this.lbxTags.Name = "lbxTags";
-            this.lbxTags.Size = new System.Drawing.Size(211, 95);
-            this.lbxTags.TabIndex = 13;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 18);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(175, 13);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Tags (Ex. #Jon Doe\'s#Favorite Pie)";
             // 
             // lblComingSoon
             // 

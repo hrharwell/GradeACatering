@@ -26,7 +26,7 @@ namespace GradeACatering
         {
             if (btnEditRecipe.Text == "Edit Recipe")
             {
-               txtName.Enabled = true;
+            txtName.Enabled = true;
             txtPriceSold.Enabled = true;
             txtPrepTime.Enabled = true;
             txtCookTime.Enabled = true;
@@ -106,12 +106,65 @@ namespace GradeACatering
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            lbxTags.SelectedItems.Clear();
+            for (int x = lbxTags.SelectedIndices.Count - 1; x >= 0; x--)
+            {
+                int idx = lbxTags.SelectedIndices[x];
+                lbxTags.Items.RemoveAt(idx);
+            } 
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
             lblComingSoon.Visible = true;
         }
+
+        private void lsvIngredients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lsvIngredients.SelectedIndices.Count > 1)
+            {
+                btnEditIng.Enabled = false;
+            }
+            else
+            {
+                btnEditIng.Enabled = true;
+            }
+        }
+
+        private void btnEditIng_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                cboIng.Text = eachItem.Text;
+                txtQty.Text = eachItem.SubItems[1].Text;
+                cboUnit.Text = eachItem.SubItems[2].Text;
+                lsvIngredients.Items.Remove(eachItem);
+            }
+        }
+        //Another Hunter Epic Fail... All I wanted to do was Loop throught the textboxes and Make them Readonly like the VB version
+        /*
+         *   Private Sub TB_ReadOnly(ByVal blnRO As Boolean)
+         *      Dim ctrl As Control
+         *        For Each ctrl In Controls
+         *        If TypeOf ctrl Is TextBox Then
+         *            CType(ctrl, TextBox).ReadOnly = blnRO
+         *         End If
+         *        Next
+         *      End Sub
+         */
+
+
+        //Boolean TB_ReadOnly() {
+       //    Boolean blnRO;
+       //    Control ctrl;
+       //    foreach (Control ctrl in Controls)
+       //    {
+       //        if (typeof(Control) == TextBox)
+       //        {
+                   
+       //        }
+       //    }
+
+       //    return blnRO;
+       // }
     }
 }
