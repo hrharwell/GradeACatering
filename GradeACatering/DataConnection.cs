@@ -209,7 +209,7 @@ namespace GradeACatering
             }
         }
 
-        public static void UpdateFoodstuff(string fsID, int column, string newValue)
+        public static void UpdateFoodstuff(string fsID, FoodStuff updatedFS)
         {
             //need some way of identifying the column without passing in the name itself which might change.
             //an enum won't work since that's just a bit of code associated with an integer.
@@ -220,7 +220,76 @@ namespace GradeACatering
             //Potentially ugly hack to make this work is to just update every field regardless of whether they were
             //altered or not, overwriting with the same values for unaltered fields.
             //it might be slower but would save the headache of trying to pick and choose the fields we need to write to.
-            
+            try
+            {
+                //this needs to be rewritten to only insert fields and parameters for the items that the user is inserting, so the
+                //database will auto-default to NULL for the rest.
+                string query = "update foodstuff set "; //these two must always be there
+
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.Connection = conn;
+                //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                //if statements for each value to add, and its associated parameter   
+                query += "FoodstuffID = ?";        
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+                query += ",Name = ? ";
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.Name;
+                int intParameterCount = 2;
+                if (updatedFS.Directions != "")
+                {
+                    query += ", Directions = ?";
+                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.Directions;
+                    intParameterCount++;
+                }
+                if (updatedFS.PrepTime > -1) //use -1, items may still have 0 prep time
+                {
+                    query += ", PrepTime = ?";
+                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = updatedFS.PrepTime;
+                    intParameterCount++;
+                }
+                if (updatedFS.CookTime > -1)
+                {
+                    query += ", CookTime = ? ";
+                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = updatedFS.CookTime;
+                    intParameterCount++;
+                }
+                if (updatedFS.Cost > 0.0) //unlikely anything is going to be free
+                {
+                    query += ", Cost = ? ";
+                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = updatedFS.Cost;
+                    intParameterCount++;
+                }
+                if (updatedFS.Servings > 0)
+                {
+                    query += ", Servings = ?";
+                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = updatedFS.Servings;
+                    intParameterCount++;
+                }
+                if (updatedFS.GetTags() != "")
+                {
+                    query += ", Tags = ? ";
+                    //Comma-and-space delineated list of the tags.
+                    //When tokenizing or splitting tags, use ", " for the demarcation.
+                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.GetTags();
+                    intParameterCount++;
+                }
+                query += "where FoodstuffID = " + updatedFS.ID;
+
+                cmd.CommandText = query;
+                DataConnection.OpenConnection();
+
+                cmd.ExecuteNonQuery();
+                
+                //return "Item plus ingredients added.";
+            }
+            catch (Exception ex)
+            {
+                //return ex.ToString();
+            }
+            finally
+            {
+                DataConnection.CloseConnection();
+            }
         }
 
         public static string AddRecipeItem(Recipe r)
@@ -447,6 +516,35 @@ namespace GradeACatering
             }
             
             return lstFoods;
+        }
+
+        public List<FoodStuff> FindFoodstuffsTagged(string tag)
+        {
+            List<FoodStuff> FoodstuffsFound = new List<FoodStuff>();
+
+            try
+            {
+                //loop through each foodstuff's parsed tag string
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                DataConnection.CloseConnection();
+            }
+
+            return FoodstuffsFound;
+        }
+
+        public static FoodStuff GetFoodstuffWithID(string fsID)
+        {
+            FoodStuff found = new FoodStuff();
+            return found;
         }
 
         public static int NumFoodstuffs()
