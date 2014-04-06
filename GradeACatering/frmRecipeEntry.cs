@@ -264,14 +264,25 @@ namespace GradeACatering
         {
             if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
             {
-                int intI = lsvIngredients.Items.Count;
-                lsvIngredients.Items.Add(cboIng.Text);
-                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
-                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-                cboIng.Text = "";
-                txtQty.Text = "";
-                cboUnit.Text = "";
+                double dblQty; 
+                if (double.TryParse(txtQty.Text, out dblQty))
+                {
 
+                    int intI = lsvIngredients.Items.Count;
+                    lsvIngredients.Items.Add(cboIng.Text);
+                    lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+                    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                    cboIng.Text = "";
+                    txtQty.Text = "";
+                    cboUnit.Text = "";
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Please enter a numeric value");
+                }
+            
             }
             else
             {

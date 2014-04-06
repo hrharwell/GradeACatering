@@ -75,19 +75,28 @@ namespace GradeACatering
         {
             if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
             {
-                int intI = lsvIngredients.Items.Count;
-                lsvIngredients.Items.Add(cboIng.Text);
-                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
-                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-                cboIng.Text = "";
-                txtQty.Text = "";
-                cboUnit.Text = "";
-
-            }
-            else
-            {
-                string ErrMessage = "Please Enter an Ingredient";
-                MessageBox.Show(ErrMessage);
+                double dblQty;
+                if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+                {
+                    if (double.TryParse(txtQty.Text, out dblQty))
+                    {
+                        int intI = lsvIngredients.Items.Count;
+                        lsvIngredients.Items.Add(cboIng.Text);
+                        lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+                        lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                        cboIng.Text = "";
+                        txtQty.Text = "";
+                        cboUnit.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a numeric value");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter an Ingredient");
+                }
             }
         }
 
@@ -139,6 +148,7 @@ namespace GradeACatering
                 cboUnit.Text = eachItem.SubItems[2].Text;
                 lsvIngredients.Items.Remove(eachItem);
             }
+
         }
         //Another Hunter Epic Fail... All I wanted to do was Loop throught the textboxes and Make them Readonly like the VB version
         /*

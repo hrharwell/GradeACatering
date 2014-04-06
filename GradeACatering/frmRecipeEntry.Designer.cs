@@ -35,6 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnDefineItem = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -68,7 +69,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.btnDefineItem = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -151,6 +151,16 @@
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
+            // 
+            // btnDefineItem
+            // 
+            this.btnDefineItem.Location = new System.Drawing.Point(173, 184);
+            this.btnDefineItem.Name = "btnDefineItem";
+            this.btnDefineItem.Size = new System.Drawing.Size(71, 23);
+            this.btnDefineItem.TabIndex = 32;
+            this.btnDefineItem.Text = "Define Item";
+            this.btnDefineItem.UseVisualStyleBackColor = true;
+            this.btnDefineItem.Click += new System.EventHandler(this.btnDefineItem_Click);
             // 
             // label11
             // 
@@ -455,16 +465,6 @@
             this.btnReturn.Text = "Return to Main Menu";
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // btnDefineItem
-            // 
-            this.btnDefineItem.Location = new System.Drawing.Point(173, 184);
-            this.btnDefineItem.Name = "btnDefineItem";
-            this.btnDefineItem.Size = new System.Drawing.Size(71, 23);
-            this.btnDefineItem.TabIndex = 32;
-            this.btnDefineItem.Text = "Define Item";
-            this.btnDefineItem.UseVisualStyleBackColor = true;
-            this.btnDefineItem.Click += new System.EventHandler(this.btnDefineItem_Click);
             // 
             // frmRecipeEntry
             // 
