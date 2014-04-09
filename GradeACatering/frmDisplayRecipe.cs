@@ -12,6 +12,17 @@ namespace GradeACatering
 {
     public partial class frmDisplayRecipe : Form
     {
+        public void LoadFoodstuff(FoodStuff inFS)
+        {
+            //fill out controls based on what inFS contains
+            txtName.Text = inFS.Name;
+            txtServingSize.Text = inFS.Servings.ToString();
+            txtPriceSold.Text = inFS.Cost.ToString();
+            txtPrepTime.Text = inFS.PrepTime.ToString();
+            txtCookTime.Text = inFS.CookTime.ToString();
+            
+        }
+
         public frmDisplayRecipe()
         {
             InitializeComponent();
@@ -148,6 +159,11 @@ namespace GradeACatering
                 cboUnit.Text = eachItem.SubItems[2].Text;
                 lsvIngredients.Items.Remove(eachItem);
             }
+
+        }
+
+        private void frmDisplayRecipe_Load(object sender, EventArgs e)
+        {
 
         }
         //Another Hunter Epic Fail... All I wanted to do was Loop throught the textboxes and Make them Readonly like the VB version

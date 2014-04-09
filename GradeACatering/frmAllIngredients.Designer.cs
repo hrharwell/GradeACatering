@@ -124,6 +124,7 @@
             this.Controls.Add(this.lsvAllRecipes);
             this.Name = "frmAllIngredients";
             this.Text = "frmAllIngredients";
+            this.Load += new System.EventHandler(this.frmAllIngredients_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

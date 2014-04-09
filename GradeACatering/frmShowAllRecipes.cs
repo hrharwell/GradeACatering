@@ -12,6 +12,7 @@ namespace GradeACatering
 {
     public partial class frmShowAllRecipes : Form
     {
+        private List<FoodStuff> fsMasterlist;
         public frmShowAllRecipes()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace GradeACatering
         private void btnOpenRecipe_Click(object sender, EventArgs e)
         {
             frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
+            displayRecipe.LoadFoodstuff(fsMasterlist[lsvAllRecipes.SelectedIndices[0]]);
             displayRecipe.ShowDialog();
         }
 
@@ -37,14 +39,16 @@ namespace GradeACatering
         {
 
           // Imports all items from the recipes list into listview...
-            foreach (FoodStuff fs in DataConnection.ListAllFoodstuffs())
+            fsMasterlist = DataConnection.ListAllFoodstuffs();
+            foreach (FoodStuff fs in fsMasterlist)
             {
-                ListViewItem lsvItem = new ListViewItem(fs.Name);
+                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
                 lsvItem.SubItems.Add(fs.Servings.ToString());
                 lsvItem.SubItems.Add(fs.Cost.ToString("C"));
                 lsvItem.SubItems.Add(fs.CostPerServing().ToString("C"));
                 lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
                 lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.ID.ToString());
                 lsvAllRecipes.Items.Add(lsvItem);
             }
          

@@ -77,7 +77,8 @@ namespace GradeACatering
         }       
         private void bbtnShowAllIngredient_Click(object sender, EventArgs e)
         {
-
+            frmAllIngredients ShowAllIngredients = new frmAllIngredients();
+            ShowAllIngredients.ShowDialog();
         }
 
     }

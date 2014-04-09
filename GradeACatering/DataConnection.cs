@@ -422,9 +422,13 @@ namespace GradeACatering
                                                reader.GetDouble(5),
                                                reader.GetInt32(6));
                     //tokenize the tags from their long string stored in the database.
+                    
                     string[] strTagList = reader.GetString(7).Split(',');
-                    foreach (string t in strTagList)
-                        fs.AddTag(t);
+                    if (strTagList.Length > 0)
+                    {
+                        foreach (string t in strTagList)
+                            fs.AddTag(t);
+                    }
 
 
                     lstFoods.Add(fs);
@@ -434,6 +438,7 @@ namespace GradeACatering
             catch (Exception ex)
             {
                 //don't do anything, apparently can't post messageboxes out of this thing
+                ex.ToString();
             }
             finally
              {
@@ -518,7 +523,7 @@ namespace GradeACatering
             return lstFoods;
         }
 
-        public List<FoodStuff> FindFoodstuffsTagged(string tag)
+        public static List<FoodStuff> FindFoodstuffsTagged(string tag)
         {
             List<FoodStuff> FoodstuffsFound = new List<FoodStuff>();
 

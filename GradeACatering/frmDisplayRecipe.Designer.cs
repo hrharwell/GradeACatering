@@ -499,6 +499,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmDisplayRecipe";
             this.Text = "Recipe Display View";
+            this.Load += new System.EventHandler(this.frmDisplayRecipe_Load);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);

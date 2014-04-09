@@ -56,7 +56,10 @@ namespace GradeACatering
             intCookTime = inCook;
             intServings = inServing;
 
-            lstTags = inTags;
+            if (inTags == null)
+                lstTags = new List<string>();
+            else
+                lstTags = inTags;
         }
         
         public override string ToString()
@@ -159,7 +162,9 @@ namespace GradeACatering
         {
             //Iterate through the list of tags, returns 0-based index in list if a string matches, else returns -1.
             int isFound = -1;
-            for (int i = 0; (i <= lstTags.Count - 1) & isFound == -1; i++)
+            for (int i = 0; 
+                (i <= lstTags.Count - 1) & isFound == -1; 
+                i++)
             {
                 if (tagtofind == lstTags.ElementAt<string>(i))
                     isFound = i;
