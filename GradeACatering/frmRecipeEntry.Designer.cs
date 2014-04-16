@@ -28,26 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtCookDirections = new System.Windows.Forms.TextBox();
-            this.txtPrepDirections = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnSaveRecipe = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtQty = new System.Windows.Forms.TextBox();
-            this.cboUnit = new System.Windows.Forms.ComboBox();
-            this.cboIng = new System.Windows.Forms.ComboBox();
-            this.btnEditIng = new System.Windows.Forms.Button();
-            this.btnDeleteIng = new System.Windows.Forms.Button();
-            this.btnAddIng = new System.Windows.Forms.Button();
-            this.lsvIngredients = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -68,59 +49,28 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.btnDefineItem = new System.Windows.Forms.Button();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDirections = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            this.cboUnit = new System.Windows.Forms.ComboBox();
+            this.btnEditIng = new System.Windows.Forms.Button();
+            this.cboIng = new System.Windows.Forms.ComboBox();
+            this.btnDeleteIng = new System.Windows.Forms.Button();
+            this.btnAddIng = new System.Windows.Forms.Button();
+            this.lsvIngredients = new System.Windows.Forms.ListView();
+            this.colQty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtCookDirections);
-            this.groupBox2.Controls.Add(this.txtPrepDirections);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(550, 24);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(253, 284);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Directions";
-            // 
-            // txtCookDirections
-            // 
-            this.txtCookDirections.Location = new System.Drawing.Point(18, 166);
-            this.txtCookDirections.Multiline = true;
-            this.txtCookDirections.Name = "txtCookDirections";
-            this.txtCookDirections.Size = new System.Drawing.Size(213, 110);
-            this.txtCookDirections.TabIndex = 8;
-            // 
-            // txtPrepDirections
-            // 
-            this.txtPrepDirections.Location = new System.Drawing.Point(18, 38);
-            this.txtPrepDirections.Multiline = true;
-            this.txtPrepDirections.Name = "txtPrepDirections";
-            this.txtPrepDirections.Size = new System.Drawing.Size(213, 110);
-            this.txtPrepDirections.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Cooking Directions\r\n";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Prep Directions\r\n";
             // 
             // btnSaveRecipe
             // 
@@ -131,139 +81,6 @@
             this.btnSaveRecipe.Text = "Save Recipe";
             this.btnSaveRecipe.UseVisualStyleBackColor = true;
             this.btnSaveRecipe.Click += new System.EventHandler(this.btnSaveRecipe_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnDefineItem);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.txtQty);
-            this.groupBox3.Controls.Add(this.cboUnit);
-            this.groupBox3.Controls.Add(this.cboIng);
-            this.groupBox3.Controls.Add(this.btnEditIng);
-            this.groupBox3.Controls.Add(this.btnDeleteIng);
-            this.groupBox3.Controls.Add(this.btnAddIng);
-            this.groupBox3.Controls.Add(this.lsvIngredients);
-            this.groupBox3.Location = new System.Drawing.Point(276, 24);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(268, 284);
-            this.groupBox3.TabIndex = 17;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Made of Ingredients";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(184, 225);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Type";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(147, 225);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 13);
-            this.label9.TabIndex = 29;
-            this.label9.Text = "Qty";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 225);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "Name";
-            // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(150, 241);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(31, 20);
-            this.txtQty.TabIndex = 26;
-            // 
-            // cboUnit
-            // 
-            this.cboUnit.FormattingEnabled = true;
-            this.cboUnit.Items.AddRange(new object[] {
-            "lb",
-            "oz"});
-            this.cboUnit.Location = new System.Drawing.Point(187, 241);
-            this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Size = new System.Drawing.Size(66, 21);
-            this.cboUnit.TabIndex = 27;
-            // 
-            // cboIng
-            // 
-            this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(20, 241);
-            this.cboIng.Name = "cboIng";
-            this.cboIng.Size = new System.Drawing.Size(121, 21);
-            this.cboIng.TabIndex = 25;
-            // 
-            // btnEditIng
-            // 
-            this.btnEditIng.Location = new System.Drawing.Point(62, 184);
-            this.btnEditIng.Name = "btnEditIng";
-            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
-            this.btnEditIng.TabIndex = 24;
-            this.btnEditIng.Text = "Edit";
-            this.btnEditIng.UseVisualStyleBackColor = true;
-            this.btnEditIng.Visible = false;
-            this.btnEditIng.Click += new System.EventHandler(this.btnEditIng_Click);
-            // 
-            // btnDeleteIng
-            // 
-            this.btnDeleteIng.Location = new System.Drawing.Point(113, 184);
-            this.btnDeleteIng.Name = "btnDeleteIng";
-            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
-            this.btnDeleteIng.TabIndex = 23;
-            this.btnDeleteIng.Text = "Delete";
-            this.btnDeleteIng.UseVisualStyleBackColor = true;
-            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click_1);
-            // 
-            // btnAddIng
-            // 
-            this.btnAddIng.Location = new System.Drawing.Point(20, 184);
-            this.btnAddIng.Name = "btnAddIng";
-            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
-            this.btnAddIng.TabIndex = 22;
-            this.btnAddIng.Text = "Add";
-            this.btnAddIng.UseVisualStyleBackColor = true;
-            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click_1);
-            // 
-            // lsvIngredients
-            // 
-            this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.lsvIngredients.FullRowSelect = true;
-            this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
-            this.lsvIngredients.Name = "lsvIngredients";
-            this.lsvIngredients.Size = new System.Drawing.Size(229, 159);
-            this.lsvIngredients.TabIndex = 8;
-            this.lsvIngredients.UseCompatibleStateImageBehavior = false;
-            this.lsvIngredients.View = System.Windows.Forms.View.Details;
-            this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 129;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Qty";
-            this.columnHeader2.Width = 37;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Unit";
             // 
             // groupBox1
             // 
@@ -456,55 +273,200 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // btnDefineItem
+            // groupBox2
             // 
-            this.btnDefineItem.Location = new System.Drawing.Point(173, 184);
-            this.btnDefineItem.Name = "btnDefineItem";
-            this.btnDefineItem.Size = new System.Drawing.Size(71, 23);
-            this.btnDefineItem.TabIndex = 32;
-            this.btnDefineItem.Text = "Define Item";
-            this.btnDefineItem.UseVisualStyleBackColor = true;
-            this.btnDefineItem.Click += new System.EventHandler(this.btnDefineItem_Click);
+            this.groupBox2.Controls.Add(this.txtDirections);
+            this.groupBox2.Location = new System.Drawing.Point(550, 24);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(253, 284);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Directions";
+            // 
+            // txtDirections
+            // 
+            this.txtDirections.Location = new System.Drawing.Point(18, 19);
+            this.txtDirections.Multiline = true;
+            this.txtDirections.Name = "txtDirections";
+            this.txtDirections.Size = new System.Drawing.Size(213, 249);
+            this.txtDirections.TabIndex = 7;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.txtQty);
+            this.groupBox3.Controls.Add(this.cboUnit);
+            this.groupBox3.Controls.Add(this.btnEditIng);
+            this.groupBox3.Controls.Add(this.cboIng);
+            this.groupBox3.Controls.Add(this.btnDeleteIng);
+            this.groupBox3.Controls.Add(this.btnAddIng);
+            this.groupBox3.Controls.Add(this.lsvIngredients);
+            this.groupBox3.Location = new System.Drawing.Point(264, 24);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(268, 284);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Made of Ingredients";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(176, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(71, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Define Item";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(57, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(31, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Type";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 232);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(23, 13);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Qty";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(134, 231);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Name";
+            // 
+            // txtQty
+            // 
+            this.txtQty.Enabled = false;
+            this.txtQty.Location = new System.Drawing.Point(23, 248);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(31, 20);
+            this.txtQty.TabIndex = 0;
+            // 
+            // cboUnit
+            // 
+            this.cboUnit.Enabled = false;
+            this.cboUnit.FormattingEnabled = true;
+            this.cboUnit.Items.AddRange(new object[] {
+            "lb",
+            "oz"});
+            this.cboUnit.Location = new System.Drawing.Point(60, 248);
+            this.cboUnit.Name = "cboUnit";
+            this.cboUnit.Size = new System.Drawing.Size(66, 21);
+            this.cboUnit.TabIndex = 1;
+            // 
+            // btnEditIng
+            // 
+            this.btnEditIng.Enabled = false;
+            this.btnEditIng.Location = new System.Drawing.Point(60, 191);
+            this.btnEditIng.Name = "btnEditIng";
+            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
+            this.btnEditIng.TabIndex = 4;
+            this.btnEditIng.Text = "Edit";
+            this.btnEditIng.UseVisualStyleBackColor = true;
+            // 
+            // cboIng
+            // 
+            this.cboIng.Enabled = false;
+            this.cboIng.FormattingEnabled = true;
+            this.cboIng.Location = new System.Drawing.Point(133, 247);
+            this.cboIng.Name = "cboIng";
+            this.cboIng.Size = new System.Drawing.Size(121, 21);
+            this.cboIng.TabIndex = 2;
+            // 
+            // btnDeleteIng
+            // 
+            this.btnDeleteIng.Enabled = false;
+            this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
+            this.btnDeleteIng.Name = "btnDeleteIng";
+            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
+            this.btnDeleteIng.TabIndex = 5;
+            this.btnDeleteIng.Text = "Delete";
+            this.btnDeleteIng.UseVisualStyleBackColor = true;
+            // 
+            // btnAddIng
+            // 
+            this.btnAddIng.Enabled = false;
+            this.btnAddIng.Location = new System.Drawing.Point(18, 191);
+            this.btnAddIng.Name = "btnAddIng";
+            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
+            this.btnAddIng.TabIndex = 3;
+            this.btnAddIng.Text = "Add";
+            this.btnAddIng.UseVisualStyleBackColor = true;
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click_2);
+            // 
+            // lsvIngredients
+            // 
+            this.lsvIngredients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colQty,
+            this.colUnit,
+            this.colName});
+            this.lsvIngredients.FullRowSelect = true;
+            this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
+            this.lsvIngredients.Name = "lsvIngredients";
+            this.lsvIngredients.Size = new System.Drawing.Size(233, 166);
+            this.lsvIngredients.TabIndex = 8;
+            this.lsvIngredients.UseCompatibleStateImageBehavior = false;
+            this.lsvIngredients.View = System.Windows.Forms.View.Details;
+            // 
+            // colQty
+            // 
+            this.colQty.Text = "Qty";
+            this.colQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.colQty.Width = 37;
+            // 
+            // colUnit
+            // 
+            this.colUnit.Text = "Unit";
+            // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            this.colName.Width = 130;
             // 
             // frmRecipeEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 494);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSaveRecipe);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmRecipeEntry";
             this.Text = "Enter A New Recipe or Edit An Existing Recipe";
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.Load += new System.EventHandler(this.frmRecipeEntry_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtCookDirections;
-        private System.Windows.Forms.TextBox txtPrepDirections;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSaveRecipe;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListView lsvIngredients;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtServingSize;
         private System.Windows.Forms.Label label10;
@@ -525,15 +487,22 @@
         private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Button btnRemoveSelectedTag;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtDirections;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.ComboBox cboUnit;
-        private System.Windows.Forms.ComboBox cboIng;
         private System.Windows.Forms.Button btnEditIng;
+        private System.Windows.Forms.ComboBox cboIng;
         private System.Windows.Forms.Button btnDeleteIng;
         private System.Windows.Forms.Button btnAddIng;
-        private System.Windows.Forms.Button btnDefineItem;
+        private System.Windows.Forms.ListView lsvIngredients;
+        private System.Windows.Forms.ColumnHeader colQty;
+        private System.Windows.Forms.ColumnHeader colUnit;
+        private System.Windows.Forms.ColumnHeader colName;
     }
 }

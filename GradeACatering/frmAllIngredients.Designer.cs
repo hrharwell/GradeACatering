@@ -57,6 +57,7 @@
             this.btnReturnToMenu.TabIndex = 7;
             this.btnReturnToMenu.Text = "Return to Main Menu";
             this.btnReturnToMenu.UseVisualStyleBackColor = true;
+            this.btnReturnToMenu.Click += new System.EventHandler(this.btnReturnToMenu_Click);
             // 
             // btnOpenIngredient
             // 
@@ -124,6 +125,7 @@
             this.Controls.Add(this.lsvAllRecipes);
             this.Name = "frmAllIngredients";
             this.Text = "frmAllIngredients";
+            this.Load += new System.EventHandler(this.frmAllIngredients_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

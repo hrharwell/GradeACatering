@@ -16,5 +16,29 @@ namespace GradeACatering
         {
             InitializeComponent();
         }
+
+        private void frmAllIngredients_Load(object sender, EventArgs e)
+        {
+           
+            foreach (FoodStuff fs in  DataConnection.ListAllFoodstuffs())
+            {
+                //parse them out into listviewitem objects
+                //then insert listviewitems in the listview
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = fs.Name;
+                lvi.SubItems.Add(fs.Servings.ToString());
+                lvi.SubItems.Add(fs.Cost.ToString());
+                lvi.SubItems.Add(fs.CostPerServing().ToString());
+                lvi.SubItems.Add(fs.PrepTime.ToString());
+                lvi.SubItems.Add(fs.CookTime.ToString());
+                //and so on, ordered however the columns are in the listview
+                lsvAllRecipes.Items.Add(lvi);
+            }
+        }
+
+        private void btnReturnToMenu_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
+        }
     }
 }

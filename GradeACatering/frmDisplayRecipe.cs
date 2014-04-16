@@ -12,6 +12,17 @@ namespace GradeACatering
 {
     public partial class frmDisplayRecipe : Form
     {
+        public void LoadFoodstuff(FoodStuff inFS)
+        {
+            //fill out controls based on what inFS contains
+            txtName.Text = inFS.Name;
+            txtServingSize.Text = inFS.Servings.ToString();
+            txtPriceSold.Text = inFS.Cost.ToString();
+            txtPrepTime.Text = inFS.PrepTime.ToString();
+            txtCookTime.Text = inFS.CookTime.ToString();
+            
+        }
+
         public frmDisplayRecipe()
         {
             InitializeComponent();
@@ -30,8 +41,7 @@ namespace GradeACatering
             txtPriceSold.Enabled = true;
             txtPrepTime.Enabled = true;
             txtCookTime.Enabled = true;
-            txtCookDir.Enabled = true;
-            txtPrepDir.Enabled = true;
+            txtDirections.Enabled = true;
             txtTags.Enabled = true;
             txtServingSize.Enabled = true;
             cboIng.Enabled = true;
@@ -53,8 +63,7 @@ namespace GradeACatering
                 txtPriceSold.Enabled = false;
                 txtPrepTime.Enabled = false;
                 txtCookTime.Enabled = false;
-                txtCookDir.Enabled = false;
-                txtPrepDir.Enabled = false;
+                txtDirections.Enabled = false;
                 txtTags.Enabled = false;
                 txtServingSize.Enabled = false;
                 cboIng.Enabled = false;
@@ -75,19 +84,38 @@ namespace GradeACatering
         {
             if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
             {
-                int intI = lsvIngredients.Items.Count;
-                lsvIngredients.Items.Add(cboIng.Text);
-                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
-                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-                cboIng.Text = "";
-                txtQty.Text = "";
-                cboUnit.Text = "";
+                double dblQty;
+                if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+                {
+                    if (double.TryParse(txtQty.Text, out dblQty))
+                    {
+                        //int intI = lsvIngredients.Items.Count;
+                        //lsvIngredients.Items.Add(cboIng.Text);
+                        //lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+                        //lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
 
-            }
-            else
-            {
-                string ErrMessage = "Please Enter an Ingredient";
-                MessageBox.Show(ErrMessage);
+                        //how dustin does it
+                        ListViewItem lvi = new ListViewItem();
+                        //make a listview item, fill it with your parameters
+                        lvi.Text = dblQty.ToString();
+                        lvi.SubItems.Add(cboUnit.Text);
+                        lvi.SubItems.Add(cboIng.Text);
+                        //then add it to the listview items collection.
+                        lsvIngredients.Items.Add(lvi);
+                        
+                        cboIng.Text = "";
+                        txtQty.Text = "";
+                        cboUnit.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a numeric value");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter an Ingredient");
+                }
             }
         }
 
@@ -139,6 +167,12 @@ namespace GradeACatering
                 cboUnit.Text = eachItem.SubItems[2].Text;
                 lsvIngredients.Items.Remove(eachItem);
             }
+
+        }
+
+        private void frmDisplayRecipe_Load(object sender, EventArgs e)
+        {
+
         }
         //Another Hunter Epic Fail... All I wanted to do was Loop throught the textboxes and Make them Readonly like the VB version
         /*

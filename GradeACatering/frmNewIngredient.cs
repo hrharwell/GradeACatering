@@ -24,20 +24,32 @@ public partial class frmNewIngredient : Form
 
 private void btnAddIng_Click(object sender, EventArgs e)
 {
+    double dblQty;
+    string ErrMessage = "";
     if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
-{
-int intI = lsvIngredients.Items.Count;
-	lsvIngredients.Items.Add(cboIng.Text);
-    lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
-    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-    cboIng.Text = "";
-    txtQty.Text = "";
-    cboUnit.Text = "";
-                
+{       
+        if (double.TryParse(txtQty.Text, out dblQty))
+    {
+       
+                int intI = lsvIngredients.Items.Count;
+                lsvIngredients.Items.Add(cboIng.Text);  
+                lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());  
+                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                cboIng.Text = "";
+                txtQty.Text = "";
+                cboUnit.Text = "";
+        
+        }
+        else
+        {
+           
+            MessageBox.Show(  "Please enter a numeric value" );
+        }
+            
 }
     else
     {
-        string ErrMessage = "Please Enter an Ingredient";
+        ErrMessage += "Please Enter an Ingredient";
         MessageBox.Show(ErrMessage);
     }
            
@@ -53,21 +65,25 @@ private void btnDeleteIng_Click(object sender, EventArgs e)
 
     foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
     {
-        lsvIngredients.Items.Remove(eachItem);
+        if (lsvIngredients.SelectedIndices.Count > 0)
+        {
+            lsvIngredients.Items.Remove(eachItem);
+ //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+        }
+        else if (lsvIngredients.Items.Count > 0)
+        {
+            string ErrMessage = "Please select an Item";
+            MessageBox.Show(ErrMessage);
+        }
+        else
+        {
+            MessageBox.Show("List is empty, please at an item.");
+        }
     }
-    //if (lsvIngredients.SelectedIndices.Count > 0 )
-    //{
-    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
-    //}
-    //else if (lsvIngredients.Items.Count > 0)
-    //{
-    //    string ErrMessage = "Please select an Item";
-    //    MessageBox.Show(ErrMessage);
-    //}
-    //else
-    //{
-    //    MessageBox.Show("List is empty, please at an item.");
-    //}
+   
+   
+   
+  
 }
 
 private void btnReturn_Click(object sender, EventArgs e)
@@ -99,5 +115,18 @@ private void lsvIngredients_SelectedIndexChanged(object sender, EventArgs e)
         btnEditIng.Enabled = true;
     }
 }
+
+
+private void btnDefineItem_Click(object sender, EventArgs e)
+{
+    // Open Another Item Form
+}
+
+private void btnReturn_Click_1(object sender, EventArgs e)
+{
+    ActiveForm.Close();
+}
+
+
 }
 }

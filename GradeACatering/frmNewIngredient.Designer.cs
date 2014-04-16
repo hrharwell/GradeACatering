@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSaveRecipe = new System.Windows.Forms.Button();
+            this.btnDefineItem = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -133,7 +133,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnDefineItem);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label6);
@@ -150,15 +150,6 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(176, 182);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Define Item";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -281,15 +272,25 @@
             this.btnSaveRecipe.Text = "Save Item";
             this.btnSaveRecipe.UseVisualStyleBackColor = true;
             // 
+            // btnDefineItem
+            // 
+            this.btnDefineItem.Location = new System.Drawing.Point(176, 182);
+            this.btnDefineItem.Name = "btnDefineItem";
+            this.btnDefineItem.Size = new System.Drawing.Size(71, 23);
+            this.btnDefineItem.TabIndex = 22;
+            this.btnDefineItem.Text = "Define Item";
+            this.btnDefineItem.UseVisualStyleBackColor = true;
+            this.btnDefineItem.Click += new System.EventHandler(this.btnDefineItem_Click);
+            // 
             // btnReturn
             // 
             this.btnReturn.Location = new System.Drawing.Point(12, 272);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(90, 45);
-            this.btnReturn.TabIndex = 15;
+            this.btnReturn.TabIndex = 16;
             this.btnReturn.Text = "Return to Main Menu";
             this.btnReturn.UseVisualStyleBackColor = true;
-            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click_1);
             // 
             // frmNewIngredient
             // 
@@ -319,7 +320,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
@@ -336,6 +336,7 @@
         private System.Windows.Forms.Button btnSaveRecipe;
         private System.Windows.Forms.TextBox txtIngUnit;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnDefineItem;
         private System.Windows.Forms.Button btnReturn;
     }
 }
