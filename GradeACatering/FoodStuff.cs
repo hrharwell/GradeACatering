@@ -197,7 +197,10 @@ namespace GradeACatering
             }
             return success;
         }
-        
 
+        public List<string> ReturnTagList()
+        {
+            return lstTags;
+        }
     }
 }
