@@ -90,7 +90,7 @@ namespace GradeACatering
                     List<string> newTags = new List<String>();
                     if (lbxTags.Items.Count > 0)
                     {
-                        for (int i = 0; i <= lbxTags.Items.Count; i++)
+                        for (int i = 0; i < lbxTags.Items.Count; i++)
                         {
                             newTags.Add(lbxTags.Items[i].ToString());
                         }

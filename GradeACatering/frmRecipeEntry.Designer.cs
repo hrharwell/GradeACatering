@@ -313,7 +313,6 @@
             // 
             // button1
             // 
-            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(176, 191);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 23);
@@ -350,7 +349,6 @@
             // 
             // txtQty
             // 
-            this.txtQty.Enabled = false;
             this.txtQty.Location = new System.Drawing.Point(23, 248);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(31, 20);
@@ -358,7 +356,6 @@
             // 
             // cboUnit
             // 
-            this.cboUnit.Enabled = false;
             this.cboUnit.FormattingEnabled = true;
             this.cboUnit.Items.AddRange(new object[] {
             "lb",
@@ -370,7 +367,6 @@
             // 
             // btnEditIng
             // 
-            this.btnEditIng.Enabled = false;
             this.btnEditIng.Location = new System.Drawing.Point(60, 191);
             this.btnEditIng.Name = "btnEditIng";
             this.btnEditIng.Size = new System.Drawing.Size(45, 23);
@@ -380,7 +376,6 @@
             // 
             // cboIng
             // 
-            this.cboIng.Enabled = false;
             this.cboIng.FormattingEnabled = true;
             this.cboIng.Location = new System.Drawing.Point(133, 247);
             this.cboIng.Name = "cboIng";
@@ -389,7 +384,6 @@
             // 
             // btnDeleteIng
             // 
-            this.btnDeleteIng.Enabled = false;
             this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
             this.btnDeleteIng.Name = "btnDeleteIng";
             this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
@@ -399,7 +393,6 @@
             // 
             // btnAddIng
             // 
-            this.btnAddIng.Enabled = false;
             this.btnAddIng.Location = new System.Drawing.Point(18, 191);
             this.btnAddIng.Name = "btnAddIng";
             this.btnAddIng.Size = new System.Drawing.Size(36, 23);
