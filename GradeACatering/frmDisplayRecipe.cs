@@ -41,8 +41,7 @@ namespace GradeACatering
             txtPriceSold.Enabled = true;
             txtPrepTime.Enabled = true;
             txtCookTime.Enabled = true;
-            txtCookDir.Enabled = true;
-            txtPrepDir.Enabled = true;
+            txtDirections.Enabled = true;
             txtTags.Enabled = true;
             txtServingSize.Enabled = true;
             cboIng.Enabled = true;
@@ -64,8 +63,7 @@ namespace GradeACatering
                 txtPriceSold.Enabled = false;
                 txtPrepTime.Enabled = false;
                 txtCookTime.Enabled = false;
-                txtCookDir.Enabled = false;
-                txtPrepDir.Enabled = false;
+                txtDirections.Enabled = false;
                 txtTags.Enabled = false;
                 txtServingSize.Enabled = false;
                 cboIng.Enabled = false;
@@ -91,10 +89,20 @@ namespace GradeACatering
                 {
                     if (double.TryParse(txtQty.Text, out dblQty))
                     {
-                        int intI = lsvIngredients.Items.Count;
-                        lsvIngredients.Items.Add(cboIng.Text);
-                        lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
-                        lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                        //int intI = lsvIngredients.Items.Count;
+                        //lsvIngredients.Items.Add(cboIng.Text);
+                        //lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+                        //lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+
+                        //how dustin does it
+                        ListViewItem lvi = new ListViewItem();
+                        //make a listview item, fill it with your parameters
+                        lvi.Text = dblQty.ToString();
+                        lvi.SubItems.Add(cboUnit.Text);
+                        lvi.SubItems.Add(cboIng.Text);
+                        //then add it to the listview items collection.
+                        lsvIngredients.Items.Add(lvi);
+                        
                         cboIng.Text = "";
                         txtQty.Text = "";
                         cboUnit.Text = "";

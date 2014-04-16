@@ -57,6 +57,7 @@
             this.btnReturnToMenu.TabIndex = 7;
             this.btnReturnToMenu.Text = "Return to Main Menu";
             this.btnReturnToMenu.UseVisualStyleBackColor = true;
+            this.btnReturnToMenu.Click += new System.EventHandler(this.btnReturnToMenu_Click);
             // 
             // btnOpenIngredient
             // 

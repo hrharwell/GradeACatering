@@ -35,5 +35,10 @@ namespace GradeACatering
                 lsvAllRecipes.Items.Add(lvi);
             }
         }
+
+        private void btnReturnToMenu_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
+        }
     }
 }

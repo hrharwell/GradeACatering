@@ -28,22 +28,7 @@ namespace GradeACatering
 
         private void btnAddIng_Click(object sender, EventArgs e)
         {
-            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
-            {
-                int intI = lsvIngredients.Items.Count;
-                lsvIngredients.Items.Add(cboIng.Text);
-                lsvIngredients.Items[intI].SubItems.Add(txtQty.Text);
-                lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-                cboIng.Text = "";
-                txtQty.Text = "";
-                cboUnit.Text = "";
 
-            }
-            else
-            {
-                string ErrMessage = "Please Enter an Ingredient";
-                MessageBox.Show(ErrMessage);
-            }
         }
         public IEnumerable<Control> GetAll(Control control, Type type)
         {
@@ -69,15 +54,7 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
         {
-            if (lsvIngredients.SelectedIndices.Count > 0)
-            {
-                lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
-            }
-            else if (lsvIngredients.Items.Count > 0)
-            {
-                string ErrMessage = "Please select an Item";
-                MessageBox.Show(ErrMessage);
-            }
+
         }
 
         private void btnSaveRecipe_Click(object sender, EventArgs e)
@@ -128,7 +105,7 @@ namespace GradeACatering
                     if (txtPriceSold.Text == "")
                         txtPriceSold.Text = "-1.0";
 
-                    FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtPrepDirections.Text + "\n\n" + txtCookDirections.Text,
+                    FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtDirections.Text,
                                                     Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
@@ -344,6 +321,42 @@ namespace GradeACatering
             frmNewIngredient NewIngrFrm = new frmNewIngredient();
             NewIngrFrm.ShowDialog();
         }
-       
+
+        private void frmRecipeEntry_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddIng_Click_2(object sender, EventArgs e)
+        {
+  if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                double dblQty;
+                if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+                {
+                    if (double.TryParse(txtQty.Text, out dblQty))
+                    {
+                        //int intI = lsvIngredients.Items.Count;
+                        //lsvIngredients.Items.Add(cboIng.Text);
+                        //lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+                        //lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+
+                        //how dustin does it
+                        ListViewItem lvi = new ListViewItem();
+                        //make a listview item, fill it with your parameters
+                        lvi.Text = dblQty.ToString();
+                        lvi.SubItems.Add(cboUnit.Text);
+                        lvi.SubItems.Add(cboIng.Text);
+                        //then add it to the listview items collection.
+                        lsvIngredients.Items.Add(lvi);
+
+                        cboIng.Text = "";
+                        txtQty.Text = "";
+                        cboUnit.Text = "";
+                    }
+                }
+                    }
+                
+                    }
     }
 }
