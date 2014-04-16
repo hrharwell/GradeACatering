@@ -17,6 +17,12 @@ namespace GradeACatering
          * 
          * ==================================================================================================
          */
+
+        // TODO
+        // Allow editing of the path to the database file.
+        // Function to call the CompactRepair method on the database.
+        // See: http://www.codeproject.com/Articles/7775/Compact-and-Repair-Access-Database-using-C-and-lat
+
        
         private static string connstr= "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
                                        "Data Source = GradeACatering.accdb;"; //defaults, we can make these changeable later if needed, looks in root directory currently.
@@ -556,6 +562,7 @@ namespace GradeACatering
         public static FoodStuff GetFoodstuffWithID(string fsID)
         {
             FoodStuff found = new FoodStuff();
+            //really simple, match the foodstuff ID passed in with the ID in the table and return it.
             return found;
         }
 
@@ -580,7 +587,7 @@ namespace GradeACatering
 
         public static int NumRecipeMaterials()
         {
-            //returns a count of the number of items in the Recipe table
+            //returns a count of the number of items in the RecipeMaterials table
             try
             {
                 string query = "Select Count(Makes) from RecipeMaterials";
