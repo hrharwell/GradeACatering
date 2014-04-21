@@ -24,6 +24,19 @@ namespace GradeACatering
             {
                 lbxTags.Items.Add(s);
             }
+
+            //get recipematerials for it...
+            List<Recipe> inFSmats = DataConnection.ListOfIngredients(inFS.ID);
+            foreach (Recipe r in inFSmats)
+            {
+                ListViewItem lvi = new ListViewItem();
+                
+                lvi.Text = r.FractionAmount();
+                lvi.SubItems.Add(r.Unit);
+                lvi.SubItems.Add(DataConnection.GetFoodstuffWithID(r.Makes).Name);
+                
+                lsvIngredients.Items.Add(lvi);
+            }
         }
 
         public frmDisplayRecipe()

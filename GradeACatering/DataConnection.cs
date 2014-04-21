@@ -365,7 +365,7 @@ namespace GradeACatering
                 string query = "select * from RecipeMaterials";
                 if (makesID != "")
                 {
-                    query += " where Makes contains ?";
+                    query += " where Makes like ?";
                 }
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 if (makesID != "")
