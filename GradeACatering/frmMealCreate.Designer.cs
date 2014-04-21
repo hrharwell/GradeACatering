@@ -51,6 +51,7 @@
             // 
             // lsvRecipes
             // 
+            this.lsvRecipes.FullRowSelect = true;
             this.lsvRecipes.Location = new System.Drawing.Point(33, 56);
             this.lsvRecipes.Name = "lsvRecipes";
             this.lsvRecipes.Size = new System.Drawing.Size(224, 252);
@@ -95,6 +96,7 @@
             this.btnRemove.TabIndex = 4;
             this.btnRemove.Text = "<<";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnSaveList
             // 

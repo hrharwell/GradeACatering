@@ -390,6 +390,7 @@
             this.btnDeleteIng.TabIndex = 5;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click_2);
             // 
             // btnAddIng
             // 

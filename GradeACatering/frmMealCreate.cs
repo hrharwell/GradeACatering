@@ -48,5 +48,10 @@ namespace GradeACatering
                    lsvRecipes.Items.Add(lsvItem);
                }
         }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+        //    lsvMealItems.Items.Remove(lsvMealItems.SelectedItems());
+        }
     }
 }
