@@ -25,9 +25,16 @@ namespace GradeACatering
 
         private void btnOpenRecipe_Click(object sender, EventArgs e)
         {
-            frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
-            displayRecipe.LoadFoodstuff(fsMasterlist[lsvAllRecipes.SelectedIndices[0]]);
-            displayRecipe.ShowDialog();
+            if (lsvAllRecipes.SelectedItems.Count > 0)
+            {
+                frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
+                displayRecipe.LoadFoodstuff(fsMasterlist[lsvAllRecipes.SelectedIndices[0]]);
+                displayRecipe.ShowDialog();
+            }
+            else
+            {
+                //message stating an item needs to be selected first...
+            }
         }
 
         private void btnEditRecipe_Click(object sender, EventArgs e)

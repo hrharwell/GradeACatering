@@ -33,7 +33,7 @@ namespace GradeACatering
                 
                 lvi.Text = r.FractionAmount();
                 lvi.SubItems.Add(r.Unit);
-                lvi.SubItems.Add(DataConnection.GetFoodstuffWithID(r.Makes).Name);
+                lvi.SubItems.Add(DataConnection.GetFoodstuffWithID(r.MadeOf).Name);
                 
                 lsvIngredients.Items.Add(lvi);
             }

@@ -561,9 +561,50 @@ namespace GradeACatering
 
         public static FoodStuff GetFoodstuffWithID(string fsID)
         {
-            FoodStuff found = new FoodStuff();
             //really simple, match the foodstuff ID passed in with the ID in the table and return it.
-            return found;
+            FoodStuff fs=new FoodStuff();
+            try
+            {
+                string query = "Select * from Foodstuff where FoodstuffID like ?";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fsID;
+                OleDbDataReader reader = cmd.ExecuteReader();
+
+
+                reader.Read();
+                string id = reader.IsDBNull(0) ? "":reader.GetString(0);
+
+                fs = new FoodStuff(reader.GetString(0),
+                                   reader.GetString(1),
+                                   reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                   reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
+                                   reader.IsDBNull(4) ? -1: reader.GetInt32(4),
+                                   reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
+                                   reader.IsDBNull(6) ? -1 : reader.GetInt32(6));
+
+                  
+                //tokenize the tags from their long string stored in the database.
+
+                string[] strTagList = reader.IsDBNull(7) ? new string[0] : reader.GetString(7).Split(',');
+
+                if (strTagList.Length != 0)
+                {
+                    foreach (string t in strTagList)
+                        fs.AddTag(t);
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                DataConnection.CloseConnection();
+                
+            }
+            return fs;
         }
 
         public static int NumFoodstuffs()
