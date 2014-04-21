@@ -54,7 +54,23 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
         {
-
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                if (lsvIngredients.SelectedIndices.Count > 0)
+                {
+                    lsvIngredients.Items.Remove(eachItem);
+                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+                }
+                else if (lsvIngredients.Items.Count > 0)
+                {
+                    string ErrMessage = "Please select an Item";
+                    MessageBox.Show(ErrMessage);
+                }
+                else
+                {
+                    MessageBox.Show("List is empty, please at an item.");
+                }
+            }
         }
 
         private void btnSaveRecipe_Click(object sender, EventArgs e)
@@ -270,9 +286,27 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click_1(object sender, EventArgs e)
         {
+            //foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            //{
+            //    lsvIngredients.Items.Remove(eachItem);
+            //}
+
             foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
             {
-                lsvIngredients.Items.Remove(eachItem);
+                if (lsvIngredients.SelectedIndices.Count > 0)
+                {
+                    lsvIngredients.Items.Remove(eachItem);
+                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+                }
+                else if (lsvIngredients.Items.Count > 0)
+                {
+                    string ErrMessage = "Please select an Item";
+                    MessageBox.Show(ErrMessage);
+                }
+                else
+                {
+                    MessageBox.Show("List is empty, please at an item.");
+                }
             }
 
             
@@ -358,5 +392,26 @@ namespace GradeACatering
                     }
                 
                     }
+
+        private void btnDeleteIng_Click_2(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                if (lsvIngredients.SelectedIndices.Count > 0)
+                {
+                    lsvIngredients.Items.Remove(eachItem);
+                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+                }
+                else if (lsvIngredients.Items.Count > 0)
+                {
+                    string ErrMessage = "Please select an Item";
+                    MessageBox.Show(ErrMessage);
+                }
+                else
+                {
+                    MessageBox.Show("List is empty, please at an item.");
+                }
+            }
+        }
     }
 }

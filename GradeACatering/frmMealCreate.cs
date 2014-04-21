@@ -30,10 +30,28 @@ namespace GradeACatering
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //if and item is selected then at the items to the Meal Listview
-        //    if ()
-        //    {
-        //        lsvRecipes.ItemActivate = lsvRecipes.Items.Add;
-        //    }
+            if (lsvRecipes.SelectedIndices.Count > -1)
+            {
+                //ListViewItem lvi = new ListViewItem(fsMasterlist.ToString());
+                //lsvRecipes.ItemActivate += lsvRecipes.Items.;
+            }
+
+        }
+        private List<FoodStuff> fsMasterlist;
+
+        private void frmMealCreate_Load(object sender, EventArgs e)
+        {
+               fsMasterlist = DataConnection.ListAllFoodstuffs();
+               foreach (FoodStuff fs in fsMasterlist)
+               {
+                   ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+                   lsvRecipes.Items.Add(lsvItem);
+               }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+        //    lsvMealItems.Items.Remove(lsvMealItems.SelectedItems());
         }
     }
 }

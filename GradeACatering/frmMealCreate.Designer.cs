@@ -31,10 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lsvRecipes = new System.Windows.Forms.ListView();
             this.lsvMealItems = new System.Windows.Forms.ListView();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.btnSaveList = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -51,6 +51,7 @@
             // 
             // lsvRecipes
             // 
+            this.lsvRecipes.FullRowSelect = true;
             this.lsvRecipes.Location = new System.Drawing.Point(33, 56);
             this.lsvRecipes.Name = "lsvRecipes";
             this.lsvRecipes.Size = new System.Drawing.Size(224, 252);
@@ -68,6 +69,14 @@
             this.lsvMealItems.Size = new System.Drawing.Size(224, 252);
             this.lsvMealItems.TabIndex = 2;
             this.lsvMealItems.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Qty";
             // 
             // btnAdd
             // 
@@ -87,14 +96,7 @@
             this.btnRemove.TabIndex = 4;
             this.btnRemove.Text = "<<";
             this.btnRemove.UseVisualStyleBackColor = true;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Qty";
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnSaveList
             // 
@@ -140,6 +142,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmMealCreate";
             this.Text = "frmMealCreate";
+            this.Load += new System.EventHandler(this.frmMealCreate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

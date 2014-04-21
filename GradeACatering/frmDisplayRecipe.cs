@@ -137,9 +137,26 @@ namespace GradeACatering
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
         {
+            //foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            //{
+            //    lsvIngredients.Items.Remove(eachItem);
+            //}
             foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
             {
-                lsvIngredients.Items.Remove(eachItem);
+                if (lsvIngredients.SelectedIndices.Count > 0)
+                {
+                    lsvIngredients.Items.Remove(eachItem);
+                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
+                }
+                else if (lsvIngredients.Items.Count > 0)
+                {
+                    string ErrMessage = "Please select an Item";
+                    MessageBox.Show(ErrMessage);
+                }
+                else
+                {
+                    MessageBox.Show("List is empty, please at an item.");
+                }
             }
         }
 
@@ -176,13 +193,17 @@ namespace GradeACatering
 
         private void btnEditIng_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
-            {
-                cboIng.Text = eachItem.Text;
-                txtQty.Text = eachItem.SubItems[1].Text;
-                cboUnit.Text = eachItem.SubItems[2].Text;
-                lsvIngredients.Items.Remove(eachItem);
-            }
+          
+                 foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+                    {
+               
+                     cboIng.Text = eachItem.Text;
+                     txtQty.Text = eachItem.SubItems[1].Text;
+                     cboUnit.Text = eachItem.SubItems[2].Text;
+                     lsvIngredients.Items.Remove(eachItem);
+                    }
+               
+         
 
         }
 
