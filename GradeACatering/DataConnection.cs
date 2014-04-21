@@ -428,13 +428,20 @@ namespace GradeACatering
                                                reader.GetDouble(5),
                                                reader.GetInt32(6));
                     //tokenize the tags from their long string stored in the database.
-                    
-                    string[] strTagList = reader.GetString(7).Split(',');
-                    if (strTagList.Length > 0)
-                    {
-                        foreach (string t in strTagList)
-                            fs.AddTag(t);
+
+                    if (reader[7] is System.DBNull)
+                    {    //if it's null, don't worry about it
                     }
+                    else
+                    {
+                        string[] strTagList = reader.GetString(7).Split(',');
+                        if (strTagList.Length > 0)
+                        {
+                            foreach (string t in strTagList)
+                                fs.AddTag(t);
+                        }
+                    }
+                    
 
 
                     lstFoods.Add(fs);
