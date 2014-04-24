@@ -390,7 +390,7 @@
             this.btnDeleteIng.TabIndex = 5;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
-            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click_2);
+            this.btnDeleteIng.Click += new System.EventHandler(this.btnDeleteIng_Click);
             // 
             // btnAddIng
             // 
@@ -400,7 +400,7 @@
             this.btnAddIng.TabIndex = 3;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
-            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click_2);
+            this.btnAddIng.Click += new System.EventHandler(this.btnAddIng_Click);
             // 
             // lsvIngredients
             // 

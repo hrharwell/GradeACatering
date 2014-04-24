@@ -28,8 +28,45 @@ namespace GradeACatering
 
         private void btnAddIng_Click(object sender, EventArgs e)
         {
+            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+            {
+                double dblQty;
+                if (double.TryParse(txtQty.Text, out dblQty))
+                {
+                    //order in listview is quanity | unit | item name
+                    int intI = lsvIngredients.Items.Count;
+                    lsvIngredients.Items.Add(dblQty.ToString());
+                    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                    lsvIngredients.Items[intI].SubItems.Add(cboIng.Text);
+                    cboIng.Text = "";
+                    txtQty.Text = "";
+                    cboUnit.Text = "";
 
+                }
+                else if(System.Text.RegularExpressions.Regex.IsMatch(txtQty.Text,@"[1-9]?\w{0,1}[\d/\d]?"))
+                {
+                    int intI = lsvIngredients.Items.Count;
+                    lsvIngredients.Items.Add(txtQty.Text);
+                    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+                    lsvIngredients.Items[intI].SubItems.Add(cboIng.Text);
+                    cboIng.Text = "";
+                    txtQty.Text = "";
+                    cboUnit.Text = "";
+                }
+                else
+                {
+
+                    MessageBox.Show("Please enter a numeric value");
+                }
+            
+            }
+            else
+            {
+                ErrMessage = "Please Enter an Ingredient";
+                MessageBox.Show(ErrMessage);
+            }
         }
+
         public IEnumerable<Control> GetAll(Control control, Type type)
         {
             var controls = control.Controls.Cast<Control>();
@@ -141,20 +178,20 @@ namespace GradeACatering
                             //check to see whether the item exists or not.
                             if (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0)
                             {
-                               newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
-                                                       lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                               newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text)[0].ID),
+                                                       lvi.SubItems[0].Text, lvi.SubItems[1].Text));
                             }
                             else
                             {
                                 //Did not find a match...
                                 //making dummy entries
 
-                                string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
+                                string newPHID = lvi.SubItems[2].Text.Substring(0, Math.Min(lvi.SubItems[2].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
                                 newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
-                                FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
+                                FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[2].Text);
                                 DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
 
-                                newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                                newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[0].Text, lvi.SubItems[1].Text));
                                 
                             }
 			            }
@@ -253,63 +290,9 @@ namespace GradeACatering
             }
         }
 
-        private void btnAddIng_Click_1(object sender, EventArgs e)
-        {
-            if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
-            {
-                double dblQty; 
-                if (double.TryParse(txtQty.Text, out dblQty))
-                {
-
-                    int intI = lsvIngredients.Items.Count;
-                    lsvIngredients.Items.Add(cboIng.Text);
-                    lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
-                    lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
-                    cboIng.Text = "";
-                    txtQty.Text = "";
-                    cboUnit.Text = "";
-
-                }
-                else
-                {
-
-                    MessageBox.Show("Please enter a numeric value");
-                }
-            
-            }
-            else
-            {
-                ErrMessage = "Please Enter an Ingredient";
-                MessageBox.Show(ErrMessage);
-            }   
-        }
-
         private void btnDeleteIng_Click_1(object sender, EventArgs e)
         {
-            //foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
-            //{
-            //    lsvIngredients.Items.Remove(eachItem);
-            //}
-
-            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
-            {
-                if (lsvIngredients.SelectedIndices.Count > 0)
-                {
-                    lsvIngredients.Items.Remove(eachItem);
-                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
-                }
-                else if (lsvIngredients.Items.Count > 0)
-                {
-                    string ErrMessage = "Please select an Item";
-                    MessageBox.Show(ErrMessage);
-                }
-                else
-                {
-                    MessageBox.Show("List is empty, please at an item.");
-                }
-            }
-
-            
+                        
         }
 
         private void btnEditIng_Click(object sender, EventArgs e)
@@ -361,57 +344,36 @@ namespace GradeACatering
 
         }
 
-        private void btnAddIng_Click_2(object sender, EventArgs e)
-        {
-  if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
-            {
-                double dblQty;
-                if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
-                {
-                    if (double.TryParse(txtQty.Text, out dblQty))
-                    {
-                        //int intI = lsvIngredients.Items.Count;
-                        //lsvIngredients.Items.Add(cboIng.Text);
-                        //lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
-                        //lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
+        //private void btnAddIng_Click_2(object sender, EventArgs e)
+        //{
+        //    if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+        //    {
+        //        double dblQty;
+        //        if (cboIng.Text != "" && txtQty.Text != "" && cboUnit.Text != "")
+        //        {
+        //            if (double.TryParse(txtQty.Text, out dblQty))
+        //            {
+        //                //int intI = lsvIngredients.Items.Count;
+        //                //lsvIngredients.Items.Add(cboIng.Text);
+        //                //lsvIngredients.Items[intI].SubItems.Add(dblQty.ToString());
+        //                //lsvIngredients.Items[intI].SubItems.Add(cboUnit.Text);
 
-                        //how dustin does it
-                        ListViewItem lvi = new ListViewItem();
-                        //make a listview item, fill it with your parameters
-                        lvi.Text = dblQty.ToString();
-                        lvi.SubItems.Add(cboUnit.Text);
-                        lvi.SubItems.Add(cboIng.Text);
-                        //then add it to the listview items collection.
-                        lsvIngredients.Items.Add(lvi);
+        //                //how dustin does it
+        //                ListViewItem lvi = new ListViewItem();
+        //                //make a listview item, fill it with your parameters
+        //                lvi.Text = dblQty.ToString();
+        //                lvi.SubItems.Add(cboUnit.Text);
+        //                lvi.SubItems.Add(cboIng.Text);
+        //                //then add it to the listview items collection.
+        //                lsvIngredients.Items.Add(lvi);
 
-                        cboIng.Text = "";
-                        txtQty.Text = "";
-                        cboUnit.Text = "";
-                    }
-                }
-                    }
+        //                cboIng.Text = "";
+        //                txtQty.Text = "";
+        //                cboUnit.Text = "";
+        //            }
+        //        }
+        //            }
                 
-                    }
-
-        private void btnDeleteIng_Click_2(object sender, EventArgs e)
-        {
-            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
-            {
-                if (lsvIngredients.SelectedIndices.Count > 0)
-                {
-                    lsvIngredients.Items.Remove(eachItem);
-                    //    lsvIngredients.Items.RemoveAt(lsvIngredients.SelectedIndices[0]);
-                }
-                else if (lsvIngredients.Items.Count > 0)
-                {
-                    string ErrMessage = "Please select an Item";
-                    MessageBox.Show(ErrMessage);
-                }
-                else
-                {
-                    MessageBox.Show("List is empty, please at an item.");
-                }
-            }
-        }
+        //            }
     }
 }
