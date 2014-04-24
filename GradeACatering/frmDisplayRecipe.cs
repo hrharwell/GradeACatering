@@ -12,10 +12,12 @@ namespace GradeACatering
 {
     public partial class frmDisplayRecipe : Form
     {
+        private FoodStuff fstoUpdate;
+
         public void LoadFoodstuff(FoodStuff inFS)
         {
             //fill out controls based on what inFS contains
-            lblID.Text = inFS.ID;
+            fstoUpdate = inFS;
             txtName.Text = inFS.Name;
             txtServingSize.Text = inFS.Servings.ToString();
             txtPriceSold.Text = inFS.Cost.ToString();
@@ -101,21 +103,21 @@ namespace GradeACatering
                     if (txtPriceSold.Text == "")
                         txtPriceSold.Text = "-1.0";
 
-                    FoodStuff newFS = new FoodStuff(lblID.Text, txtName.Text, txtDirections.Text,
+                    FoodStuff newFS = new FoodStuff(fstoUpdate.ID, txtName.Text, txtDirections.Text,
                                                     Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
                                                     Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
                     if (lsvIngredients.Items.Count == 0)
                     {
                         //Not sure if this will need to change for updating...We only need the new ingredients
-                        newItemIngredients.Add(new Recipe(lblID.Text, lblID.Text));
+                        newItemIngredients.Add(new Recipe(newFS.ID, fstoUpdate.ID));
                     }
                     else
                     {
                        foreach(ListViewItem lvi in lsvIngredients.Items)
                         if(DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0 )
                         {
-                            newItemIngredients.Add(new Recipe(lblID.Text, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
+                            newItemIngredients.Add(new Recipe(fstoUpdate.ID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
                                                        lvi.SubItems[1].Text, lvi.SubItems[2].Text));
                         } 
                         else

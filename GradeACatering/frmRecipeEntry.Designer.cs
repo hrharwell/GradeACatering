@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSaveRecipe = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtServingSize = new System.Windows.Forms.TextBox();
@@ -66,7 +67,8 @@
             this.colQty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblSaved = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -85,7 +87,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtServingSize);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtCookTime);
@@ -433,20 +434,26 @@
             this.colName.Text = "Name";
             this.colName.Width = 130;
             // 
-            // label4
+            // lblSaved
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(149, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "label4";
+            this.lblSaved.AutoSize = true;
+            this.lblSaved.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblSaved.Location = new System.Drawing.Point(33, 372);
+            this.lblSaved.Name = "lblSaved";
+            this.lblSaved.Size = new System.Drawing.Size(0, 13);
+            this.lblSaved.TabIndex = 29;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmRecipeEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 494);
+            this.Controls.Add(this.lblSaved);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnReturn);
@@ -466,6 +473,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -509,6 +517,7 @@
         private System.Windows.Forms.ColumnHeader colQty;
         private System.Windows.Forms.ColumnHeader colUnit;
         private System.Windows.Forms.ColumnHeader colName;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblSaved;
+        private System.Windows.Forms.Timer timer1;
     }
 }
