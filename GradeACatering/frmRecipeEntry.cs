@@ -78,15 +78,17 @@ namespace GradeACatering
         private void btnNewFrm_Click(object sender, EventArgs e)
         {
            //Clear the form....
-            var cntrlCollections = GetAll(this,typeof(TextBox));
+            var cntrlCollections = GetAll(this, typeof(TextBox));
 
-            foreach (Control ctrl in cntrlCollections )
+            foreach (Control ctrl in cntrlCollections)
             {
                 if (ctrl is TextBox)
                 {
                     ctrl.Text = string.Empty;
                 }
             }
+            lsvIngredients.Items.Clear();
+            lbxTags.Items.Clear();
         }
 
         private void btnDeleteIng_Click(object sender, EventArgs e)
@@ -199,6 +201,20 @@ namespace GradeACatering
                   
                     DataConnection.AddFoodStuff(newFS, newItemIngredients);
                 }
+                //Then Clear the form and show a message stating the info was saved
+                lblSaved.Text = "Recipe was saved. Please enter new recipe";
+                var cntrlCollections = GetAll(this, typeof(TextBox));
+
+                foreach (Control ctrl in cntrlCollections)
+                {
+                    if (ctrl is TextBox)
+                    {
+                        ctrl.Text = string.Empty;
+                    }
+                }
+                lsvIngredients.Items.Clear();
+                lbxTags.Items.Clear();
+                timer1.Start();
 
             }
             else
@@ -217,9 +233,16 @@ namespace GradeACatering
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
+            if (lblSaved.Text == "")
+            {
+                 DialogResult button = MessageBox.Show("Unsaved data will be lost, are you sure you want to leave?", "Unsaved Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                 if (button == DialogResult.Yes)
+                 { 
+                  ActiveForm.Close();
+                 }
+
+            }
            
-            DialogResult button = MessageBox.Show("Unsaved data will be lost, are you sure you want to leave?", "Unsaved Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            ActiveForm.Close();
            
         }
 
@@ -279,6 +302,8 @@ namespace GradeACatering
         {
             
             lbxTags.Items.Add(txtTags.Text);
+            txtTags.Text = "";
+            txtTags.Focus();
         }
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
@@ -342,6 +367,12 @@ namespace GradeACatering
         private void frmRecipeEntry_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblSaved.Text = "";
+            timer1.Stop();
         }
 
         //private void btnAddIng_Click_2(object sender, EventArgs e)

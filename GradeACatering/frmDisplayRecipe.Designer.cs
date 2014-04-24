@@ -46,14 +46,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.cboUnit = new System.Windows.Forms.ComboBox();
-            this.cboIng = new System.Windows.Forms.ComboBox();
             this.btnEditIng = new System.Windows.Forms.Button();
+            this.cboIng = new System.Windows.Forms.ComboBox();
             this.btnDeleteIng = new System.Windows.Forms.Button();
             this.btnAddIng = new System.Windows.Forms.Button();
             this.lsvIngredients = new System.Windows.Forms.ListView();
-            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colQty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -67,6 +67,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblComingSoon = new System.Windows.Forms.Label();
+            this.lblID = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -256,15 +257,6 @@
             this.cboUnit.Size = new System.Drawing.Size(66, 21);
             this.cboUnit.TabIndex = 1;
             // 
-            // cboIng
-            // 
-            this.cboIng.Enabled = false;
-            this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(133, 247);
-            this.cboIng.Name = "cboIng";
-            this.cboIng.Size = new System.Drawing.Size(121, 21);
-            this.cboIng.TabIndex = 2;
-            // 
             // btnEditIng
             // 
             this.btnEditIng.Enabled = false;
@@ -275,6 +267,15 @@
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
             this.btnEditIng.Click += new System.EventHandler(this.btnEditIng_Click);
+            // 
+            // cboIng
+            // 
+            this.cboIng.Enabled = false;
+            this.cboIng.FormattingEnabled = true;
+            this.cboIng.Location = new System.Drawing.Point(133, 247);
+            this.cboIng.Name = "cboIng";
+            this.cboIng.Size = new System.Drawing.Size(121, 21);
+            this.cboIng.TabIndex = 2;
             // 
             // btnDeleteIng
             // 
@@ -313,11 +314,6 @@
             this.lsvIngredients.View = System.Windows.Forms.View.Details;
             this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
             // 
-            // colName
-            // 
-            this.colName.Text = "Name";
-            this.colName.Width = 130;
-            // 
             // colQty
             // 
             this.colQty.Text = "Qty";
@@ -328,8 +324,14 @@
             // 
             this.colUnit.Text = "Unit";
             // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            this.colName.Width = 130;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Controls.Add(this.txtServingSize);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtCookTime);
@@ -452,6 +454,15 @@
             this.lblComingSoon.Text = "* Print Feature Coming Soon";
             this.lblComingSoon.Visible = false;
             // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(70, 16);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(28, 13);
+            this.lblID.TabIndex = 10;
+            this.lblID.Text = "lblID";
+            // 
             // frmDisplayRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,6 +533,7 @@
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblComingSoon;
+        private System.Windows.Forms.Label lblID;
 
     }
 }
