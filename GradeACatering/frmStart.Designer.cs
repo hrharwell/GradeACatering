@@ -91,7 +91,7 @@
             // fullScreenToolStripMenuItem
             // 
             this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
-            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fullScreenToolStripMenuItem.Text = "Full Screen";
             // 
             // helpToolStripMenuItem

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace GradeACatering
 {
   
-    public partial class frmStart : Form//, MasterLists
+    public partial class frmStart : Form
     {
       
         public frmStart()

@@ -95,7 +95,7 @@ namespace GradeACatering
                     cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Servings;
                     intParameterCount++;
                 }
-                if (fs.GetTags() == "")
+                if (fs.GetTags() != "")
                 {
                     query += ", Tags";
                     //Comma-and-space delineated list of the tags.
