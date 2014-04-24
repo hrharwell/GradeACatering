@@ -21,6 +21,7 @@ namespace GradeACatering
             txtPriceSold.Text = inFS.Cost.ToString();
             txtPrepTime.Text = inFS.PrepTime.ToString();
             txtCookTime.Text = inFS.CookTime.ToString();
+            txtDirections.Text = inFS.Directions;
             foreach (string s in inFS.ReturnTagList())
             
             {
