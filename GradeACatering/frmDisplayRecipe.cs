@@ -15,12 +15,14 @@ namespace GradeACatering
         public void LoadFoodstuff(FoodStuff inFS)
         {
             //fill out controls based on what inFS contains
+            lblID.Text = inFS.ID;
             txtName.Text = inFS.Name;
             txtServingSize.Text = inFS.Servings.ToString();
             txtPriceSold.Text = inFS.Cost.ToString();
             txtPrepTime.Text = inFS.PrepTime.ToString();
             txtCookTime.Text = inFS.CookTime.ToString();
             foreach (string s in inFS.ReturnTagList())
+            
             {
                 lbxTags.Items.Add(s);
             }
@@ -32,7 +34,7 @@ namespace GradeACatering
                 ListViewItem lvi = new ListViewItem();
                 
                 lvi.Text = r.FractionAmount();
-                lvi.SubItems.Add(r.Unit);
+                lvi.SubItems.Add(r.Unit);   
                 lvi.SubItems.Add(DataConnection.GetFoodstuffWithID(r.MadeOf).Name);
                 
                 lsvIngredients.Items.Add(lvi);
@@ -71,23 +73,83 @@ namespace GradeACatering
             }
             else
             {
-                //Save Data...once we figure out how
+                //Save Data...Hunter's version of what dustin did on the Entry page
+                DialogResult button = MessageBox.Show("Are you sure you want to overwrite the previous data?", "Save Edited Recipe", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if (button == DialogResult.Yes)
+                {
+                    // FInd existing ID
+                    
 
-                //then
-                btnEditRecipe.Text = "Edit Recipe";
-                txtName.Enabled = false;
-                txtPriceSold.Enabled = false;
-                txtPrepTime.Enabled = false;
-                txtCookTime.Enabled = false;
-                txtDirections.Enabled = false;
-                txtTags.Enabled = false;
-                txtServingSize.Enabled = false;
-                cboIng.Enabled = false;
-                cboUnit.Enabled =false;
-                txtQty.Enabled = false;
-                btnAddIng.Enabled = false;
-                btnEditIng.Enabled = false;
-                btnDeleteIng.Enabled = false;
+
+                    List<string> newTags = new List<string>();
+                    if (lbxTags.Items.Count > 0)
+                    {
+                        for (int i = 0; i < lbxTags.Items.Count; i++)
+                        {
+                            newTags.Add(lbxTags.Items[i].ToString());
+                        }
+                    }
+                    //COPY PASTE OF DUSTINS WORK -hunter
+                    //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
+                    if (txtPrepTime.Text == "")
+                        txtPrepTime.Text = "-1";
+                    if (txtCookTime.Text == "")
+                        txtCookTime.Text = "-1";
+                    if (txtServingSize.Text == "")
+                        txtServingSize.Text = "-1";
+                    if (txtPriceSold.Text == "")
+                        txtPriceSold.Text = "-1.0";
+
+                    FoodStuff newFS = new FoodStuff(lblID.Text, txtName.Text, txtDirections.Text,
+                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
+                                                    Convert.ToInt32(txtServingSize.Text), newTags);
+                    List<Recipe> newItemIngredients = new List<Recipe>();
+                    if (lsvIngredients.Items.Count == 0)
+                    {
+                        //Not sure if this will need to change for updating...We only need the new ingredients
+                        newItemIngredients.Add(new Recipe(lblID.Text, lblID.Text));
+                    }
+                    else
+                    {
+                       foreach(ListViewItem lvi in lsvIngredients.Items)
+                        if(DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0 )
+                        {
+                            newItemIngredients.Add(new Recipe(lblID.Text, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
+                                                       lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                        } 
+                        else
+	                    {
+                             //Did not find a match...Dustin Dummy entries
+                                
+                             string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
+                             newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
+                             FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
+                             DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
+                 
+                             newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+	                    }
+                        
+                    }
+	
+	
+	
+
+                    //then
+                    btnEditRecipe.Text = "Edit Recipe";
+                    txtName.Enabled = false;
+                    txtPriceSold.Enabled = false;
+                    txtPrepTime.Enabled = false;
+                    txtCookTime.Enabled = false;
+                    txtDirections.Enabled = false;
+                    txtTags.Enabled = false;
+                    txtServingSize.Enabled = false;
+                    cboIng.Enabled = false;
+                    cboUnit.Enabled = false;
+                    txtQty.Enabled = false;
+                    btnAddIng.Enabled = false;
+                    btnEditIng.Enabled = false;
+                    btnDeleteIng.Enabled = false;
+                }
             }
            
             //foreach (TextBox textbox in frmDisplayRecipe.);

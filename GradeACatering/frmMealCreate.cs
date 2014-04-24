@@ -32,8 +32,11 @@ namespace GradeACatering
             //if and item is selected then at the items to the Meal Listview
             if (lsvRecipes.SelectedIndices.Count > -1)
             {
-                //ListViewItem lvi = new ListViewItem(fsMasterlist.ToString());
-                //lsvRecipes.ItemActivate += lsvRecipes.Items.;
+                var lsvItem = lsvRecipes.SelectedIndices;
+                lsvMealItems.Items.Add(lsvItem.ToString());
+
+             //   ListViewItem lvi = new ListViewItem(fsMasterlist.ToString());     
+             //   lsvRecipes.ItemActivate += lsvRecipes;
             }
 
         }
