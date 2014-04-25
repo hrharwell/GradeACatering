@@ -151,8 +151,12 @@ namespace GradeACatering
                         }
                     }
                     //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
+                    
                     if (txtPrepTime.Text == "")
+                        
+                        //convert to a double
                         txtPrepTime.Text = "-1";
+                        
                     if (txtCookTime.Text == "")
                         txtCookTime.Text = "-1";
                     if (txtServingSize.Text == "")

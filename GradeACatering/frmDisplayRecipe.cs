@@ -96,6 +96,11 @@ namespace GradeACatering
                     //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
                     if (txtPrepTime.Text == "")
                         txtPrepTime.Text = "-1";
+                    else if (txtPrepTime.Text != fstoUpdate.PrepTime.ToString())
+                    {
+                     //   fstoUpdate.PrepTime =
+
+                    }
                     if (txtCookTime.Text == "")
                         txtCookTime.Text = "-1";
                     if (txtServingSize.Text == "")
@@ -103,14 +108,14 @@ namespace GradeACatering
                     if (txtPriceSold.Text == "")
                         txtPriceSold.Text = "-1.0";
 
-                    FoodStuff newFS = new FoodStuff(fstoUpdate.ID, txtName.Text, txtDirections.Text,
-                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
-                                                    Convert.ToInt32(txtServingSize.Text), newTags);
+                   // FoodStuff newFS = new FoodStuff(fstoUpdate.ID, txtName.Text, txtDirections.Text,
+                   //                               Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
+                   //                             Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
                     if (lsvIngredients.Items.Count == 0)
                     {
                         //Not sure if this will need to change for updating...We only need the new ingredients
-                        newItemIngredients.Add(new Recipe(newFS.ID, fstoUpdate.ID));
+                     //   newItemIngredients.Add(new Recipe(fstoUpdate.ID, fstoUpdate.ID));
                     }
                     else
                     {
@@ -129,7 +134,7 @@ namespace GradeACatering
                              FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
                              DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
                  
-                             newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                           //  newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
 	                    }
                         
                     }

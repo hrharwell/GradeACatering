@@ -30,16 +30,21 @@ namespace GradeACatering
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //if and item is selected then at the items to the Meal Listview
-            if (lsvRecipes.SelectedIndices.Count > -1)
+            if (lsvMealItems.SelectedIndices.Count > -1)
             {
-                var lsvItem = lsvRecipes.SelectedIndices;
-                lsvMealItems.Items.Add(lsvItem.ToString());
+               
+                var lsvItem = lsvRecipes.SelectedItems.ToString();
 
-             //   ListViewItem lvi = new ListViewItem(fsMasterlist.ToString());     
-             //   lsvRecipes.ItemActivate += lsvRecipes;
+                lsvMealItems.Items.Add(lsvItem);
+
+                //ListViewItem lvi = new ListViewItem(fsMasterlist.ToString());     
+                //lsvRecipes.ItemActivate += lsvRecipes;
+
             }
 
         }
+       
+
         private List<FoodStuff> fsMasterlist;
 
         private void frmMealCreate_Load(object sender, EventArgs e)
@@ -55,6 +60,11 @@ namespace GradeACatering
         private void btnRemove_Click(object sender, EventArgs e)
         {
         //    lsvMealItems.Items.Remove(lsvMealItems.SelectedItems());
+        }
+
+        private void lsvRecipes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
