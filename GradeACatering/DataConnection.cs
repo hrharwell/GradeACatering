@@ -43,10 +43,13 @@ namespace GradeACatering
         
         //functions to read from, update in, and add to the database
 
-        public static string AddFoodStuff(FoodStuff fs, List<Recipe> ingredients)
+        //
+        //========================================================
+        public static string AddFoodStuff(FoodStuff fs)
         {
             //insert a foodstuff entry in the Foodstuff table
             //will use comma-delineated string for the tags
+            //now contains the ingredients itself, don't need to handle them separately
             try
             {
                 //this needs to be rewritten to only insert fields and parameters for the items that the user is inserting, so the
@@ -57,96 +60,10 @@ namespace GradeACatering
                 OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
                 rdItemCount.Read();
                 DataConnection.CloseConnection();
-
-                OleDbCommand cmd = new OleDbCommand();
-                cmd.Connection = conn;    
-                
-                //if statements for each value to add, and its associated parameter                           
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
-                int intParameterCount = 2;
-                if (fs.Directions != "")
-                {
-                    query += ", Directions";
-                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Directions;
-                    intParameterCount++;
-                }
-                if (fs.PrepTime > -1) //use -1, items may still have 0 prep time
-                {
-                    query += ", PrepTime";
-                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.PrepTime;
-                    intParameterCount++;
-                }
-                if (fs.CookTime > -1)
-                {
-                    query += ", CookTime";
-                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.CookTime;
-                    intParameterCount++;
-                }
-                if (fs.Cost > 0.0) //unlikely anything is going to be free
-                {
-                    query += ", Cost";
-                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Cost;
-                    intParameterCount++;
-                }
-                if (fs.Servings > 0)
-                {
-                    query += ", Servings";
-                    cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Servings;
-                    intParameterCount++;
-                }
-                if (fs.GetTags() == "")
-                {
-                    query += ", Tags";
-                    //Comma-and-space delineated list of the tags.
-                    //When tokenizing or splitting tags, use ", " for the demarcation.
-                    cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.GetTags();
-                    intParameterCount++;
-                }
-                query += ") Values(?";
-                for (int i = 0; i < intParameterCount-1; i++)
-                {
-                    query += ",?";
-                }
-                query += ")";
-
-                cmd.CommandText = query;
-                DataConnection.OpenConnection();
-
-                cmd.ExecuteNonQuery();
-
-                foreach (Recipe r in ingredients)
-                    AddRecipeItem(r);
-
-                return "Item plus ingredients added.";
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-            finally
-            {
-                DataConnection.CloseConnection();
-            }
-        }
-
-        public static string AddFoodStuff(FoodStuff fs, Recipe r)
-        {
-            //same as other but for just adding single Recipe elements instead of from a list.
-            //insert a foodstuff entry in the Foodstuff table
-            //will use comma-delineated string for the tags
-            try
-            {
-                //this needs to be rewritten to only insert fields and parameters for the items that the user is inserting, so the
-                //database will auto-default to NULL for the rest.
-                string query = "insert into Foodstuff(FoodstuffID, Name"; //these two must always be there
-
-                OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
-                rdItemCount.Read();
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
-                //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+
                 //if statements for each value to add, and its associated parameter                           
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
@@ -190,18 +107,19 @@ namespace GradeACatering
                     intParameterCount++;
                 }
                 query += ") Values(?";
-                for (int i = 1; i < intParameterCount; i++) //counter is one-based
+                for (int i = 0; i < intParameterCount - 1; i++)
                 {
                     query += ",?";
                 }
                 query += ")";
 
                 cmd.CommandText = query;
-                AddRecipeItem(r);
                 DataConnection.OpenConnection();
 
                 cmd.ExecuteNonQuery();
 
+                foreach (Recipe r in fs.ReturnIngredientsList())
+                    AddRecipeItem(r);
 
                 return "Item plus ingredients added.";
             }
@@ -214,6 +132,181 @@ namespace GradeACatering
                 DataConnection.CloseConnection();
             }
         }
+
+        //========================================================
+        //
+
+        //public static string AddFoodStuff(FoodStuff fs, List<Recipe> ingredients)
+        //{
+        //    //insert a foodstuff entry in the Foodstuff table
+        //    //will use comma-delineated string for the tags
+        //    try
+        //    {
+        //        //this needs to be rewritten to only insert fields and parameters for the items that the user is inserting, so the
+        //        //database will auto-default to NULL for the rest.
+        //        string query = "insert into Foodstuff(FoodstuffID, Name"; //these two must always be there
+
+        //        DataConnection.OpenConnection();
+        //        OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
+        //        rdItemCount.Read();
+        //        DataConnection.CloseConnection();
+
+        //        OleDbCommand cmd = new OleDbCommand();
+        //        cmd.Connection = conn;    
+                
+        //        //if statements for each value to add, and its associated parameter                           
+        //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+        //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
+        //        int intParameterCount = 2;
+        //        if (fs.Directions != "")
+        //        {
+        //            query += ", Directions";
+        //            cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Directions;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.PrepTime > -1) //use -1, items may still have 0 prep time
+        //        {
+        //            query += ", PrepTime";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.PrepTime;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.CookTime > -1)
+        //        {
+        //            query += ", CookTime";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.CookTime;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.Cost > 0.0) //unlikely anything is going to be free
+        //        {
+        //            query += ", Cost";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Cost;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.Servings > 0)
+        //        {
+        //            query += ", Servings";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Servings;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.GetTags() != "")
+        //        {
+        //            query += ", Tags";
+        //            //Comma-and-space delineated list of the tags.
+        //            //When tokenizing or splitting tags, use ", " for the demarcation.
+        //            cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.GetTags();
+        //            intParameterCount++;
+        //        }
+        //        query += ") Values(?";
+        //        for (int i = 0; i < intParameterCount-1; i++)
+        //        {
+        //            query += ",?";
+        //        }
+        //        query += ")";
+
+        //        cmd.CommandText = query;
+        //        DataConnection.OpenConnection();
+
+        //        cmd.ExecuteNonQuery();
+
+        //        foreach (Recipe r in ingredients)
+        //            AddRecipeItem(r);
+
+        //        return "Item plus ingredients added.";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.ToString();
+        //    }
+        //    finally
+        //    {
+        //        DataConnection.CloseConnection();
+        //    }
+        //}
+
+        //public static string AddFoodStuff(FoodStuff fs, Recipe r)
+        //{
+        //    //same as other but for just adding single Recipe elements instead of from a list.
+        //    //insert a foodstuff entry in the Foodstuff table
+        //    //will use comma-delineated string for the tags
+        //    try
+        //    {
+        //        //this needs to be rewritten to only insert fields and parameters for the items that the user is inserting, so the
+        //        //database will auto-default to NULL for the rest.
+        //        string query = "insert into Foodstuff(FoodstuffID, Name"; //these two must always be there
+
+        //        OleDbDataReader rdItemCount = new OleDbCommand("Select Count(Name) from Foodstuff", conn).ExecuteReader();
+        //        rdItemCount.Read();
+
+        //        OleDbCommand cmd = new OleDbCommand();
+        //        cmd.Connection = conn;
+        //        //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+        //        //if statements for each value to add, and its associated parameter                           
+        //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
+        //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
+        //        int intParameterCount = 2;
+        //        if (fs.Directions != "")
+        //        {
+        //            query += ", Directions";
+        //            cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Directions;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.PrepTime > -1) //use -1, items may still have 0 prep time
+        //        {
+        //            query += ", PrepTime";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.PrepTime;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.CookTime > -1)
+        //        {
+        //            query += ", CookTime";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.CookTime;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.Cost > 0.0) //unlikely anything is going to be free
+        //        {
+        //            query += ", Cost";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Cost;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.Servings > 0)
+        //        {
+        //            query += ", Servings";
+        //            cmd.Parameters.Add("?", OleDbType.Numeric).Value = fs.Servings;
+        //            intParameterCount++;
+        //        }
+        //        if (fs.GetTags() != "")
+        //        {
+        //            query += ", Tags";
+        //            //Comma-and-space delineated list of the tags.
+        //            //When tokenizing or splitting tags, use ", " for the demarcation.
+        //            cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.GetTags();
+        //            intParameterCount++;
+        //        }
+        //        query += ") Values(?";
+        //        for (int i = 1; i < intParameterCount; i++) //counter is one-based
+        //        {
+        //            query += ",?";
+        //        }
+        //        query += ")";
+
+        //        cmd.CommandText = query;
+        //        AddRecipeItem(r);
+        //        DataConnection.OpenConnection();
+
+        //        cmd.ExecuteNonQuery();
+
+
+        //        return "Item plus ingredients added.";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.ToString();
+        //    }
+        //    finally
+        //    {
+        //        DataConnection.CloseConnection();
+        //    }
+        //}
 
         public static void UpdateFoodstuff(string fsID, FoodStuff updatedFS)
         {

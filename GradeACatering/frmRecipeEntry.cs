@@ -164,47 +164,48 @@ namespace GradeACatering
                     if (txtPriceSold.Text == "")
                         txtPriceSold.Text = "-1.0";
 
-                    FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtDirections.Text,
-                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
-                                                    Convert.ToInt32(txtServingSize.Text), newTags);
                     List<Recipe> newItemIngredients = new List<Recipe>();
-                    if(lsvIngredients.Items.Count == 0)
+                    //if lsvIngredients is empty...atomic ingredient?  Don't hand the list to the constructor.
+                    if (lsvIngredients.Items.Count > 0)
                     {
-                        //no ingredients listed, so treat this as an atomic item?
-                        //which kind of defeats the purpose of the separate ingredient entry but whatever
-                        //FIX IT LATER                     
-                        
-                        newItemIngredients.Add(new Recipe(newID, newID));
-                        //atomic items have the same Makes and MadeOf IDs. (i.e. all-purpose flour is made of itself)
-                    }
-                    else
-                    {
-                        foreach(ListViewItem lvi in lsvIngredients.Items)
+                        foreach (ListViewItem lvi in lsvIngredients.Items)
                         {
-                            //check to see whether the item exists or not.
-                            if (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0)
+                            //check to see whether the item exists or not by matching name, which is the third column of the listview.
+                            if (DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text).Count > 0)
                             {
-                               newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text)[0].ID),
-                                                       lvi.SubItems[0].Text, lvi.SubItems[1].Text));
+                                //this is supposed to return true if a name match is found
+                                //and add it to the new food's ingredient list
+                                newItemIngredients.Add(new Recipe(newID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text)[0].ID),
+                                                        lvi.SubItems[0].Text, lvi.SubItems[1].Text));
                             }
                             else
                             {
                                 //Did not find a match...
                                 //making dummy entries
 
-                                string newPHID = lvi.SubItems[2].Text.Substring(0, Math.Min(lvi.SubItems[2].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
-                                newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
-                                FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[2].Text);
-                                DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
-
-                                newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[0].Text, lvi.SubItems[1].Text));
+                                //grab the first up to 4 characters of the name
+                               string newPHID = lvi.SubItems[2].Text.Substring(0, Math.Min(lvi.SubItems[2].Text.Split(' ')[0].Length, 4));
+                                 
+                                newPHID += (DataConnection.NumFoodstuffs() + 1).ToString("0000#");
                                 
+                                //new placeholder ID, name from listview's name column
+                                FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[2].Text);
+                                //should automatically generate the self-referencing RecipeMaterial stub...
+                                DataConnection.AddFoodStuff(fsPlaceholder);
+                                //then put this in the list for the actual food we're going to add
+                                newItemIngredients.Add(new Recipe(newID, newPHID, lvi.SubItems[0].Text, lvi.SubItems[1].Text));
+
                             }
-			            }
+                        }
                     }
-                  
-                    DataConnection.AddFoodStuff(newFS, newItemIngredients);
+                    //build the new foodstuff we're adding
+                    FoodStuff newFS = new FoodStuff(newID, txtName.Text, txtDirections.Text,
+                                                    Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
+                                                    Convert.ToInt32(txtServingSize.Text), newTags, newItemIngredients);
+                    //send to database
+                   DataConnection.AddFoodStuff(newFS);
                 }
+
                 //Then Clear the form and show a message stating the info was saved
                 lblSaved.Text = "Recipe was saved. Please enter new recipe";
                 var cntrlCollections = GetAll(this, typeof(TextBox));
@@ -304,18 +305,22 @@ namespace GradeACatering
 
         private void btnAddToTagList_Click(object sender, EventArgs e)
         {
-            
-            lbxTags.Items.Add(txtTags.Text);
+           // if(txtTags.Text != "")
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtTags.Text, @"/\S/"))
+                   lbxTags.Items.Add(txtTags.Text);
+                             
             txtTags.Text = "";
             txtTags.Focus();
         }
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-
-            for (int i = lbxTags.SelectedIndices.Count -1 ; i >= 0;  i++)
+            if (lbxTags.SelectedIndices.Count > 0)
             {
-                lbxTags.Items.RemoveAt(lbxTags.SelectedIndices[i]);
+                for (int index = lbxTags.SelectedIndices.Count-1; index >= 0; index--)
+                {
+                    lbxTags.Items.RemoveAt(lbxTags.SelectedIndices[index]);
+                }
             }
         }
 
@@ -378,6 +383,7 @@ namespace GradeACatering
             lblSaved.Text = "";
             timer1.Stop();
         }
+
 
         //private void btnAddIng_Click_2(object sender, EventArgs e)
         //{

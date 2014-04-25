@@ -94,50 +94,106 @@ namespace GradeACatering
                     }
                     //COPY PASTE OF DUSTINS WORK -hunter
                     //temp fix for blank textboxes so the foodstuff constructor doesn't error out with a blank string
+                    string strName = fstoUpdate.Name;
+                    int intPrepTime = fstoUpdate.PrepTime;
+                    int intCookTime = fstoUpdate.CookTime;
+                    int intServings = fstoUpdate.Servings;
+                    double dblCost  = fstoUpdate.Cost;
+
+                    if (txtName.Text != strName)
+                        strName = txtName.Text;
+
                     if (txtPrepTime.Text == "")
                         txtPrepTime.Text = "-1";
-                    else if (txtPrepTime.Text != fstoUpdate.PrepTime.ToString())
-                    {
-                     //   fstoUpdate.PrepTime =
+                    else if (txtPrepTime.Text != intPrepTime.ToString())
+                        int.TryParse(txtPrepTime.Text, out intPrepTime);
+
 
                     }
                     if (txtCookTime.Text == "")
                         txtCookTime.Text = "-1";
+                    else if (txtCookTime.Text != intCookTime.ToString())
+                        int.TryParse(txtCookTime.Text, out intCookTime);
+                                        
                     if (txtServingSize.Text == "")
                         txtServingSize.Text = "-1";
+                    else if (txtServingSize.Text != intServings.ToString())
+                        int.TryParse(txtServingSize.Text, out intServings);
+                  
                     if (txtPriceSold.Text == "")
                         txtPriceSold.Text = "-1.0";
+                    else if (txtPriceSold.Text != dblCost.ToString())
+                        Double.TryParse(txtPriceSold.Text, out dblCost);
+                  
+                    //if item in list but not fs's list, add it, then add as its own foodstuff
+                    //if item matches, check unit and quantity
+                        //if different, update from ingredient list
+                    //if item in fs's list is not in ingredient list, remove it
 
-                   // FoodStuff newFS = new FoodStuff(fstoUpdate.ID, txtName.Text, txtDirections.Text,
-                   //                               Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
-                   //                             Convert.ToInt32(txtServingSize.Text), newTags);
-                    List<Recipe> newItemIngredients = new List<Recipe>();
-                    if (lsvIngredients.Items.Count == 0)
+                    foreach (ListViewItem lvi in lsvIngredients.Items)
                     {
-                        //Not sure if this will need to change for updating...We only need the new ingredients
-                     //   newItemIngredients.Add(new Recipe(fstoUpdate.ID, fstoUpdate.ID));
-                    }
-                    else
-                    {
-                       foreach(ListViewItem lvi in lsvIngredients.Items)
-                        if(DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0 )
+                        string newIngrID = DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].ToString())[0].ID;//in theory only one match if the name fits...
+
+                        if (newIngrID == "") //item wasn't found, must be new
                         {
-                            newItemIngredients.Add(new Recipe(fstoUpdate.ID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
-                                                       lvi.SubItems[1].Text, lvi.SubItems[2].Text));
-                        } 
-                        else
-	                    {
-                             //Did not find a match...Dustin Dummy entries
-                                
-                             string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
-                             newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
-                             FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
-                             DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
-                 
-                           //  newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
-	                    }
-                        
+                            newIngrID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4)) +
+                                                                   (DataConnection.NumFoodstuffs() + 1).ToString("0000#"); //add up to 1st 4 chars of name + # of foodstuffs to make id
+                            fstoUpdate.AddIngredient(new Recipe(fstoUpdate.ID, //current food id
+                                                                newIngrID, //new ingredient ID
+                                                                lvi.SubItems[0].Text,//quantity
+                                                                lvi.SubItems[1].Text));//unit
+                            //now add the new recipe as its own foodstuff
+                            DataConnection.AddFoodStuff(new FoodStuff(newIngrID, lvi.SubItems[2].Text));
+                        }
+                        else  //found a match
+                        {   //look to see if the values are the same
+                            foreach (Recipe existing_r in fstoUpdate.ReturnIngredientsList())
+                            {
+                                //make sure the existing and item to update are the same
+                                if (existing_r.MadeOf == newIngrID)
+                                {
+                                    //compare quantity first
+                                    if (existing_r.FractionAmount() != lvi.SubItems[0].Text) //quants are different
+                                        fstoUpdate.UpdateIngredientQuantity(existing_r.MadeOf, lvi.SubItems[0].Text);//replace with new one
+
+                                    //now compare unit
+                                    if (existing_r.Unit != lvi.SubItems[1].Text) //units are different
+                                        fstoUpdate.UpdateIngredientUnit(existing_r.MadeOf, lvi.SubItems[1].Text);//replace with new one
+                                }
+                                else //item in fs's list isn't in ingredient list, so remove it
+                                    fstoUpdate.RemoveIngredient(existing_r);
+                            }
+                        }
                     }
+
+
+                    //List<Recipe> newItemIngredients = new List<Recipe>();
+                    //if (lsvIngredients.Items.Count == 0)
+                    //{
+                    //    //Not sure if this will need to change for updating...We only need the new ingredients
+                    //    newItemIngredients.Add(new Recipe(newFS.ID, fstoUpdate.ID));
+                    //}
+                    //else
+                    //{
+                    //   foreach(ListViewItem lvi in lsvIngredients.Items)
+                    //    if(DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text).Count > 0 )
+                    //    {
+                    //        newItemIngredients.Add(new Recipe(fstoUpdate.ID, (DataConnection.FindFoodstuffsNamed(lvi.SubItems[0].Text)[0].ID),
+                    //                                   lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                    //    } 
+                    //    else
+                    //    {
+                    //         //Did not find a match...Dustin Dummy entries
+                                
+                    //         string newPHID = lvi.SubItems[0].Text.Substring(0, Math.Min(lvi.SubItems[0].Text.Split(' ')[0].Length, 4));//grab the first up to 4 characters of the name
+                    //         newPHID += (DataConnection.NumFoodstuffs()+1).ToString("0000#");
+                    //         FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
+                    //         DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
+                 
+                    //         newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+                    //    }
+                        
+                    //}
 	
 	
 	
@@ -266,11 +322,10 @@ namespace GradeACatering
           
                  foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
                     {
-               
-                     cboIng.Text = eachItem.Text;
-                     txtQty.Text = eachItem.SubItems[1].Text;
-                     cboUnit.Text = eachItem.SubItems[2].Text;
-                     lsvIngredients.Items.Remove(eachItem);
+                        txtQty.Text = eachItem.SubItems[0].Text;
+                        cboIng.Text = eachItem.SubItems[2].Text;                     
+                        cboUnit.Text = eachItem.SubItems[1].Text;
+                        lsvIngredients.Items.Remove(eachItem);
                     }
                
          
