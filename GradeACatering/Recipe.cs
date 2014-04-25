@@ -129,7 +129,24 @@ namespace GradeACatering
             return (double)qAmount.whole + ((double)(qAmount.numerator) / (double)(qAmount.denominator));
         }
 
-        
+        public void UpdateQuantity(string inAmount)
+        {
+            string[] split = inAmount.Split(' ');
 
+            //look to see if we have one or two substrings
+            if (split.Length == 1)//only one substring
+            {
+                if (split[0].Contains('/'))//is it a fraction?
+                {
+                    string[] frac = split[0].Split('/');
+                    int.TryParse(frac[0], out qAmount.numerator);
+                    int.TryParse(frac[1], out qAmount.denominator);
+                }
+                else //no fraction
+                {
+                    int.TryParse(split[0], out qAmount.whole);
+                }
+            }
+          }
     }
 }

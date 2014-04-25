@@ -361,8 +361,14 @@
             // 
             this.cboUnit.FormattingEnabled = true;
             this.cboUnit.Items.AddRange(new object[] {
-            "lb",
-            "oz"});
+            "tsp",
+            "tbsp",
+            "cup",
+            "pt",
+            "qt",
+            "gal",
+            "oz",
+            "lb"});
             this.cboUnit.Location = new System.Drawing.Point(60, 248);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(66, 21);
@@ -418,6 +424,7 @@
             this.lsvIngredients.TabIndex = 8;
             this.lsvIngredients.UseCompatibleStateImageBehavior = false;
             this.lsvIngredients.View = System.Windows.Forms.View.Details;
+            this.lsvIngredients.SelectedIndexChanged += new System.EventHandler(this.lsvIngredients_SelectedIndexChanged);
             // 
             // colQty
             // 

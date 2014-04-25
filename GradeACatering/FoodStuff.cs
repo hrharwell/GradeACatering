@@ -17,6 +17,10 @@ namespace GradeACatering
         private int intPrepTime, intCookTime, intServings; //in minutes
         private double dblCost;  //cost of the whole recipe
 
+        //-------------------------------
+        private List<Recipe> lstIngredients;
+        //-------------------------------
+
         //possible todo:
         //new fields for Category (breakfast, lunch, dinner, dessert)
         //               Cookbook (which book it came from?)
@@ -45,7 +49,7 @@ namespace GradeACatering
         }
 
         public FoodStuff(string inID, string inName, string inDirections = "", int inPrep = -1, int inCook = -1,
-                         double inCost = -1.0, int inServing = -1, List<string> inTags = null)
+                         double inCost = -1.0, int inServing = -1, List<string> inTags = null, List<Recipe> inIngredients = null)
         {
             //This is a constructor for generating a placeholder item: basically just a name and ID
             strFSID = inID;
@@ -60,8 +64,18 @@ namespace GradeACatering
                 lstTags = new List<string>();
             else
                 lstTags = inTags;
+
+            if (inIngredients == null)
+            {   //If no list of ingredients passed in, assume this is an atomic ingredient
+                //and create a self-referencing RecipeMaterial entry.
+                lstIngredients = new List<Recipe>();
+                lstIngredients.Add(new Recipe(inID,inID));
+            }
+            else
+                lstIngredients = inIngredients;
         }
         
+
         public override string ToString()
         {
             string strOut = String.Concat("ID Number: ", ID, "\n",
@@ -83,9 +97,6 @@ namespace GradeACatering
         public string ID
         {
             get{ return strFSID; }
-            //no set since this is only set through the constructor
-            //disregarding the above, testing something
-            set { strFSID = value; }
         }
         
         public string Name
@@ -100,13 +111,7 @@ namespace GradeACatering
             //on the off-chance they find a better way of making something, this lets the directions be updatable.
             set { strDirections = value; }
         }
-/*
-        public string Unit //Might be replacing this later, don't get too attached
-        {
-            get { return strUnit; }
-            //same as ID, only set during object creation
-        }
-*/
+
         public double Cost
         {
             //needs a means of updating price values
@@ -201,6 +206,55 @@ namespace GradeACatering
         public List<string> ReturnTagList()
         {
             return lstTags;
+        }
+
+        public void AddIngredient(Recipe r)
+        {
+            lstIngredients.Add(r);
+        }
+
+        public void RemoveIngredient(Recipe r)
+        {
+            foreach (Recipe rec in lstIngredients)
+                if (rec == r)
+                    lstIngredients.Remove(rec);
+        }
+
+        public void RemoveIngredientWithID(string rID)
+        {
+            foreach (Recipe rec in lstIngredients)
+                if (rec.MadeOf == rID)
+                    lstIngredients.Remove(rec);
+        }
+
+        public Recipe ReturnIngredientWithID(string rID)
+        {
+            Recipe value = null;
+
+            foreach (Recipe r in lstIngredients)
+                if (r.MadeOf == rID)
+                    value = r;
+
+            return value;
+        }
+
+        public List<Recipe> ReturnIngredientsList()
+        {
+            return lstIngredients;
+        }
+
+        public void UpdateIngredientQuantity(string rID, string rFracValue)
+        {
+            foreach (Recipe r in lstIngredients)
+                if (r.MadeOf == rID)
+                    r.UpdateQuantity(rFracValue);
+        }
+
+        public void UpdateIngredientUnit(string rID, string rUnit)
+        {
+            foreach (Recipe r in lstIngredients)
+                if (r.MadeOf == rID)
+                    r.Unit = rUnit;
         }
     }
 }
