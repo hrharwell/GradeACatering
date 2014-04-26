@@ -135,7 +135,10 @@ namespace GradeACatering
 
                     foreach (ListViewItem lvi in lsvIngredients.Items)
                     {
-                        string newIngrID = DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].ToString())[0].ID;//in theory only one match if the name fits...
+                        
+                        //look in the database to see if the ingredient in question already exists
+                        FoodStuff foundfs = DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text)[0];
+                        string newIngrID = foundfs.ID;//in theory only one match if the name fits...
 
                         if (newIngrID == "") //item wasn't found, must be new
                         {
@@ -148,13 +151,19 @@ namespace GradeACatering
                             //now add the new recipe as its own foodstuff
                             DataConnection.AddFoodStuff(new FoodStuff(newIngrID, lvi.SubItems[2].Text));
                         }
-                        else  //found a match
-                        {   //look to see if the values are the same
+                        else  //found a matching existing ingredient in Foodstuffs
+                        {   
+                            //determine if the item does or doesn't exist in the ingredient list 
+                         
+                            Recipe recTestForExists;
                             foreach (Recipe existing_r in fstoUpdate.ReturnIngredientsList())
                             {
+                                recTestForExists = existing_r;
                                 //make sure the existing and item to update are the same
                                 if (existing_r.MadeOf == newIngrID)
-                                {
+                                {   
+                                    matchFound = true;
+                                    //look to see if the values are the same
                                     //compare quantity first
                                     if (existing_r.FractionAmount() != lvi.SubItems[0].Text) //quants are different
                                         fstoUpdate.UpdateIngredientQuantity(existing_r.MadeOf, lvi.SubItems[0].Text);//replace with new one
@@ -162,10 +171,14 @@ namespace GradeACatering
                                     //now compare unit
                                     if (existing_r.Unit != lvi.SubItems[1].Text) //units are different
                                         fstoUpdate.UpdateIngredientUnit(existing_r.MadeOf, lvi.SubItems[1].Text);//replace with new one
-                                }
-                                else //item in fs's list isn't in ingredient list, so remove it
-                                    fstoUpdate.RemoveIngredient(existing_r);
+                                } 
+                               if(!matchFound)
+                                    fstoUpdate.RemoveIngredient(recTestForExists);
                             }
+                            
+                           
+                            //item in fs's list isn't in ingredient list, so remove it
+                            
                         }
                     }
 
@@ -296,16 +309,22 @@ namespace GradeACatering
 
         private void btnAddToTagList_Click(object sender, EventArgs e)
         {
-            lbxTags.Items.Add(txtTags.Text);
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtTags.Text, @"^\s*$"))
+                lbxTags.Items.Add(txtTags.Text);
+
+            txtTags.Text = "";
+            txtTags.Focus();
         }
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            for (int x = lbxTags.SelectedIndices.Count - 1; x >= 0; x--)
+            if (lbxTags.SelectedIndices.Count > 0)
             {
-                int idx = lbxTags.SelectedIndices[x];
-                lbxTags.Items.RemoveAt(idx);
-            } 
+                for (int index = lbxTags.SelectedIndices.Count - 1; index >= 0; index--)
+                {
+                    lbxTags.Items.RemoveAt(lbxTags.SelectedIndices[index]);
+                }
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
