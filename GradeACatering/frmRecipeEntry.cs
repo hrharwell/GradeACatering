@@ -302,7 +302,7 @@ namespace GradeACatering
         private void btnAddToTagList_Click(object sender, EventArgs e)
         {
            // if(txtTags.Text != "")
-            if (!System.Text.RegularExpressions.Regex.IsMatch(txtTags.Text, @"/\S/"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtTags.Text, @"^\s*$"))
                    lbxTags.Items.Add(txtTags.Text);
                              
             txtTags.Text = "";
@@ -320,10 +320,6 @@ namespace GradeACatering
             }
         }
 
-        private void btnDeleteIng_Click_1(object sender, EventArgs e)
-        {
-                        
-        }
 
         private void btnEditIng_Click(object sender, EventArgs e)
         {

@@ -486,7 +486,7 @@ namespace GradeACatering
 
                     resultRMs.Add(new Recipe(results[0],results[1],results[2],results[3]));
                 }
-                
+                reader.Close();
             }
             catch (Exception ex)
             { }
@@ -512,6 +512,7 @@ namespace GradeACatering
                 
                 while (reader.Read())
                 {
+                    List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
 
                     FoodStuff fs = new FoodStuff(reader.GetString(0),
                                                reader.GetString(1),
@@ -519,13 +520,12 @@ namespace GradeACatering
                                                reader.GetInt32(3),
                                                reader.GetInt32(4),
                                                reader.GetDouble(5),
-                                               reader.GetInt32(6));
+                                               reader.GetInt32(6),
+                                               null,
+                                               lstMats);
                     //tokenize the tags from their long string stored in the database.
 
-                    if (reader[7] is System.DBNull)
-                    {    //if it's null, don't worry about it
-                    }
-                    else
+                    if (!(reader[7] is System.DBNull))
                     {
                         string[] strTagList = reader.GetString(7).Split(',');
                         if (strTagList.Length > 0)
@@ -533,13 +533,10 @@ namespace GradeACatering
                             foreach (string t in strTagList)
                                 fs.AddTag(t);
                         }
-                    }
-                    
-
-
+                    } 
                     lstFoods.Add(fs);
                 }
-                
+                reader.Close();
             }
             catch (Exception ex)
             {
@@ -573,7 +570,7 @@ namespace GradeACatering
                                                reader.GetString(1));
                     lstFoods.Add(fs);
                 }
-
+                reader.Close();
             }
             catch (Exception ex)
             {
@@ -595,27 +592,34 @@ namespace GradeACatering
              {
                  string query = "Select * from Foodstuff where Name like ?";
                  OleDbCommand cmd = new OleDbCommand(query, conn);
-                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = "*" + inName + "*";
+                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = inName;
                  OleDbDataReader reader = cmd.ExecuteReader();
 
                  while (reader.Read())
                  {
-
+                     List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
                      FoodStuff fs = new FoodStuff(reader.GetString(0),
-                                                reader.GetString(1),
-                                                reader.GetString(2),
-                                                reader.GetInt32(3),
-                                                reader.GetInt32(4),
-                                                reader.GetDouble(5),
-                                                reader.GetInt32(6));
+                                                  reader.GetString(1),
+                                                  reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                                  reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
+                                                  reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
+                                                  reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
+                                                  reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
+                                                  null,
+                                                  lstMats);
+
+
                      //tokenize the tags from their long string stored in the database.
-                     string[] strTagList = reader.GetString(7).Split(',');
+
+                     string[] strTagList = reader.IsDBNull(7) ? new string[0] : reader.GetString(7).Split(',');
+
                      foreach (string t in strTagList)
                          fs.AddTag(t);
 
 
                      lstFoods.Add(fs);
                  }
+                 reader.Close();
              }
              catch (Exception ex)
              {
@@ -623,6 +627,7 @@ namespace GradeACatering
              }
             finally
             {
+               
                 DataConnection.CloseConnection();
             }
             
@@ -666,6 +671,7 @@ namespace GradeACatering
 
                 reader.Read();
                 string id = reader.IsDBNull(0) ? "":reader.GetString(0);
+                List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
 
                 fs = new FoodStuff(reader.GetString(0),
                                    reader.GetString(1),
@@ -673,7 +679,9 @@ namespace GradeACatering
                                    reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
                                    reader.IsDBNull(4) ? -1: reader.GetInt32(4),
                                    reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
-                                   reader.IsDBNull(6) ? -1 : reader.GetInt32(6));
+                                   reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
+                                   null,
+                                   lstMats);
 
                   
                 //tokenize the tags from their long string stored in the database.
@@ -685,7 +693,7 @@ namespace GradeACatering
                     foreach (string t in strTagList)
                         fs.AddTag(t);
                 }
-
+                reader.Close();
                
             }
             catch (Exception ex)
@@ -730,11 +738,12 @@ namespace GradeACatering
                 OleDbDataReader reader = cmd.ExecuteReader();
                 reader.Read();
                 return reader.GetInt32(0);
+                reader.Close();
             }
             catch (Exception ex)
             { return -1; }
             finally
-            { DataConnection.CloseConnection(); }
+            { DataConnection.CloseConnection();}
 
         }
 
@@ -773,6 +782,7 @@ namespace GradeACatering
             {
                 resultset.Add(reader.GetString(0) + " " + reader.GetString(1));
             }
+            reader.Close();
             DataConnection.CloseConnection(); 
             return resultset;
         }
