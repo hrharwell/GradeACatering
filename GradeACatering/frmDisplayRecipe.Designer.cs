@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
@@ -55,6 +56,7 @@
             this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblID = new System.Windows.Forms.Label();
             this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCookTime = new System.Windows.Forms.TextBox();
@@ -66,8 +68,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblComingSoon = new System.Windows.Forms.Label();
-            this.lblID = new System.Windows.Forms.Label();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,6 +102,7 @@
             // 
             // btnRemoveSelectedTag
             // 
+            this.btnRemoveSelectedTag.Enabled = false;
             this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 121);
             this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
             this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
@@ -110,6 +113,7 @@
             // 
             // btnAddToTagList
             // 
+            this.btnAddToTagList.Enabled = false;
             this.btnAddToTagList.Location = new System.Drawing.Point(163, 32);
             this.btnAddToTagList.Name = "btnAddToTagList";
             this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
@@ -120,6 +124,7 @@
             // 
             // txtTags
             // 
+            this.txtTags.Enabled = false;
             this.txtTags.Location = new System.Drawing.Point(18, 34);
             this.txtTags.Name = "txtTags";
             this.txtTags.Size = new System.Drawing.Size(139, 20);
@@ -127,6 +132,7 @@
             // 
             // lbxTags
             // 
+            this.lbxTags.Enabled = false;
             this.lbxTags.FormattingEnabled = true;
             this.lbxTags.Location = new System.Drawing.Point(18, 60);
             this.lbxTags.Name = "lbxTags";
@@ -157,6 +163,7 @@
             this.txtDirections.Location = new System.Drawing.Point(18, 19);
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
+            this.txtDirections.ReadOnly = true;
             this.txtDirections.Size = new System.Drawing.Size(213, 249);
             this.txtDirections.TabIndex = 0;
             // 
@@ -209,6 +216,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Define Item";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
             // label11
             // 
@@ -350,6 +358,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Info";
             // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(70, 16);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(28, 13);
+            this.lblID.TabIndex = 10;
+            this.lblID.Text = "lblID";
+            // 
             // txtServingSize
             // 
             this.txtServingSize.Enabled = false;
@@ -444,31 +461,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID Number";
             // 
-            // lblComingSoon
+            // lblMessage
             // 
-            this.lblComingSoon.AutoSize = true;
-            this.lblComingSoon.Location = new System.Drawing.Point(32, 392);
-            this.lblComingSoon.Name = "lblComingSoon";
-            this.lblComingSoon.Size = new System.Drawing.Size(140, 13);
-            this.lblComingSoon.TabIndex = 30;
-            this.lblComingSoon.Text = "* Print Feature Coming Soon";
-            this.lblComingSoon.Visible = false;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(32, 392);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(140, 13);
+            this.lblMessage.TabIndex = 30;
+            this.lblMessage.Text = "* Print Feature Coming Soon";
+            this.lblMessage.Visible = false;
             // 
-            // lblID
+            // timer1
             // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(70, 16);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(28, 13);
-            this.lblID.TabIndex = 10;
-            this.lblID.Text = "lblID";
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmDisplayRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 538);
-            this.Controls.Add(this.lblComingSoon);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -532,8 +545,9 @@
         private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lblComingSoon;
+        private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }
