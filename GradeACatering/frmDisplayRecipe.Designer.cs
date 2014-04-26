@@ -41,7 +41,6 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -189,7 +188,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label6);
@@ -206,17 +204,6 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(176, 191);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Define Item";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             // 
             // label11
             // 
@@ -268,9 +255,9 @@
             // btnEditIng
             // 
             this.btnEditIng.Enabled = false;
-            this.btnEditIng.Location = new System.Drawing.Point(60, 191);
+            this.btnEditIng.Location = new System.Drawing.Point(97, 191);
             this.btnEditIng.Name = "btnEditIng";
-            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
+            this.btnEditIng.Size = new System.Drawing.Size(72, 23);
             this.btnEditIng.TabIndex = 4;
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
@@ -288,9 +275,9 @@
             // btnDeleteIng
             // 
             this.btnDeleteIng.Enabled = false;
-            this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
+            this.btnDeleteIng.Location = new System.Drawing.Point(178, 191);
             this.btnDeleteIng.Name = "btnDeleteIng";
-            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
+            this.btnDeleteIng.Size = new System.Drawing.Size(73, 23);
             this.btnDeleteIng.TabIndex = 5;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
@@ -301,7 +288,7 @@
             this.btnAddIng.Enabled = false;
             this.btnAddIng.Location = new System.Drawing.Point(18, 191);
             this.btnAddIng.Name = "btnAddIng";
-            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
+            this.btnAddIng.Size = new System.Drawing.Size(70, 23);
             this.btnAddIng.TabIndex = 3;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
@@ -530,7 +517,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;

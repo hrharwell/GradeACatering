@@ -162,7 +162,7 @@ namespace GradeACatering
                                 //make sure the existing and item to update are the same
                                 if (existing_r.MadeOf == newIngrID)
                                 {   
-                                    matchFound = true;
+                                    //matchFound = true;
                                     //look to see if the values are the same
                                     //compare quantity first
                                     if (existing_r.FractionAmount() != lvi.SubItems[0].Text) //quants are different
@@ -172,7 +172,7 @@ namespace GradeACatering
                                     if (existing_r.Unit != lvi.SubItems[1].Text) //units are different
                                         fstoUpdate.UpdateIngredientUnit(existing_r.MadeOf, lvi.SubItems[1].Text);//replace with new one
                                 } 
-                               if(!matchFound)
+                             //  if(!matchFound)
                                     fstoUpdate.RemoveIngredient(recTestForExists);
                             }
                             

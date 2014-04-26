@@ -17,12 +17,14 @@ namespace GradeACatering
             InitializeComponent();
         }
         private List<FoodStuff> fsMasterlist;
+        private List<FoodStuff> fsFilteredNamelist;
 
       
 
         private void frmSearchRecipes_Load(object sender, EventArgs e)
         {
             fsMasterlist = DataConnection.ListAllFoodstuffs();
+            
             foreach (FoodStuff fs in fsMasterlist)
             {
                 ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
@@ -57,19 +59,35 @@ namespace GradeACatering
             lsvSearch.Items.Clear();
             // Apply the filters
             string strFilterName = txtName.Text;
-            int intFilterPrice =  Convert.ToInt32(txtPricePerServing.Text);
-            int intFilterServingSize = Convert.ToInt32(txtServingSize.Text);
-            string strTags = txtTags.Text;
+           // int intFilterPrice =  Convert.ToInt32(txtPricePerServing.Text);
+           // int intFilterServingSize = Convert.ToInt32(txtServingSize.Text);
+           // string strTags = txtTags.Text;
 
             if (chkName.Checked == true)
             {
-               
-            }
+                fsFilteredNamelist = DataConnection.FindFoodstuffsNamed(txtName.Text);
 
-           
+            }
+            else
+            {
+                fsFilteredNamelist = fsMasterlist;
+            }
+         
 
             // Then repopulate the listview
-
+            foreach (FoodStuff filtFS in fsFilteredNamelist)
+            {
+                ListViewItem lsvItem = new ListViewItem(filtFS.Name);
+                
+                lsvItem.SubItems.Add(filtFS.CostPerServing().ToString("C"));
+                lsvItem.SubItems.Add(filtFS.Cost.ToString("C"));
+                lsvItem.SubItems.Add(filtFS.PrepTime.ToString() + " mins");
+                lsvItem.SubItems.Add(filtFS.CookTime.ToString() + " mins");
+                lsvItem.SubItems.Add(filtFS.ID.ToString());
+                lsvSearch.Items.Add(lsvItem);
+               
+            }
+            
 
         }
 
@@ -77,8 +95,19 @@ namespace GradeACatering
 
         private void btnResetSearch_Click(object sender, EventArgs e)
         {
-            lsvSearch.Items.Clear(); 
+            lsvSearch.Items.Clear();
+            foreach (FoodStuff fs in fsMasterlist)
+            {
+                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+                lsvItem.SubItems.Add(fs.Servings.ToString());
+                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C"));
+                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.ID.ToString());
+                lsvSearch.Items.Add(lsvItem);
 
+            }
         }
 
 
