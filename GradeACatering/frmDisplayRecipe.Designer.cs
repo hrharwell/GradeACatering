@@ -159,6 +159,7 @@
             // 
             // txtDirections
             // 
+            this.txtDirections.Enabled = false;
             this.txtDirections.Location = new System.Drawing.Point(18, 19);
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
@@ -267,7 +268,7 @@
             // 
             this.cboIng.Enabled = false;
             this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(133, 247);
+            this.cboIng.Location = new System.Drawing.Point(132, 248);
             this.cboIng.Name = "cboIng";
             this.cboIng.Size = new System.Drawing.Size(121, 21);
             this.cboIng.TabIndex = 2;
@@ -300,6 +301,7 @@
             this.colQty,
             this.colUnit,
             this.colName});
+            this.lsvIngredients.Enabled = false;
             this.lsvIngredients.FullRowSelect = true;
             this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
             this.lsvIngredients.Name = "lsvIngredients";
@@ -459,10 +461,8 @@
             this.lblMessage.Visible = false;
             // 
             // timer1
-            // 
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // frmDisplayRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
