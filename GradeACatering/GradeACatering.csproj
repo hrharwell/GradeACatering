@@ -142,6 +142,12 @@
     <Compile Include="frmNewIngredient.Designer.cs">
       <DependentUpon>frmNewIngredient.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSearch.Designer.cs">
+      <DependentUpon>frmNewSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRecipeEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewIngredient.resx">
       <DependentUpon>frmNewIngredient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSearch.resx">
+      <DependentUpon>frmNewSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRecipeEntry.resx">
       <DependentUpon>frmRecipeEntry.cs</DependentUpon>

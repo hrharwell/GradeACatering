@@ -124,10 +124,7 @@ namespace GradeACatering
         {
          foreach (RadioButton rdo in gbRadTags.Controls)
 	{
-        if ( r)
-        {
-            
-        }
+       
 	}  
         }
 

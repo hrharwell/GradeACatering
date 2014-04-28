@@ -42,7 +42,7 @@ namespace GradeACatering
 
         private void btnSearchfrm_Click(object sender, EventArgs e)
         {
-            frmSearchRecipes Search = new frmSearchRecipes();
+            frmNewSearch Search = new frmNewSearch();
             Search.ShowDialog();
         }
 
