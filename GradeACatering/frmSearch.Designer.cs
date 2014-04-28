@@ -37,15 +37,15 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkName = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gbServing = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbRadServing = new System.Windows.Forms.GroupBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.gbRadTags = new System.Windows.Forms.GroupBox();
+            this.radAndTag = new System.Windows.Forms.RadioButton();
+            this.radOrTags = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnResetSearch = new System.Windows.Forms.Button();
             this.txtPricePerServing = new System.Windows.Forms.TextBox();
@@ -59,9 +59,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbServing.SuspendLayout();
+            this.gbRadServing.SuspendLayout();
+            this.gbRadTags.SuspendLayout();
             this.SuspendLayout();
             // 
             // lsvSearch
@@ -89,9 +89,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chkName);
-            this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.gbServing);
+            this.groupBox1.Controls.Add(this.gbRadServing);
+            this.groupBox1.Controls.Add(this.gbRadTags);
             this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.btnResetSearch);
             this.groupBox1.Controls.Add(this.txtPricePerServing);
@@ -119,15 +119,15 @@
             this.chkName.UseVisualStyleBackColor = true;
             this.chkName.CheckedChanged += new System.EventHandler(this.chkName_CheckedChanged);
             // 
-            // groupBox4
+            // gbServing
             // 
-            this.groupBox4.Controls.Add(this.radioButton3);
-            this.groupBox4.Controls.Add(this.radioButton4);
-            this.groupBox4.Location = new System.Drawing.Point(7, 147);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(83, 29);
-            this.groupBox4.TabIndex = 23;
-            this.groupBox4.TabStop = false;
+            this.gbServing.Controls.Add(this.radioButton3);
+            this.gbServing.Controls.Add(this.radioButton4);
+            this.gbServing.Location = new System.Drawing.Point(7, 147);
+            this.gbServing.Name = "gbServing";
+            this.gbServing.Size = new System.Drawing.Size(83, 29);
+            this.gbServing.TabIndex = 23;
+            this.gbServing.TabStop = false;
             // 
             // radioButton3
             // 
@@ -151,15 +151,15 @@
             this.radioButton4.Text = "Or";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // gbRadServing
             // 
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Controls.Add(this.radioButton5);
-            this.groupBox3.Location = new System.Drawing.Point(6, 103);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(83, 29);
-            this.groupBox3.TabIndex = 22;
-            this.groupBox3.TabStop = false;
+            this.gbRadServing.Controls.Add(this.radioButton1);
+            this.gbRadServing.Controls.Add(this.radioButton5);
+            this.gbRadServing.Location = new System.Drawing.Point(6, 103);
+            this.gbRadServing.Name = "gbRadServing";
+            this.gbRadServing.Size = new System.Drawing.Size(83, 29);
+            this.gbRadServing.TabIndex = 22;
+            this.gbRadServing.TabStop = false;
             // 
             // radioButton1
             // 
@@ -183,37 +183,38 @@
             this.radioButton5.Text = "Or";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // gbRadTags
             // 
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton6);
-            this.groupBox2.Location = new System.Drawing.Point(6, 62);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(83, 29);
-            this.groupBox2.TabIndex = 21;
-            this.groupBox2.TabStop = false;
+            this.gbRadTags.Controls.Add(this.radAndTag);
+            this.gbRadTags.Controls.Add(this.radOrTags);
+            this.gbRadTags.Location = new System.Drawing.Point(9, 68);
+            this.gbRadTags.Name = "gbRadTags";
+            this.gbRadTags.Size = new System.Drawing.Size(83, 29);
+            this.gbRadTags.TabIndex = 21;
+            this.gbRadTags.TabStop = false;
             // 
-            // radioButton2
+            // radAndTag
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(3, 10);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(44, 17);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "And";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radAndTag.AutoSize = true;
+            this.radAndTag.Location = new System.Drawing.Point(3, 10);
+            this.radAndTag.Name = "radAndTag";
+            this.radAndTag.Size = new System.Drawing.Size(44, 17);
+            this.radAndTag.TabIndex = 12;
+            this.radAndTag.TabStop = true;
+            this.radAndTag.Text = "And";
+            this.radAndTag.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // radOrTags
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(48, 10);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(36, 17);
-            this.radioButton6.TabIndex = 16;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Or";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radOrTags.AutoSize = true;
+            this.radOrTags.Location = new System.Drawing.Point(48, 10);
+            this.radOrTags.Name = "radOrTags";
+            this.radOrTags.Size = new System.Drawing.Size(36, 17);
+            this.radOrTags.TabIndex = 16;
+            this.radOrTags.TabStop = true;
+            this.radOrTags.Text = "Or";
+            this.radOrTags.UseVisualStyleBackColor = true;
+            this.radOrTags.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // btnSearch
             // 
@@ -292,6 +293,7 @@
             this.chkTags.TabIndex = 3;
             this.chkTags.Text = "Tags";
             this.chkTags.UseVisualStyleBackColor = true;
+            this.chkTags.CheckedChanged += new System.EventHandler(this.chkTags_CheckedChanged);
             // 
             // btnDisplayRecipe
             // 
@@ -337,12 +339,12 @@
             this.Load += new System.EventHandler(this.frmSearchRecipes_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbServing.ResumeLayout(false);
+            this.gbServing.PerformLayout();
+            this.gbRadServing.ResumeLayout(false);
+            this.gbRadServing.PerformLayout();
+            this.gbRadTags.ResumeLayout(false);
+            this.gbRadTags.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -353,8 +355,8 @@
         private System.Windows.Forms.ListView lsvSearch;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnResetSearch;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radOrTags;
+        private System.Windows.Forms.RadioButton radAndTag;
         private System.Windows.Forms.TextBox txtPricePerServing;
         private System.Windows.Forms.TextBox txtServingSize;
         private System.Windows.Forms.TextBox txtTags;
@@ -365,13 +367,13 @@
         private System.Windows.Forms.Button btnDisplayRecipe;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox gbServing;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbRadServing;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbRadTags;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

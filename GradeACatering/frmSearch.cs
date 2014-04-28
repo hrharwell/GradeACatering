@@ -19,8 +19,6 @@ namespace GradeACatering
         private List<FoodStuff> fsMasterlist;
         private List<FoodStuff> fsFilteredNamelist;
 
-      
-
         private void frmSearchRecipes_Load(object sender, EventArgs e)
         {
             fsMasterlist = DataConnection.ListAllFoodstuffs();
@@ -66,7 +64,7 @@ namespace GradeACatering
             if (chkName.Checked == true)
             {
                 fsFilteredNamelist = DataConnection.FindFoodstuffsNamed(txtName.Text);
-
+                
             }
             else
             {
@@ -118,7 +116,24 @@ namespace GradeACatering
 
         private void chkName_CheckedChanged(object sender, EventArgs e)
         {
+            // Search using Name as filter
             
+        }
+
+        private void chkTags_CheckedChanged(object sender, EventArgs e)
+        {
+         foreach (RadioButton rdo in gbRadTags.Controls)
+	{
+        if ( r)
+        {
+            
+        }
+	}  
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
        

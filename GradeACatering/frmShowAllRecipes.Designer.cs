@@ -38,6 +38,7 @@
             this.btnOpenRecipe = new System.Windows.Forms.Button();
             this.btnReturnToMenu = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsvAllRecipes
@@ -89,7 +90,7 @@
             // 
             // btnOpenRecipe
             // 
-            this.btnOpenRecipe.Location = new System.Drawing.Point(41, 430);
+            this.btnOpenRecipe.Location = new System.Drawing.Point(541, 417);
             this.btnOpenRecipe.Name = "btnOpenRecipe";
             this.btnOpenRecipe.Size = new System.Drawing.Size(84, 44);
             this.btnOpenRecipe.TabIndex = 1;
@@ -99,7 +100,7 @@
             // 
             // btnReturnToMenu
             // 
-            this.btnReturnToMenu.Location = new System.Drawing.Point(505, 430);
+            this.btnReturnToMenu.Location = new System.Drawing.Point(12, 417);
             this.btnReturnToMenu.Name = "btnReturnToMenu";
             this.btnReturnToMenu.Size = new System.Drawing.Size(84, 44);
             this.btnReturnToMenu.TabIndex = 3;
@@ -116,11 +117,22 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Select a recipe to either display or edit.";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(278, 417);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 44);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Delete Recipe";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmShowAllRecipes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 483);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReturnToMenu);
             this.Controls.Add(this.btnOpenRecipe);
@@ -145,6 +157,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button button1;
 
     }
 }
