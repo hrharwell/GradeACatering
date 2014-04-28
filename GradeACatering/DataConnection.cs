@@ -634,20 +634,64 @@ namespace GradeACatering
             return lstFoods;
         }
 
-        public static List<FoodStuff> FindFoodstuffsTagged(string tag)
+        public static List<FoodStuff> FindFoodstuffsTagged(List<string> TagsToMatch)
         {
+            //find a match for the tags in the passed-in list of tags in the foodstuff's tag string
             List<FoodStuff> FoodstuffsFound = new List<FoodStuff>();
 
             try
             {
-                //loop through each foodstuff's parsed tag string
+                
+                if (TagsToMatch.Count > 0)
+                {
+                    OleDbCommand cmd = new OleDbCommand();
+                    cmd.Connection = conn;
+                    string query = "select * from foodstuffs where tags like ?";
+                    cmd.Parameters.Add(TagsToMatch[0]);
+                    if (TagsToMatch.Count > 1)
+                    {
+                        for (int i = 1; i < TagsToMatch.Count - 1; i++)
+                        {
+                            query += " or tags like ?";
+                            cmd.Parameters.Add(TagsToMatch[i]);
+                        }
+                    }
+                    cmd.CommandText = query;
+                    OleDbDataReader reader = cmd.ExecuteReader();
 
+                    while (reader.Read())
+                    {
+                        List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
 
+                        FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                                   reader.GetString(1),
+                                                   reader.GetString(2),
+                                                   reader.GetInt32(3),
+                                                   reader.GetInt32(4),
+                                                   reader.GetDouble(5),
+                                                   reader.GetInt32(6),
+                                                   null,
+                                                   lstMats);
+                        //tokenize the tags from their long string stored in the database.
+
+                        if (!(reader[7] is System.DBNull))
+                        {
+                            string[] strTagList = reader.GetString(7).Split(',');
+                            if (strTagList.Length > 0)
+                            {
+                                foreach (string t in strTagList)
+                                    fs.AddTag(t);
+                            }
+                        }
+                        FoodstuffsFound.Add(fs);
+                    }
+                    reader.Close();
+                }
             }
             catch (Exception ex)
             {
 
-                throw;
+               // throw;
             }
             finally
             {
@@ -706,6 +750,46 @@ namespace GradeACatering
                 
             }
             return fs;
+        }
+
+        public static void DeleteFoodstuff(string id)
+        {
+            //can't decide if this needs to do validation or if the program itself needs to check for it.            
+            try
+            {
+                //wrote this to do a minimal check that a passed id isn't being used in the creation of another food
+                //if it finds a match then it won't try to delete anything
+                //if no results returned assume it's okay to delete.
+                string validationQuery = "Select * from RecipeMaterials where MadeOf = ? and Makes <> MadeOf";
+                OleDbCommand validationCmd = new OleDbCommand(validationQuery, conn);
+                validationCmd.Parameters.Add(id);
+                
+                OleDbDataReader validReader = validationCmd.ExecuteReader();
+                
+                if (!validReader.Read())
+                {
+                    validReader.Close();
+                
+                    string deleteMaterials = "Delete from RecipeMaterials where Makes = ?";
+                    OleDbCommand cmdDelMats = new OleDbCommand(deleteMaterials, conn);
+                    cmdDelMats.Parameters.Add(id);
+
+                    string deleteFoodstuff = "Delete from Foodstuffs where FoodstuffID = ?";
+                    OleDbCommand cmdDelFood = new OleDbCommand(deleteFoodstuff, conn);
+                    cmdDelFood.Parameters.Add(id);
+
+                    cmdDelMats.ExecuteNonQuery();
+                    cmdDelFood.ExecuteNonQuery();
+                }
+                else
+                    validReader.Close();
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                DataConnection.CloseConnection();
+            }            
         }
 
         public static int NumFoodstuffs()
