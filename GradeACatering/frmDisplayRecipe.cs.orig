@@ -25,7 +25,6 @@ namespace GradeACatering
             txtCookTime.Text = inFS.CookTime.ToString();
             txtDirections.Text = inFS.Directions;
             foreach (string s in inFS.ReturnTagList())
-
             
             {
                 lbxTags.Items.Add(s);
@@ -64,7 +63,6 @@ namespace GradeACatering
             txtPrepTime.Enabled = true;
             txtCookTime.Enabled = true;
             txtDirections.Enabled = true;
-            txtDirections.ReadOnly = false;
             txtTags.Enabled = true;
             txtServingSize.Enabled = true;
             cboIng.Enabled = true;
@@ -73,10 +71,8 @@ namespace GradeACatering
             btnAddIng.Enabled = true;
             btnEditIng.Enabled = true;
             btnDeleteIng.Enabled = true;
-            btnAddToTagList.Enabled = true;
-            btnRemoveSelectedTag.Enabled = false;
             btnEditRecipe.Text = "Save";
-            
+  
             }
             else
             {
@@ -109,10 +105,17 @@ namespace GradeACatering
 
                     if (txtPrepTime.Text == "")
                         txtPrepTime.Text = "-1";
+<<<<<<< HEAD
+                    else if (txtPrepTime.Text != fstoUpdate.PrepTime.ToString())
+                    {
+                     //   fstoUpdate.PrepTime =
+
+                    }
+=======
                     else if (txtPrepTime.Text != intPrepTime.ToString())
                         int.TryParse(txtPrepTime.Text, out intPrepTime);
 
-                    
+>>>>>>> origin/master
                     if (txtCookTime.Text == "")
                         txtCookTime.Text = "-1";
                     else if (txtCookTime.Text != intCookTime.ToString())
@@ -133,12 +136,22 @@ namespace GradeACatering
                         //if different, update from ingredient list
                     //if item in fs's list is not in ingredient list, remove it
 
-                    foreach (ListViewItem lvi in lsvIngredients.Items)
+<<<<<<< HEAD
+                   // FoodStuff newFS = new FoodStuff(fstoUpdate.ID, txtName.Text, txtDirections.Text,
+                   //                               Convert.ToInt32(txtPrepTime.Text), Convert.ToInt32(txtCookTime.Text), Convert.ToDouble(txtPriceSold.Text),
+                   //                             Convert.ToInt32(txtServingSize.Text), newTags);
+                    List<Recipe> newItemIngredients = new List<Recipe>();
+                    if (lsvIngredients.Items.Count == 0)
                     {
-                        
-                        //look in the database to see if the ingredient in question already exists
-                        FoodStuff foundfs = DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].Text)[0];
-                        string newIngrID = foundfs.ID;//in theory only one match if the name fits...
+                        //Not sure if this will need to change for updating...We only need the new ingredients
+                     //   newItemIngredients.Add(new Recipe(fstoUpdate.ID, fstoUpdate.ID));
+                    }
+                    else
+=======
+                    foreach (ListViewItem lvi in lsvIngredients.Items)
+>>>>>>> origin/master
+                    {
+                        string newIngrID = DataConnection.FindFoodstuffsNamed(lvi.SubItems[2].ToString())[0].ID;//in theory only one match if the name fits...
 
                         if (newIngrID == "") //item wasn't found, must be new
                         {
@@ -151,20 +164,13 @@ namespace GradeACatering
                             //now add the new recipe as its own foodstuff
                             DataConnection.AddFoodStuff(new FoodStuff(newIngrID, lvi.SubItems[2].Text));
                         }
-                        else  //found a matching existing ingredient in Foodstuffs
-                        {   
-                            //determine if the item does or doesn't exist in the ingredient list 
-                         
-                            Recipe recTestForExists;
-                            bool matchFound = false;
+                        else  //found a match
+                        {   //look to see if the values are the same
                             foreach (Recipe existing_r in fstoUpdate.ReturnIngredientsList())
                             {
-                                recTestForExists = existing_r;
                                 //make sure the existing and item to update are the same
                                 if (existing_r.MadeOf == newIngrID)
-                                {   
-                                    //matchFound = true;
-                                    //look to see if the values are the same
+                                {
                                     //compare quantity first
                                     if (existing_r.FractionAmount() != lvi.SubItems[0].Text) //quants are different
                                         fstoUpdate.UpdateIngredientQuantity(existing_r.MadeOf, lvi.SubItems[0].Text);//replace with new one
@@ -172,14 +178,10 @@ namespace GradeACatering
                                     //now compare unit
                                     if (existing_r.Unit != lvi.SubItems[1].Text) //units are different
                                         fstoUpdate.UpdateIngredientUnit(existing_r.MadeOf, lvi.SubItems[1].Text);//replace with new one
-                                } 
-                             //  if(!matchFound)
-                                    fstoUpdate.RemoveIngredient(recTestForExists);
+                                }
+                                else //item in fs's list isn't in ingredient list, so remove it
+                                    fstoUpdate.RemoveIngredient(existing_r);
                             }
-                            
-                           
-                            //item in fs's list isn't in ingredient list, so remove it
-                            
                         }
                     }
 
@@ -207,8 +209,13 @@ namespace GradeACatering
                     //         FoodStuff fsPlaceholder = new FoodStuff(newPHID, lvi.SubItems[0].Text);
                     //         DataConnection.AddFoodStuff(fsPlaceholder, new Recipe(newPHID, newPHID));
                  
+<<<<<<< HEAD
+                           //  newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
+	                    }
+=======
                     //         newItemIngredients.Add(new Recipe(newFS.ID, newPHID, lvi.SubItems[1].Text, lvi.SubItems[2].Text));
                     //    }
+>>>>>>> origin/master
                         
                     //}
 	
@@ -230,11 +237,6 @@ namespace GradeACatering
                     btnAddIng.Enabled = false;
                     btnEditIng.Enabled = false;
                     btnDeleteIng.Enabled = false;
-                    btnAddToTagList.Enabled = false;
-                    btnRemoveSelectedTag.Enabled = false;
-                    txtDirections.ReadOnly = true;
-                    lblMessage.Text = "Data edit saved";
-                    timer1.Start();
                 }
             }
            
@@ -310,27 +312,21 @@ namespace GradeACatering
 
         private void btnAddToTagList_Click(object sender, EventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(txtTags.Text, @"^\s*$"))
-                lbxTags.Items.Add(txtTags.Text);
-
-            txtTags.Text = "";
-            txtTags.Focus();
+            lbxTags.Items.Add(txtTags.Text);
         }
 
         private void btnRemoveSelectedTag_Click(object sender, EventArgs e)
         {
-            if (lbxTags.SelectedIndices.Count > 0)
+            for (int x = lbxTags.SelectedIndices.Count - 1; x >= 0; x--)
             {
-                for (int index = lbxTags.SelectedIndices.Count - 1; index >= 0; index--)
-                {
-                    lbxTags.Items.RemoveAt(lbxTags.SelectedIndices[index]);
-                }
-            }
+                int idx = lbxTags.SelectedIndices[x];
+                lbxTags.Items.RemoveAt(idx);
+            } 
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "* Print Feature Coming Soon";
+            lblComingSoon.Visible = true;
         }
 
         private void lsvIngredients_SelectedIndexChanged(object sender, EventArgs e)
@@ -363,12 +359,6 @@ namespace GradeACatering
         private void frmDisplayRecipe_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblMessage.Text = "";
-            timer1.Stop();
         }
         //Another Hunter Epic Fail... All I wanted to do was Loop throught the textboxes and Make them Readonly like the VB version
         /*

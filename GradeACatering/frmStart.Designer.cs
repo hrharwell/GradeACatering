@@ -70,7 +70,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(660, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(551, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +91,7 @@
             // fullScreenToolStripMenuItem
             // 
             this.fullScreenToolStripMenuItem.Name = "fullScreenToolStripMenuItem";
-            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fullScreenToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.fullScreenToolStripMenuItem.Text = "Full Screen";
             // 
             // helpToolStripMenuItem
@@ -125,14 +125,14 @@
             this.groupBox1.Controls.Add(this.btnSearchfrm);
             this.groupBox1.Location = new System.Drawing.Point(41, 86);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(337, 193);
+            this.groupBox1.Size = new System.Drawing.Size(453, 114);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recipes";
             // 
             // btnSeeAllRecipes
             // 
-            this.btnSeeAllRecipes.Location = new System.Drawing.Point(25, 109);
+            this.btnSeeAllRecipes.Location = new System.Drawing.Point(305, 31);
             this.btnSeeAllRecipes.Name = "btnSeeAllRecipes";
             this.btnSeeAllRecipes.Size = new System.Drawing.Size(124, 51);
             this.btnSeeAllRecipes.TabIndex = 4;
@@ -142,7 +142,7 @@
             // 
             // btnNewRecipe
             // 
-            this.btnNewRecipe.Location = new System.Drawing.Point(179, 31);
+            this.btnNewRecipe.Location = new System.Drawing.Point(165, 31);
             this.btnNewRecipe.Name = "btnNewRecipe";
             this.btnNewRecipe.Size = new System.Drawing.Size(124, 51);
             this.btnNewRecipe.TabIndex = 3;
@@ -155,9 +155,9 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.btnNewMeal);
             this.groupBox2.Controls.Add(this.btnMealOrders);
-            this.groupBox2.Location = new System.Drawing.Point(41, 285);
+            this.groupBox2.Location = new System.Drawing.Point(41, 300);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(337, 100);
+            this.groupBox2.Size = new System.Drawing.Size(314, 100);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Meals";
@@ -204,16 +204,16 @@
             // 
             this.groupBox3.Controls.Add(this.bbtnShowAllIngredient);
             this.groupBox3.Controls.Add(this.btnAddIngr);
-            this.groupBox3.Location = new System.Drawing.Point(422, 92);
+            this.groupBox3.Location = new System.Drawing.Point(41, 206);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(161, 187);
+            this.groupBox3.Size = new System.Drawing.Size(285, 88);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ingredients";
             // 
             // bbtnShowAllIngredient
             // 
-            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(18, 103);
+            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(148, 26);
             this.bbtnShowAllIngredient.Name = "bbtnShowAllIngredient";
             this.bbtnShowAllIngredient.Size = new System.Drawing.Size(124, 51);
             this.bbtnShowAllIngredient.TabIndex = 3;
@@ -235,7 +235,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 487);
+            this.ClientSize = new System.Drawing.Size(551, 487);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnTestfrm);
             this.Controls.Add(this.groupBox2);

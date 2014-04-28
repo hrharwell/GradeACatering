@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnEditRecipe = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,7 +67,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblComingSoon = new System.Windows.Forms.Label();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -162,6 +163,7 @@
             this.txtDirections.Location = new System.Drawing.Point(18, 19);
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
+            this.txtDirections.ReadOnly = true;
             this.txtDirections.Size = new System.Drawing.Size(213, 249);
             this.txtDirections.TabIndex = 0;
             // 
@@ -187,7 +189,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label6);
@@ -204,16 +205,6 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Made of Ingredients";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(176, 191);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Define Item";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -265,9 +256,9 @@
             // btnEditIng
             // 
             this.btnEditIng.Enabled = false;
-            this.btnEditIng.Location = new System.Drawing.Point(60, 191);
+            this.btnEditIng.Location = new System.Drawing.Point(97, 191);
             this.btnEditIng.Name = "btnEditIng";
-            this.btnEditIng.Size = new System.Drawing.Size(45, 23);
+            this.btnEditIng.Size = new System.Drawing.Size(72, 23);
             this.btnEditIng.TabIndex = 4;
             this.btnEditIng.Text = "Edit";
             this.btnEditIng.UseVisualStyleBackColor = true;
@@ -285,9 +276,9 @@
             // btnDeleteIng
             // 
             this.btnDeleteIng.Enabled = false;
-            this.btnDeleteIng.Location = new System.Drawing.Point(111, 191);
+            this.btnDeleteIng.Location = new System.Drawing.Point(178, 191);
             this.btnDeleteIng.Name = "btnDeleteIng";
-            this.btnDeleteIng.Size = new System.Drawing.Size(46, 23);
+            this.btnDeleteIng.Size = new System.Drawing.Size(73, 23);
             this.btnDeleteIng.TabIndex = 5;
             this.btnDeleteIng.Text = "Delete";
             this.btnDeleteIng.UseVisualStyleBackColor = true;
@@ -298,7 +289,7 @@
             this.btnAddIng.Enabled = false;
             this.btnAddIng.Location = new System.Drawing.Point(18, 191);
             this.btnAddIng.Name = "btnAddIng";
-            this.btnAddIng.Size = new System.Drawing.Size(36, 23);
+            this.btnAddIng.Size = new System.Drawing.Size(70, 23);
             this.btnAddIng.TabIndex = 3;
             this.btnAddIng.Text = "Add";
             this.btnAddIng.UseVisualStyleBackColor = true;
@@ -459,22 +450,25 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID Number";
             // 
-            // lblComingSoon
+            // lblMessage
             // 
-            this.lblComingSoon.AutoSize = true;
-            this.lblComingSoon.Location = new System.Drawing.Point(32, 392);
-            this.lblComingSoon.Name = "lblComingSoon";
-            this.lblComingSoon.Size = new System.Drawing.Size(140, 13);
-            this.lblComingSoon.TabIndex = 30;
-            this.lblComingSoon.Text = "* Print Feature Coming Soon";
-            this.lblComingSoon.Visible = false;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(32, 392);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(140, 13);
+            this.lblMessage.TabIndex = 30;
+            this.lblMessage.Text = "* Print Feature Coming Soon";
+            this.lblMessage.Visible = false;
             // 
+            // timer1
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // frmDisplayRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 538);
-            this.Controls.Add(this.lblComingSoon);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -523,7 +517,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
@@ -538,8 +531,9 @@
         private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lblComingSoon;
+        private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }

@@ -32,12 +32,12 @@
             this.lsvRecipes = new System.Windows.Forms.ListView();
             this.lsvMealItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnSaveList = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.ColQty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -58,25 +58,25 @@
             this.lsvRecipes.TabIndex = 1;
             this.lsvRecipes.UseCompatibleStateImageBehavior = false;
             this.lsvRecipes.View = System.Windows.Forms.View.List;
+            this.lsvRecipes.SelectedIndexChanged += new System.EventHandler(this.lsvRecipes_SelectedIndexChanged);
             // 
             // lsvMealItems
             // 
             this.lsvMealItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.ColQty});
+            this.lsvMealItems.FullRowSelect = true;
             this.lsvMealItems.Location = new System.Drawing.Point(406, 56);
             this.lsvMealItems.Name = "lsvMealItems";
             this.lsvMealItems.Size = new System.Drawing.Size(224, 252);
             this.lsvMealItems.TabIndex = 2;
             this.lsvMealItems.UseCompatibleStateImageBehavior = false;
+            this.lsvMealItems.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Qty";
+            this.columnHeader1.Width = 158;
             // 
             // btnAdd
             // 
@@ -127,6 +127,10 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // ColQty
+            // 
+            this.ColQty.Text = "Qty";
+            // 
             // frmMealCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,11 +158,11 @@
         private System.Windows.Forms.ListView lsvRecipes;
         private System.Windows.Forms.ListView lsvMealItems;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnSaveList;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ColumnHeader ColQty;
     }
 }
