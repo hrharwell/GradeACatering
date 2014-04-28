@@ -55,6 +55,7 @@
             this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblID = new System.Windows.Forms.Label();
             this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCookTime = new System.Windows.Forms.TextBox();
@@ -67,7 +68,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblComingSoon = new System.Windows.Forms.Label();
-            this.lblID = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,6 +100,7 @@
             // 
             // btnRemoveSelectedTag
             // 
+            this.btnRemoveSelectedTag.Enabled = false;
             this.btnRemoveSelectedTag.Location = new System.Drawing.Point(235, 121);
             this.btnRemoveSelectedTag.Name = "btnRemoveSelectedTag";
             this.btnRemoveSelectedTag.Size = new System.Drawing.Size(59, 34);
@@ -110,6 +111,7 @@
             // 
             // btnAddToTagList
             // 
+            this.btnAddToTagList.Enabled = false;
             this.btnAddToTagList.Location = new System.Drawing.Point(163, 32);
             this.btnAddToTagList.Name = "btnAddToTagList";
             this.btnAddToTagList.Size = new System.Drawing.Size(62, 23);
@@ -120,6 +122,7 @@
             // 
             // txtTags
             // 
+            this.txtTags.Enabled = false;
             this.txtTags.Location = new System.Drawing.Point(18, 34);
             this.txtTags.Name = "txtTags";
             this.txtTags.Size = new System.Drawing.Size(139, 20);
@@ -127,6 +130,7 @@
             // 
             // lbxTags
             // 
+            this.lbxTags.Enabled = false;
             this.lbxTags.FormattingEnabled = true;
             this.lbxTags.Location = new System.Drawing.Point(18, 60);
             this.lbxTags.Name = "lbxTags";
@@ -154,6 +158,7 @@
             // 
             // txtDirections
             // 
+            this.txtDirections.Enabled = false;
             this.txtDirections.Location = new System.Drawing.Point(18, 19);
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
@@ -272,7 +277,7 @@
             // 
             this.cboIng.Enabled = false;
             this.cboIng.FormattingEnabled = true;
-            this.cboIng.Location = new System.Drawing.Point(133, 247);
+            this.cboIng.Location = new System.Drawing.Point(132, 248);
             this.cboIng.Name = "cboIng";
             this.cboIng.Size = new System.Drawing.Size(121, 21);
             this.cboIng.TabIndex = 2;
@@ -305,6 +310,7 @@
             this.colQty,
             this.colUnit,
             this.colName});
+            this.lsvIngredients.Enabled = false;
             this.lsvIngredients.FullRowSelect = true;
             this.lsvIngredients.Location = new System.Drawing.Point(18, 19);
             this.lsvIngredients.Name = "lsvIngredients";
@@ -349,6 +355,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Info";
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(70, 16);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(28, 13);
+            this.lblID.TabIndex = 10;
+            this.lblID.Text = "lblID";
             // 
             // txtServingSize
             // 
@@ -453,15 +468,6 @@
             this.lblComingSoon.TabIndex = 30;
             this.lblComingSoon.Text = "* Print Feature Coming Soon";
             this.lblComingSoon.Visible = false;
-            // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(70, 16);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(28, 13);
-            this.lblID.TabIndex = 10;
-            this.lblID.Text = "lblID";
             // 
             // frmDisplayRecipe
             // 

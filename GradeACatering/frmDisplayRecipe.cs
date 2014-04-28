@@ -71,6 +71,11 @@ namespace GradeACatering
             btnAddIng.Enabled = true;
             btnEditIng.Enabled = true;
             btnDeleteIng.Enabled = true;
+            lsvIngredients.Enabled = true;
+            txtTags.Enabled = true;
+            btnAddToTagList.Enabled = true;
+            btnRemoveSelectedTag.Enabled = true;
+            lbxTags.Enabled = true;
             btnEditRecipe.Text = "Save";
   
             }
@@ -151,6 +156,7 @@ namespace GradeACatering
                             //determine if the item does or doesn't exist in the ingredient list 
                          
                             Recipe recTestForExists;
+                            bool matchFound = false;
                             foreach (Recipe existing_r in fstoUpdate.ReturnIngredientsList())
                             {
                                 recTestForExists = existing_r;
