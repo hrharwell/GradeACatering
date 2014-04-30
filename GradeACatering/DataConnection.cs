@@ -23,6 +23,7 @@ namespace GradeACatering
         // Function to call the CompactRepair method on the database.
         // See: http://www.codeproject.com/Articles/7775/Compact-and-Repair-Access-Database-using-C-and-lat
 
+        private static int intMaintenanceCounter; //load this from the settings file? utility table?  registry? (ack!)
        
         private static string connstr= "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
                                        "Data Source = GradeACatering.accdb;"; //defaults, we can make these changeable later if needed, looks in root directory currently.
@@ -38,9 +39,22 @@ namespace GradeACatering
         private static void CloseConnection()
         {
             if (conn.State != System.Data.ConnectionState.Open)
+            {
                 conn.Close();
+                IncrementMaintenanceCounter();
+            }
         }
-        
+
+        private static void IncrementMaintenanceCounter()
+        {
+            if (++intMaintenanceCounter == 100)
+            {
+                intMaintenanceCounter = 0;
+
+            }
+            
+        }
+
         //functions to read from, update in, and add to the database
 
         //

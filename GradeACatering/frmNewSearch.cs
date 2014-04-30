@@ -28,7 +28,10 @@ namespace GradeACatering
         ArrayList lstDynCBOs = new ArrayList();
 
         string[] strFilterTypes = { "Name", "Tag", "Serving Size", "Price Per Serving" };
-
+        string[] strNumericCompare = { ">", "≥", "=", "≤", "<" };
+        string[] strNumericCompareNoUnicode = { ">", ">=", "=", "<=", "<" };
+        string[] strNumericCompareWords = { "greater than", "greater than or equal to","equal to","less than or equal to","less than" };
+        
         private void btnDelFilter_Click(object sender, EventArgs e)
         {
             if (panel1.Controls.Count > 0)
@@ -41,7 +44,6 @@ namespace GradeACatering
         private void btnAddFilter_Click(object sender, EventArgs e)
         {
             var dynPanel = new Panel();
-
 
             dynPanel.AutoSize = false;
             dynPanel.Name = "pnl ";  
@@ -71,11 +73,7 @@ namespace GradeACatering
             py += dynPanelVerticalSpace; 
             
             //Then Chose Type of filter
-
-
-
            
-
         }
 
         private void cboType_changed(object sender, EventArgs e)
