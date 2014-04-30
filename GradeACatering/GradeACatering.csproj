@@ -105,6 +105,7 @@
     <Compile Include="Conversions.cs" />
     <Compile Include="DataConnection.cs" />
     <Compile Include="DecimalToString.cs" />
+    <Compile Include="FilteringElement.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

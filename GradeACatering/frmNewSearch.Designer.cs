@@ -31,15 +31,16 @@
             this.btnDelFilter = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.lsvSearch = new System.Windows.Forms.ListView();
-            this.btnAddFilter = new System.Windows.Forms.Button();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAddFilter = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDelFilter
@@ -68,16 +69,42 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader6});
             this.lsvSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvSearch.FullRowSelect = true;
             this.lsvSearch.Location = new System.Drawing.Point(255, 26);
             this.lsvSearch.Name = "lsvSearch";
-            this.lsvSearch.Size = new System.Drawing.Size(578, 398);
+            this.lsvSearch.Size = new System.Drawing.Size(654, 398);
             this.lsvSearch.TabIndex = 4;
             this.lsvSearch.UseCompatibleStateImageBehavior = false;
             this.lsvSearch.View = System.Windows.Forms.View.Details;
             this.lsvSearch.SelectedIndexChanged += new System.EventHandler(this.lsvSearch_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 150;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Serving Size";
+            this.columnHeader2.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Price";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Price/Serving";
+            this.columnHeader4.Width = 120;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Prep Time";
+            this.columnHeader5.Width = 100;
             // 
             // btnAddFilter
             // 
@@ -85,7 +112,7 @@
             this.btnAddFilter.Name = "btnAddFilter";
             this.btnAddFilter.Size = new System.Drawing.Size(75, 23);
             this.btnAddFilter.TabIndex = 8;
-            this.btnAddFilter.Text = "Add Another";
+            this.btnAddFilter.Text = "Add Filter";
             this.btnAddFilter.UseVisualStyleBackColor = true;
             this.btnAddFilter.Click += new System.EventHandler(this.btnAddFilter_Click);
             // 
@@ -108,46 +135,27 @@
             this.button1.Text = "Return";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // columnHeader6
             // 
-            this.button2.Location = new System.Drawing.Point(93, 416);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Clear Filters";
-            this.button2.UseVisualStyleBackColor = true;
+            this.columnHeader6.Text = "Cook Time";
+            this.columnHeader6.Width = 100;
             // 
-            // columnHeader1
+            // btnClear
             // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 150;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Serving Size";
-            this.columnHeader2.Width = 100;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Cost/Serving";
-            this.columnHeader3.Width = 120;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Prep Time";
-            this.columnHeader4.Width = 100;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Cook Time";
-            this.columnHeader5.Width = 100;
+            this.btnClear.Location = new System.Drawing.Point(93, 416);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 30);
+            this.btnClear.TabIndex = 14;
+            this.btnClear.Text = "Clear Filters";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // frmNewSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 458);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(921, 458);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnAddFilter);
@@ -169,11 +177,12 @@
         private System.Windows.Forms.Button btnAddFilter;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button btnClear;
     }
 }
