@@ -40,14 +40,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label2 = new System.Windows.Forms.Label();
-            this.cboComparison = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.rdoPnlNumericOr = new System.Windows.Forms.RadioButton();
-            this.rdoPnlNumericAnd = new System.Windows.Forms.RadioButton();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.pnlDynSearchText.SuspendLayout();
-            this.pnlDynSearchNumeric.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDelFilter
@@ -165,9 +157,6 @@
             this.Name = "frmNewSearch";
             this.Text = "frmNewSearch";
             this.Load += new System.EventHandler(this.frmNewSearch_Load);
-            this.pnlDynSearchText.PerformLayout();
-            this.pnlDynSearchNumeric.ResumeLayout(false);
-            this.pnlDynSearchNumeric.PerformLayout();
             this.ResumeLayout(false);
 
         }
