@@ -25,7 +25,7 @@ private static int dynPanelHeight = 85;
 private static int dynPanelWidth = 170;
 private static int dynPanelVerticalSpace = dynPanelHeight + 6;
 private List<FoodStuff> fsMasterlist;
-
+private List<FoodStuff> fsFilteredlist; //Needs to have stuff added that meets criteria 
 List<ComboBox> lstDynCBOs = new List<ComboBox>();
 List<Button> lstDynAndOrBtns = new List<Button>();
 
@@ -278,6 +278,22 @@ if (intNumOfPnls > 1)
                                  ctrl.Text = strCompare;
                                  }
                             FilteringElement Filter = new FilteringElement(lstDynCBOs[i].Text,txtValue,strAndOR,strCompare);
+                            foreach (FoodStuff fs in fsFilteredlist)
+                            {
+                                //if (/*Passes filter rule.*/)
+                                //{
+                                //    //Then adds the items returned to listview
+                                //      ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+                                //lsvItem.SubItems.Add(fs.Servings.ToString());
+                                //lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+                                //lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
+                                //lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+                                //lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                                //lsvItem.SubItems.Add(fs.ID.ToString());
+                                //lsvSearch.Items.Add(lsvItem);
+                                //}
+                              
+                            }
                             }
 
                     }
@@ -404,6 +420,7 @@ lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
 lsvItem.SubItems.Add(fs.ID.ToString());
 lsvSearch.Items.Add(lsvItem);
 }
+py = 3;
          
 }
 
@@ -427,6 +444,11 @@ lsvItem.SubItems.Add(fs.ID.ToString());
 lsvSearch.Items.Add(lsvItem);
 }
          
+}
+
+private void button1_Click(object sender, EventArgs e)
+{
+    ActiveForm.Close();
 }
 
       
