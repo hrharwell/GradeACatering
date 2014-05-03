@@ -18,12 +18,16 @@ namespace GradeACatering
         {
             InitializeComponent();
         }
+        private enum FilterType { Name, Tag, NumServings, PricePerServing }//and so on, can add more of these.
+        //these correspond to the selectedindex of the filter type combo boxes in the dynamic panels
+
 
         private static int px = 3;
         private static int py = 3;
         private static int dynPanelHeight = 85;
         private static int dynPanelWidth = 170;
         private static int dynPanelVerticalSpace = dynPanelHeight + 6;
+
         private List<FoodStuff> fsMasterlist;
         private List<FoodStuff> fsFilteredlist; //Needs to have stuff added that meets criteria 
         List<ComboBox> lstDynCBOs = new List<ComboBox>();
@@ -31,6 +35,8 @@ namespace GradeACatering
 
         string[] strFilterTypes = { "Name", "Tag", "Serving Size", "Price Per Serving" };
         string[] strCboOperators = { "<", "<=", "=", "=>", ">", "<>" };
+        string[] strNumericCompareNoUnicode = { ">", ">=", "=", "<=", "<" };
+        string[] strNumericCompareWords = { "greater than", "greater than or equal to", "equal to", "less than or equal to", "less than" };
 
 
         private void btnDelFilter_Click(object sender, EventArgs e)
@@ -92,67 +98,6 @@ namespace GradeACatering
         private void btnAddFilter_Click(object sender, EventArgs e)
         {
             pnlMain.Controls.Add(NewSearchPanel());
-
-            //var dynPanel = new Panel();
-
-
-            //dynPanel.AutoSize = false;
-            //dynPanel.Name = "pnl ";  
-            //dynPanel.Size = new System.Drawing.Size(dynPanelWidth, dynPanelHeight);
-            //dynPanel.BorderStyle = BorderStyle.FixedSingle;
-            //dynPanel.Location = new Point(px, py);
-
-            //CheckBox chk = new CheckBox();
-            //chk.Text = "And";
-            //chk.AutoSize = false;
-            //chk.Appearance = Appearance.Button;
-            //chk.Size = new System.Drawing.Size(36, 23);
-            //chk.Location = new Point(3, 3);
-            //chk.TextAlign = ContentAlignment.TopCenter;
-            //dynPanel.Controls.Add(chk);
-
-            //==================Changing Location==================//
-            //======Needs to be added if there is more than one====//
-            //Button btn = new Button();
-            //btn.Text = "And";
-            //btn.AutoSize = false;
-            //btn.Size = new System.Drawing.Size(36, 23);
-            //btn.Location = new Point(3, 3);
-            //btn.TextAlign = ContentAlignment.TopCenter;
-            //btn.Click += new System.EventHandler(this.btn_Click);
-            //dynPanel.Controls.Add(btn);
-            //lstDynAndOrBtns.Add(btn);
-            //=====================================================//
-
-
-            //Label lblType = new Label();
-            //lblType.Text = "Filter Type:";
-            //lblType.Location = new Point(80, 7);
-
-            //ComboBox cboType = new ComboBox();
-            //cboType.Size = new System.Drawing.Size(160, 20);
-            //cboType.Location = new Point(6, 30);
-            //cboType.DropDownStyle = ComboBoxStyle.DropDownList;
-            //cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_changed);
-
-            //cboType.Items.AddRange(strFilterTypes);
-
-
-
-            //dynPanel.Controls.Add(lblType);
-            //dynPanel.Controls.Add(cboType);
-            //lstDynCBOs.Add(cboType);
-
-            //// Adds new Generated Filter
-            //pnlMain.Controls.Add(dynPanel);
-            //py += dynPanelVerticalSpace; 
-
-            ////Then Chose Type of filter
-
-
-
-
-
         }
         private void btn_Click(object sender, EventArgs e)
         {
@@ -170,69 +115,85 @@ namespace GradeACatering
 
         private void cboType_changed(object sender, EventArgs e)
         {
-            ComboBox cboType = (ComboBox)sender;
-            Panel dynPanel = (Panel)cboType.Parent;
-            for (int i = dynPanel.Controls.Count - 1; i > 3; i--)
+            try
             {
-                dynPanel.Controls.RemoveAt(i);
+                ComboBox cboType = (ComboBox)sender;
+                Panel dynPanel = (Panel)cboType.Parent;
+
+                int ClearStop;
+                if (pnlMain.Controls.IndexOf(dynPanel) == 0)
+                    ClearStop = 2;
+                else
+                    ClearStop = 3;
+
+                for (int i = dynPanel.Controls.Count - 1; i >= ClearStop; i--)
+                {
+                    dynPanel.Controls.RemoveAt(i);
+                }
+
+                if (cboType.SelectedIndex == 0)
+                {   //Name filter
+                    TextBox tb = new TextBox();
+                    tb.Name = "txtName";
+                    tb.Location = new Point(3, 60);
+                    tb.Size = new System.Drawing.Size(160, 20);
+
+                    dynPanel.Controls.Add(tb);
+
+                }
+                else if (cboType.SelectedIndex == 1)
+                {
+                    //Tag filter
+                    TextBox tb = new TextBox();
+                    tb.Name = "txtTag";
+                    tb.Location = new Point(3, 60);
+                    tb.Size = new System.Drawing.Size(160, 20);
+
+                    dynPanel.Controls.Add(tb);
+
+                }
+                else if (cboType.SelectedIndex == 2)
+                {
+                    //number of servings
+                    ComboBox cbo = new ComboBox();
+                    cbo.Name = "cboComparators";
+                    cbo.Size = new System.Drawing.Size(70, 20);
+                    cbo.Location = new Point(3, 60);
+                    cbo.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbo.Items.AddRange(strCboOperators);
+
+                    TextBox tb = new TextBox();
+                    tb.Name = "txtServSize";
+                    tb.Location = new Point(80, 60);
+                    tb.Size = new System.Drawing.Size(80, 20);
+
+                    dynPanel.Controls.Add(cbo);
+                    dynPanel.Controls.Add(tb);
+
+                }
+                else if (cboType.SelectedIndex == 3)
+                {
+                    //price per serving
+                    ComboBox cbo = new ComboBox();
+                    cbo.Name = "cboPrice";
+                    cbo.Size = new System.Drawing.Size(70, 20);
+                    cbo.Location = new Point(3, 60);
+                    cbo.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbo.Items.AddRange(strCboOperators);
+                    cbo.Tag = "Compare";
+
+                    TextBox tb = new TextBox();
+                    tb.Name = "txtPrice";
+                    tb.Size = new System.Drawing.Size(80, 20);
+                    tb.Location = new Point(80, 60);
+
+                    dynPanel.Controls.Add(tb);
+                    dynPanel.Controls.Add(cbo);
+                }
             }
-
-            if (cboType.SelectedIndex == 0)
+            catch (Exception ex)
             {
-
-                TextBox tb = new TextBox();
-                tb.Name = "txtName";
-                tb.Location = new Point(3, 60);
-                tb.Size = new System.Drawing.Size(160, 20);
-
-
-                dynPanel.Controls.Add(tb);
-
-            }
-            else if (cboType.SelectedIndex == 1)
-            {
-
-                TextBox tb = new TextBox();
-                tb.Name = "txtTag";
-                tb.Size = new System.Drawing.Size(160, 20);
-                tb.Location = new Point(3, 60);
-                dynPanel.Controls.Add(tb);
-
-            }
-            else if (cboType.SelectedIndex == 2)
-            {
-
-                ComboBox cbo = new ComboBox();
-                cbo.Name = "cboServSize";
-                cbo.Size = new System.Drawing.Size(70, 20);
-                cbo.Location = new Point(3, 60);
-                cbo.DropDownStyle = ComboBoxStyle.DropDownList;
-                cbo.Items.AddRange(strCboOperators);
-                dynPanel.Controls.Add(cbo);
-
-                TextBox tb = new TextBox();
-                tb.Name = "txtServSize";
-                tb.Size = new System.Drawing.Size(80, 20);
-                tb.Location = new Point(80, 60);
-                dynPanel.Controls.Add(tb);
-
-            }
-            else if (cboType.SelectedIndex == 3)
-            {
-                ComboBox cboCompare = new ComboBox();
-                cboCompare.Name = "cboPrice";
-                cboCompare.Size = new System.Drawing.Size(70, 20);
-                cboCompare.Location = new Point(3, 60);
-                cboCompare.DropDownStyle = ComboBoxStyle.DropDownList;
-                cboCompare.Items.AddRange(strCboOperators);
-                cboCompare.Tag = "Compare";
-                cboCompare.Controls.Add(cboCompare);
-
-                TextBox tb = new TextBox();
-                tb.Name = "txtPrice";
-                tb.Size = new System.Drawing.Size(80, 20);
-                tb.Location = new Point(80, 60);
-                dynPanel.Controls.Add(tb);
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -242,77 +203,182 @@ namespace GradeACatering
             // Ex. if 0 do the name search if 1 do the tag search etc.
             //Need list of things we are searching for...
 
-            lsvSearch.Items.Clear();// Clear Unfiltered list
-
-
-            //===============================================================================================
-            // Hunter - It's late and I have now clue what i'm doing...Little Looping IF you know what I mean
-            // 4/30/2014 : 1:10 AM
-            //===============================================================================================
-
-
-            Int32 intNumOfPnls = pnlMain.Controls.Count;
-            if (intNumOfPnls > 1)
+            
+            if (pnlMain.Controls.Count > 0)
             {
-                for (int i = 0; i < lstDynCBOs.Count; i++)
+                for (int i = 0; i < lstDynCBOs.Count - 1; i++)
                 {
-                    if (lstDynCBOs[i].SelectedIndex == 0)
+                    Panel dyn = (Panel)pnlMain.Controls[i];//ugly hack, if anything but panels are in pnlMain this WILL EXPLODE...
+                    string txtAndOr = "";
+                    foreach (Control ctrl in dyn.Controls)
+                        if (ctrl is Button)
+                            txtAndOr = ctrl.Text.ToUpper();
+
+                    if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Name)
                     {
-                        foreach (Control ctrl in pnlMain.Controls[i].Controls)
+                        //is it the first item in the panel list?  won't have an and/or toggle, so always match it
+                        if (i == 0||txtAndOr.Contains("AND")) //or button is and...
                         {
+                            //get contents of text box in dynamic panel
+                            //but need the dynamic panel itself...
                             
+                            //now loop thru to find textbox
+                            foreach (Control ctrl in dyn.Controls)
+                            {
+                                if (ctrl is TextBox)
+                                {
+                                    foreach (FoodStuff fs in fsMasterlist)
+                                    {
+                                        if(fs.Name.Contains(ctrl.Text))
+                                            fsFilteredlist.Add(fs);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //if button is or
+                            
+                        
+                        }
+                    }
+                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Tag)
 
-                            //string txtValue = "";
-                            //string strCompare = "LIKE";
-                            //string strAndOR = "AND";
 
+                    }
+                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.NumServings)
+                    {
 
-                            //if (ctrl is Button)
-                            //{
-                            //    ctrl.Text = strAndOR;
-                            //}
-                            //else if (ctrl is TextBox)
-                            //{
-                            //    txtValue = ctrl.Text;
-                            //}
-                            //else if (ctrl is ComboBox)
-                            //{
-                            //    if (ctrl.Tag == "Compare")
-                            //    {
-                            //        ctrl.Text = strCompare;
-                            //    }
-                            //    FilteringElement Filter = new FilteringElement(lstDynCBOs[i].Text, txtValue, strAndOR, strCompare);
-                            //    foreach (FoodStuff fs in fsMasterlist)
-                            //    {
-                            //        if (fs.Name == txtValue)
-                            //        {
-                            //          ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
-                            //          lsvItem.SubItems.Add(fs.Servings.ToString());
-                            //          lsvItem.SubItems.Add(fs.Cost.ToString("C"));
-                            //          lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
-                            //          lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
-                            //          lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
-                            //          lsvItem.SubItems.Add(fs.ID.ToString());
-                            //          lsvSearch.Items.Add(lsvItem);
-                            //        }
+                    }
+                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.PricePerServing)
+                    {
+
+                    }
+                    //append additional filters here
+                    else
+                    {
+                        fsFilteredlist = fsMasterlist;
+                    }
+                    lsvSearch.Items.Clear();// Clear Unfiltered list
+                    PopulateListView(fsFilteredlist);
+                }
+            }
+        }
+
+        private void frmNewSearch_Load(object sender, EventArgs e)
+        {
+            fsMasterlist = DataConnection.ListAllFoodstuffs();
+            PopulateListView(fsMasterlist);
+            py = 3;
                             //        //if (/*Passes filter rule.*/)
                             //        //{
                             //        //    //Then adds the items returned to listview
                             //        //     
                             //        //}
 
-                            //    }
-                            //}
+        }
 
-                        }
-
-
-                    }
-
-
-                }
-
+        private void PopulateListView(List<FoodStuff> lstFs)
+        {
+            foreach (FoodStuff fs in lstFs)
+            {
+                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+                lsvItem.SubItems.Add(fs.Servings.ToString());
+                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
+                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.ID.ToString());
+                lsvSearch.Items.Add(lsvItem);
             }
+        }
+
+        private void lsvSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lsvSearch.Items.Clear();
+            foreach (FoodStuff fs in fsMasterlist)
+            {
+                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+                lsvItem.SubItems.Add(fs.Servings.ToString());
+                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
+                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+                lsvItem.SubItems.Add(fs.ID.ToString());
+                lsvSearch.Items.Add(lsvItem);
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
+        }
+
+
+    }
+}
+
+//var dynPanel = new Panel();
+
+
+//dynPanel.AutoSize = false;
+//dynPanel.Name = "pnl ";  
+//dynPanel.Size = new System.Drawing.Size(dynPanelWidth, dynPanelHeight);
+//dynPanel.BorderStyle = BorderStyle.FixedSingle;
+//dynPanel.Location = new Point(px, py);
+
+//CheckBox chk = new CheckBox();
+//chk.Text = "And";
+//chk.AutoSize = false;
+//chk.Appearance = Appearance.Button;
+//chk.Size = new System.Drawing.Size(36, 23);
+//chk.Location = new Point(3, 3);
+//chk.TextAlign = ContentAlignment.TopCenter;
+//dynPanel.Controls.Add(chk);
+
+//==================Changing Location==================//
+//======Needs to be added if there is more than one====//
+//Button btn = new Button();
+//btn.Text = "And";
+//btn.AutoSize = false;
+//btn.Size = new System.Drawing.Size(36, 23);
+//btn.Location = new Point(3, 3);
+//btn.TextAlign = ContentAlignment.TopCenter;
+//btn.Click += new System.EventHandler(this.btn_Click);
+//dynPanel.Controls.Add(btn);
+//lstDynAndOrBtns.Add(btn);
+//=====================================================//
+
+
+//Label lblType = new Label();
+//lblType.Text = "Filter Type:";
+//lblType.Location = new Point(80, 7);
+
+//ComboBox cboType = new ComboBox();
+//cboType.Size = new System.Drawing.Size(160, 20);
+//cboType.Location = new Point(6, 30);
+//cboType.DropDownStyle = ComboBoxStyle.DropDownList;
+//cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_changed);
+
+//cboType.Items.AddRange(strFilterTypes);
+
+
+
+//dynPanel.Controls.Add(lblType);
+//dynPanel.Controls.Add(cboType);
+//lstDynCBOs.Add(cboType);
+
+//// Adds new Generated Filter
+//pnlMain.Controls.Add(dynPanel);
+//py += dynPanelVerticalSpace; 
+
+////Then Chose Type of filter
 
 
 
@@ -410,53 +476,4 @@ namespace GradeACatering
 
             //}
 
-        }
 
-        private void frmNewSearch_Load(object sender, EventArgs e)
-        {
-            fsMasterlist = DataConnection.ListAllFoodstuffs();
-            foreach (FoodStuff fs in fsMasterlist)
-            {
-                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
-                lsvItem.SubItems.Add(fs.Servings.ToString());
-                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
-                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
-                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
-                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
-                lsvItem.SubItems.Add(fs.ID.ToString());
-                lsvSearch.Items.Add(lsvItem);
-            }
-            py = 3;
-
-        }
-
-        private void lsvSearch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            lsvSearch.Items.Clear();
-            foreach (FoodStuff fs in fsMasterlist)
-            {
-                ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
-                lsvItem.SubItems.Add(fs.Servings.ToString());
-                lsvItem.SubItems.Add(fs.Cost.ToString("C"));
-                lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
-                lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
-                lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
-                lsvItem.SubItems.Add(fs.ID.ToString());
-                lsvSearch.Items.Add(lsvItem);
-            }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ActiveForm.Close();
-        }
-
-
-    }
-}
