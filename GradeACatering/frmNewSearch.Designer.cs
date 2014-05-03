@@ -36,10 +36,10 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAddFilter = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             this.pnlMain.AutoScroll = true;
             this.pnlMain.Location = new System.Drawing.Point(17, 55);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(200, 355);
+            this.pnlMain.Size = new System.Drawing.Size(200, 434);
             this.pnlMain.TabIndex = 6;
             // 
             // lsvSearch
@@ -75,7 +75,7 @@
             this.lsvSearch.FullRowSelect = true;
             this.lsvSearch.Location = new System.Drawing.Point(255, 26);
             this.lsvSearch.Name = "lsvSearch";
-            this.lsvSearch.Size = new System.Drawing.Size(654, 398);
+            this.lsvSearch.Size = new System.Drawing.Size(654, 486);
             this.lsvSearch.TabIndex = 4;
             this.lsvSearch.UseCompatibleStateImageBehavior = false;
             this.lsvSearch.View = System.Windows.Forms.View.Details;
@@ -106,6 +106,11 @@
             this.columnHeader5.Text = "Prep Time";
             this.columnHeader5.Width = 100;
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Cook Time";
+            this.columnHeader6.Width = 100;
+            // 
             // btnAddFilter
             // 
             this.btnAddFilter.Location = new System.Drawing.Point(17, 26);
@@ -118,7 +123,7 @@
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(174, 416);
+            this.btnApply.Location = new System.Drawing.Point(170, 495);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 30);
             this.btnApply.TabIndex = 9;
@@ -128,21 +133,17 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 416);
+            this.button1.Location = new System.Drawing.Point(8, 495);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 10;
             this.button1.Text = "Return";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Cook Time";
-            this.columnHeader6.Width = 100;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(93, 416);
+            this.btnClear.Location = new System.Drawing.Point(89, 495);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 30);
             this.btnClear.TabIndex = 14;
@@ -154,7 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 458);
+            this.ClientSize = new System.Drawing.Size(921, 537);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnApply);
