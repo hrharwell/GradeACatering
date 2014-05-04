@@ -41,6 +41,7 @@
             this.btnApply = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnAndOr = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDelFilter
@@ -151,11 +152,22 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnAndOr
+            // 
+            this.btnAndOr.Location = new System.Drawing.Point(98, 26);
+            this.btnAndOr.Name = "btnAndOr";
+            this.btnAndOr.Size = new System.Drawing.Size(35, 23);
+            this.btnAndOr.TabIndex = 15;
+            this.btnAndOr.Text = "And";
+            this.btnAndOr.UseVisualStyleBackColor = true;
+            this.btnAndOr.Click += new System.EventHandler(this.btnAndOr_Click);
+            // 
             // frmNewSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 537);
+            this.Controls.Add(this.btnAndOr);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnApply);
@@ -185,5 +197,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnAndOr;
     }
 }

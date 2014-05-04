@@ -21,7 +21,7 @@ namespace GradeACatering
         private enum FilterType { Name, Tag, NumServings, PricePerServing }//and so on, can add more of these.
         //these correspond to the selectedindex of the filter type combo boxes in the dynamic panels
 
-
+        private bool MatchAnything = false;
         private static int px = 3;
         private static int py = 3;
         private static int dynPanelHeight = 85;
@@ -319,6 +319,14 @@ namespace GradeACatering
         private void button1_Click(object sender, EventArgs e)
         {
             ActiveForm.Close();
+        }
+
+        private void btnAndOr_Click(object sender, EventArgs e)
+        {
+            if (MatchAnything)
+                MatchAnything = false;
+            else
+                MatchAnything = true;            
         }
 
 
