@@ -81,6 +81,7 @@
             this.lsvSearch.UseCompatibleStateImageBehavior = false;
             this.lsvSearch.View = System.Windows.Forms.View.Details;
             this.lsvSearch.SelectedIndexChanged += new System.EventHandler(this.lsvSearch_SelectedIndexChanged);
+            this.lsvSearch.DoubleClick += new System.EventHandler(this.lsvSearch_DoubleClick);
             // 
             // columnHeader1
             // 
