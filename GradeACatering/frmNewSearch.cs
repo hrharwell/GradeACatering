@@ -21,7 +21,7 @@ namespace GradeACatering
         private enum FilterType { Name, Tag, NumServings, PricePerServing }//and so on, can add more of these.
         //these correspond to the selectedindex of the filter type combo boxes in the dynamic panels
 
-
+        private bool MatchAnything = false;
         private static int px = 3;
         private static int py = 3;
         private static int dynPanelHeight = 85;
@@ -66,8 +66,10 @@ namespace GradeACatering
                 btn.Location = new Point(3, 3);
                 btn.TextAlign = ContentAlignment.TopCenter;
                 btn.Click += new System.EventHandler(this.btn_Click);
+                btn.Visible = false;
                 dynPanel.Controls.Add(btn);
                 lstDynAndOrBtns.Add(btn);
+
             }
 
             Label lblType = new Label();
@@ -236,12 +238,13 @@ namespace GradeACatering
                         else
                         {
                             //if button is or
-
+                            
                         
                         }
                     }
                     else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Tag)
                     {
+
 
                     }
                     else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.NumServings)
@@ -268,6 +271,11 @@ namespace GradeACatering
             fsMasterlist = DataConnection.ListAllFoodstuffs();
             PopulateListView(fsMasterlist);
             py = 3;
+                            //        //if (/*Passes filter rule.*/)
+                            //        //{
+                            //        //    //Then adds the items returned to listview
+                            //        //     
+                            //        //}
 
         }
 
@@ -311,6 +319,14 @@ namespace GradeACatering
         private void button1_Click(object sender, EventArgs e)
         {
             ActiveForm.Close();
+        }
+
+        private void btnAndOr_Click(object sender, EventArgs e)
+        {
+            if (MatchAnything)
+                MatchAnything = false;
+            else
+                MatchAnything = true;            
         }
 
 
@@ -375,98 +391,98 @@ namespace GradeACatering
 
 
 
-//We have to use and/or button and pieces together a list
+            //We have to use and/or button and pieces together a list
 
 
 
 
 
 
-//if (ctrlP is Panel)
-//{
-//    if (ctrlP = 
-//    {
+            //if (ctrlP is Panel)
+            //{
+            //    if (ctrlP = 
+            //    {
 
-//    }
-//    if (ctrl.Tag != "compare")
-//    {
-//        foreach (ComboBox cbo in lstDynCBOs)
-//        {
-//            if (cbo.SelectedIndex == 0)
-//            {
+            //    }
+            //    if (ctrl.Tag != "compare")
+            //    {
+            //        foreach (ComboBox cbo in lstDynCBOs)
+            //        {
+            //            if (cbo.SelectedIndex == 0)
+            //            {
 
-//            }
-//        }
-//    }
-//}
-//    }
+            //            }
+            //        }
+            //    }
+            //}
+            //    }
 
-//foreach (ComboBox cbo in lstDynCBOs)
-//{
-//  for (int i = 0; i < strFilterTypes.Length; i++)
-//        {
-//           if(cbo.SelectedIndex == 0)
-//            {
-//        //And/or determination    
-//        //Filter as Name
-//            foreach(Control ctrl in pnlMain.Controls[i].Controls)
-//               {
-//                  if (ctrl is TextBox)
-//                  //Hunter's Best guess at how to filter by this
-//                  {
-//                  if (ctrl.Text == fsMasterlist[i].Name)
-//                    {
-//                         foreach (FoodStuff fs in fsMasterlist)
-//                    {
-//                        if (fs.Name == ctrl.Text)
-//                        {
-//                            ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
-//                            lsvItem.SubItems.Add(fs.Servings.ToString());
-//                            lsvItem.SubItems.Add(fs.Cost.ToString("C"));
-//                            lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
-//                            lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
-//                            lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
-//                            lsvItem.SubItems.Add(fs.ID.ToString());
-//                            lsvSearch.Items.Add(lsvItem);
+            //foreach (ComboBox cbo in lstDynCBOs)
+            //{
+            //  for (int i = 0; i < strFilterTypes.Length; i++)
+            //        {
+            //           if(cbo.SelectedIndex == 0)
+            //            {
+            //        //And/or determination    
+            //        //Filter as Name
+            //            foreach(Control ctrl in pnlMain.Controls[i].Controls)
+            //               {
+            //                  if (ctrl is TextBox)
+            //                  //Hunter's Best guess at how to filter by this
+            //                  {
+            //                  if (ctrl.Text == fsMasterlist[i].Name)
+            //                    {
+            //                         foreach (FoodStuff fs in fsMasterlist)
+            //                    {
+            //                        if (fs.Name == ctrl.Text)
+            //                        {
+            //                            ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
+            //                            lsvItem.SubItems.Add(fs.Servings.ToString());
+            //                            lsvItem.SubItems.Add(fs.Cost.ToString("C"));
+            //                            lsvItem.SubItems.Add(fs.CostPerServing().ToString("C") + " Each");
+            //                            lsvItem.SubItems.Add(fs.PrepTime.ToString() + " mins");
+            //                            lsvItem.SubItems.Add(fs.CookTime.ToString() + " mins");
+            //                            lsvItem.SubItems.Add(fs.ID.ToString());
+            //                            lsvSearch.Items.Add(lsvItem);
 
-//                        }
-//                    }
-//                }
+            //                        }
+            //                    }
+            //                }
 
-//            }
-
-
-//  }
-//    }
-//    else if (cbo.SelectedIndex == 1)
-//    {
-//       //Filter as Tag 
-//    }
-//    else if (cbo.SelectedIndex == 2)
-//    {
-//        //Filter by Serving Size
-//    }
-//    else
-//    {
-//        //Filter by Price per serving
-//        //look for combobox's tag, if tag is "Compare" then that's the one we need to use
-//        //then grab the symbol from it (text) to use in the filter expression
-//        foreach (Control ctrl in pnlMain.Controls)
-//        {
-//            if (ctrl is ComboBox) {
-//                if (ctrl.Tag == "Compare")
-//                {
-//                // "Put text in filter type things"- Dustin's actual words  -->  ctrl.Text = "FilterTypeThing"
-//                }
-
-//                }
-//        }
-//    }
-//}
-//================================================================
-//================================================================
+            //            }
 
 
-//}
+            //  }
+            //    }
+            //    else if (cbo.SelectedIndex == 1)
+            //    {
+            //       //Filter as Tag 
+            //    }
+            //    else if (cbo.SelectedIndex == 2)
+            //    {
+            //        //Filter by Serving Size
+            //    }
+            //    else
+            //    {
+            //        //Filter by Price per serving
+            //        //look for combobox's tag, if tag is "Compare" then that's the one we need to use
+            //        //then grab the symbol from it (text) to use in the filter expression
+            //        foreach (Control ctrl in pnlMain.Controls)
+            //        {
+            //            if (ctrl is ComboBox) {
+            //                if (ctrl.Tag == "Compare")
+            //                {
+            //                // "Put text in filter type things"- Dustin's actual words  -->  ctrl.Text = "FilterTypeThing"
+            //                }
+
+            //                }
+            //        }
+            //    }
+            //}
+            //================================================================
+            //================================================================
+
+
+            //}
 
 
