@@ -31,7 +31,7 @@ namespace GradeACatering
         private List<FoodStuff> fsMasterlist;
         private List<FoodStuff> fsFilteredlist; //Needs to have stuff added that meets criteria 
         List<ComboBox> lstDynCBOs = new List<ComboBox>();
-        List<Button> lstDynAndOrBtns = new List<Button>();
+      //List<Button> lstDynAndOrBtns = new List<Button>();
 
         string[] strFilterTypes = { "Name", "Tag", "Serving Size", "Price Per Serving" };
         string[] strCboOperators = { "<", "<=", "=", "=>", ">", "<>" };
@@ -68,7 +68,7 @@ namespace GradeACatering
                 btn.Click += new System.EventHandler(this.btn_Click);
                 btn.Visible = false;
                 dynPanel.Controls.Add(btn);
-                lstDynAndOrBtns.Add(btn);
+              //  lstDynAndOrBtns.Add(btn);
 
             }
 
@@ -206,7 +206,7 @@ namespace GradeACatering
             
             if (pnlMain.Controls.Count > 0)
             {
-                for (int i = 0; i < lstDynCBOs.Count - 1; i++)
+                for (int i = 0; i <= lstDynCBOs.Count - 1; i++)
                 {
                     Panel dyn = (Panel)pnlMain.Controls[i];//ugly hack, if anything but panels are in pnlMain this WILL EXPLODE...
                     string txtAndOr = "";
@@ -217,8 +217,8 @@ namespace GradeACatering
                     if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Name)
                     {
                         //is it the first item in the panel list?  won't have an and/or toggle, so always match it
-                        if (i == 0||txtAndOr.Contains("AND")) //or button is and...
-                        {
+                       // if (i == 0|| MatchAnything) //or button is and...
+                        
                             //get contents of text box in dynamic panel
                             //but need the dynamic panel itself...
                             
@@ -234,13 +234,7 @@ namespace GradeACatering
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
-                            //if button is or
-                            
-                        
-                        }
+                       
                     }
                     else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Tag)
                     {
@@ -270,6 +264,7 @@ namespace GradeACatering
         {
             fsMasterlist = DataConnection.ListAllFoodstuffs();
             PopulateListView(fsMasterlist);
+            fsFilteredlist = new List<FoodStuff>();
             py = 3;
                             //        //if (/*Passes filter rule.*/)
                             //        //{
@@ -328,6 +323,43 @@ namespace GradeACatering
             else
                 MatchAnything = true;            
         }
+
+        private void lsvSearch_DoubleClick(object sender, EventArgs e)
+        {
+            frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
+            displayRecipe.LoadFoodstuff(fsMasterlist[lsvSearch.SelectedIndices[0]]);
+            displayRecipe.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
+            displayRecipe.LoadFoodstuff(fsMasterlist[lsvSearch.SelectedIndices[0]]);
+            displayRecipe.ShowDialog();
+        }
+
+        private void addNewRecipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRecipeEntry RecipeEntry = new frmRecipeEntry();
+            RecipeEntry.ShowDialog();
+        }
+
+        private void sOPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           // Opens SOP file
+            System.Diagnostics.Process.Start(@"C:\Users\Hunter\Desktop\\Grade A SOP.pdf");
+          
+           
+
+        
+        }
+
+     
 
 
     }
