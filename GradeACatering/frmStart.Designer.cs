@@ -33,24 +33,21 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSeeAllRecipes = new System.Windows.Forms.Button();
             this.btnNewRecipe = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnMealOrders = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bbtnShowAllIngredient = new System.Windows.Forms.Button();
             this.btnAddIngr = new System.Windows.Forms.Button();
-            this.btnNewMeal = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(112, 36);
+            this.label1.Location = new System.Drawing.Point(187, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 13);
             this.label1.TabIndex = 0;
@@ -71,7 +68,7 @@
             this.groupBox1.Controls.Add(this.btnSeeAllRecipes);
             this.groupBox1.Controls.Add(this.btnNewRecipe);
             this.groupBox1.Controls.Add(this.btnSearchfrm);
-            this.groupBox1.Location = new System.Drawing.Point(26, 69);
+            this.groupBox1.Location = new System.Drawing.Point(26, 168);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(453, 106);
             this.groupBox1.TabIndex = 5;
@@ -98,36 +95,6 @@
             this.btnNewRecipe.UseVisualStyleBackColor = true;
             this.btnNewRecipe.Click += new System.EventHandler(this.btnNewRecipe_Click);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.btnNewMeal);
-            this.groupBox2.Controls.Add(this.btnMealOrders);
-            this.groupBox2.Location = new System.Drawing.Point(26, 291);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(314, 97);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Meals";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(125, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "*Coming Soon";
-            // 
-            // btnMealOrders
-            // 
-            this.btnMealOrders.Location = new System.Drawing.Point(20, 19);
-            this.btnMealOrders.Name = "btnMealOrders";
-            this.btnMealOrders.Size = new System.Drawing.Size(123, 51);
-            this.btnMealOrders.TabIndex = 2;
-            this.btnMealOrders.Text = "Search Meals";
-            this.btnMealOrders.UseVisualStyleBackColor = true;
-            // 
             // btnTestfrm
             // 
             this.btnTestfrm.Location = new System.Drawing.Point(536, 424);
@@ -142,7 +109,7 @@
             // 
             this.groupBox3.Controls.Add(this.bbtnShowAllIngredient);
             this.groupBox3.Controls.Add(this.btnAddIngr);
-            this.groupBox3.Location = new System.Drawing.Point(26, 197);
+            this.groupBox3.Location = new System.Drawing.Point(26, 289);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(314, 88);
             this.groupBox3.TabIndex = 8;
@@ -169,44 +136,42 @@
             this.btnAddIngr.UseVisualStyleBackColor = true;
             this.btnAddIngr.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnNewMeal
-            // 
-            this.btnNewMeal.Location = new System.Drawing.Point(175, 19);
-            this.btnNewMeal.Name = "btnNewMeal";
-            this.btnNewMeal.Size = new System.Drawing.Size(123, 51);
-            this.btnNewMeal.TabIndex = 3;
-            this.btnNewMeal.Text = "Create New Order List";
-            this.btnNewMeal.UseVisualStyleBackColor = true;
-            this.btnNewMeal.Click += new System.EventHandler(this.btnNewMeal_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(428, 337);
+            this.button1.Location = new System.Drawing.Point(398, 324);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 51);
+            this.button1.Size = new System.Drawing.Size(56, 35);
             this.button1.TabIndex = 9;
             this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::GradeACatering.Properties.Resources.GradeAlogo;
+            this.pictureBox1.Location = new System.Drawing.Point(31, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(143, 158);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 400);
+            this.ClientSize = new System.Drawing.Size(504, 396);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnTestfrm);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "frmStart";
             this.Text = "Main Menu";
             this.Load += new System.EventHandler(this.frmStart_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,16 +182,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSearchfrm;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnMealOrders;
         private System.Windows.Forms.Button btnTestfrm;
         private System.Windows.Forms.Button btnNewRecipe;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnAddIngr;
         private System.Windows.Forms.Button btnSeeAllRecipes;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bbtnShowAllIngredient;
-        private System.Windows.Forms.Button btnNewMeal;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

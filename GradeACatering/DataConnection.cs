@@ -776,7 +776,7 @@ namespace GradeACatering
                 //if no results returned assume it's okay to delete.
                 string validationQuery = "Select * from RecipeMaterials where MadeOf = ? and Makes <> MadeOf";
                 OleDbCommand validationCmd = new OleDbCommand(validationQuery, conn);
-                validationCmd.Parameters.Add(id);
+                validationCmd.Parameters.Add("?", OleDbType.VarChar).Value=id;
                 
                 OleDbDataReader validReader = validationCmd.ExecuteReader();
                 
@@ -786,11 +786,11 @@ namespace GradeACatering
                 
                     string deleteMaterials = "Delete from RecipeMaterials where Makes = ?";
                     OleDbCommand cmdDelMats = new OleDbCommand(deleteMaterials, conn);
-                    cmdDelMats.Parameters.Add(id);
+                    cmdDelMats.Parameters.Add("?", OleDbType.VarChar).Value = id;
 
-                    string deleteFoodstuff = "Delete from Foodstuffs where FoodstuffID = ?";
+                    string deleteFoodstuff = "Delete from Foodstuff where FoodstuffID = ?";
                     OleDbCommand cmdDelFood = new OleDbCommand(deleteFoodstuff, conn);
-                    cmdDelFood.Parameters.Add(id);
+                    cmdDelFood.Parameters.Add("?", OleDbType.VarChar).Value = id;
 
                     cmdDelMats.ExecuteNonQuery();
                     cmdDelFood.ExecuteNonQuery();

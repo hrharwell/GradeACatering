@@ -47,7 +47,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -186,7 +185,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -212,15 +210,11 @@
             // 
             // deleteRecipeToolStripMenuItem
             // 
+            this.deleteRecipeToolStripMenuItem.Enabled = false;
             this.deleteRecipeToolStripMenuItem.Name = "deleteRecipeToolStripMenuItem";
             this.deleteRecipeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.deleteRecipeToolStripMenuItem.Text = "Delete Recipe";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.deleteRecipeToolStripMenuItem.Click += new System.EventHandler(this.deleteRecipeToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -234,7 +228,7 @@
             // 
             this.sOPToolStripMenuItem.Name = "sOPToolStripMenuItem";
             this.sOPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sOPToolStripMenuItem.Text = "SOP";
+            this.sOPToolStripMenuItem.Text = "S.O.P.  Form";
             this.sOPToolStripMenuItem.Click += new System.EventHandler(this.sOPToolStripMenuItem_Click);
             // 
             // frmNewSearch
@@ -284,7 +278,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewRecipeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteRecipeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sOPToolStripMenuItem;
     }

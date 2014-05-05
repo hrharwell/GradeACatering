@@ -47,7 +47,7 @@
             // 
             // btnReturnToMenu
             // 
-            this.btnReturnToMenu.Location = new System.Drawing.Point(486, 404);
+            this.btnReturnToMenu.Location = new System.Drawing.Point(22, 404);
             this.btnReturnToMenu.Name = "btnReturnToMenu";
             this.btnReturnToMenu.Size = new System.Drawing.Size(84, 44);
             this.btnReturnToMenu.TabIndex = 7;
@@ -57,7 +57,7 @@
             // 
             // btnOpenIngredient
             // 
-            this.btnOpenIngredient.Location = new System.Drawing.Point(22, 404);
+            this.btnOpenIngredient.Location = new System.Drawing.Point(522, 404);
             this.btnOpenIngredient.Name = "btnOpenIngredient";
             this.btnOpenIngredient.Size = new System.Drawing.Size(84, 44);
             this.btnOpenIngredient.TabIndex = 6;

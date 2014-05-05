@@ -402,7 +402,14 @@ namespace GradeACatering
 
         private void lsvSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (lsvSearch.SelectedIndices.Count > 0)
+            {
+                deleteRecipeToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                deleteRecipeToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -410,7 +417,7 @@ namespace GradeACatering
             fsFilteredlist.Clear();
             pnlMain.Controls.Clear();
             lsvSearch.Items.Clear();
-            lstDynAndOrBtns.Clear();
+            //lstDynAndOrBtns.Clear();
             lstDynCBOs.Clear();
             py = 3;
 
@@ -463,27 +470,45 @@ namespace GradeACatering
         private void addNewRecipeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRecipeEntry RecipeEntry = new frmRecipeEntry();
-            RecipeEntry.ShowDialog();
+           RecipeEntry.ShowDialog();
+           lsvSearch.Items.Clear();
+           frmNewSearch_Load(sender,e);
         }
 
         private void sOPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // Opens SOP file
+            // Opens SOP file
             System.Diagnostics.Process.Start(@"C:\Users\Hunter\Desktop\\Grade A SOP.pdf");
-          
-           
-
-        
         }
 
-     
-
-        private void lsvSearch_DoubleClick(object sender, EventArgs e)
+        private void deleteRecipeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (lsvSearch.SelectedIndices.Count > 0)
+            {
+                deleteRecipeToolStripMenuItem.Enabled = true;
+                DialogResult confirm = MessageBox.Show("Do you really want to do this?  Deletion is irreversible!", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    //delete it!  DELETE IT AALLLLL!!!  MUAHAAHAHHAHA
+                    //is filteredlist loaded with anything?
+                    if (fsFilteredlist.Count > 0 && fsFilteredlist != null)
+                    {
+                        //something's in it, look at selectedindex of listview and delete that index's ID number
+                        DataConnection.DeleteFoodstuff((fsFilteredlist[lsvSearch.SelectedIndices[0]]).ID);
+                    }
+                    else
+                    {
+                        //filteredlist is empty or null, which means master is being displayed
+                        DataConnection.DeleteFoodstuff((fsMasterlist[lsvSearch.SelectedIndices[0]]).ID);
+                    }
+                    //then reload the foodstuffs to reflect the new listing
+                    lsvSearch.Items.Clear();
+                    btnClear_Click(sender, e);
+                    frmNewSearch_Load(sender, e);
+                }
+             
+            }
         }
-
-
     }
 }
 
