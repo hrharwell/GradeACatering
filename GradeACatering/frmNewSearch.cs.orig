@@ -18,7 +18,6 @@ namespace GradeACatering
         {
             InitializeComponent();
         }
-<<<<<<< HEAD
 
         private static int px = 3;
         private static int py = 3;
@@ -32,7 +31,8 @@ namespace GradeACatering
 
         string[] strFilterTypes = { "Name", "Tag", "Serving Size", "Price Per Serving" };
         string[] strCboOperators = { "<", "<=", "=", "=>", ">", "<>" };
-
+        string[] strNumericCompareNoUnicode = { ">", ">=", "=", "<=", "<" };
+        string[] strNumericCompareWords = { "greater than", "greater than or equal to","equal to","less than or equal to","less than" };
 
         private void btnDelFilter_Click(object sender, EventArgs e)
         {
@@ -116,7 +116,6 @@ namespace GradeACatering
                 btn.Click += new System.EventHandler(this.btn_Click);
                 dynPanel.Controls.Add(btn);
                 lstDynAndOrBtns.Add(btn);
->>>>>>> origin/master
             }
 
             Label lblType = new Label();
@@ -130,9 +129,9 @@ namespace GradeACatering
             cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_changed);
             cboType.Items.AddRange(strFilterTypes);
 
-            dynPanel.Controls.Add(lblType);
-            dynPanel.Controls.Add(cboType);
-            lstDynCBOs.Add(cboType);
+dynPanel.Controls.Add(lblType);
+dynPanel.Controls.Add(cboType);
+lstDynCBOs.Add(cboType);
 <<<<<<< HEAD
 =======
 
