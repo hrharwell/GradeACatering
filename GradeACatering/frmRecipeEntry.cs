@@ -380,6 +380,17 @@ namespace GradeACatering
             timer1.Stop();
         }
 
+        private void btnEditIng_Click_1(object sender, EventArgs e)
+        {
+            foreach (ListViewItem eachItem in lsvIngredients.SelectedItems)
+            {
+                txtQty.Text = eachItem.SubItems[0].Text;
+                cboIng.Text = eachItem.SubItems[2].Text;
+                cboUnit.Text = eachItem.SubItems[1].Text;
+                lsvIngredients.Items.Remove(eachItem);
+            }
+        }
+
 
         //private void btnAddIng_Click_2(object sender, EventArgs e)
         //{

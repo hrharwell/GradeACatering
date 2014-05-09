@@ -59,6 +59,7 @@ namespace GradeACatering
         {
             if (btnEditRecipe.Text == "Edit Recipe")
             {
+             //Switches the form into a editable state
             txtName.Enabled = true;
             txtPriceSold.Enabled = true;
             txtPrepTime.Enabled = true;
@@ -74,8 +75,11 @@ namespace GradeACatering
             btnEditIng.Enabled = true;
             btnDeleteIng.Enabled = true;
             btnAddToTagList.Enabled = true;
-            btnRemoveSelectedTag.Enabled = false;
-            btnEditRecipe.Text = "Save";
+            btnRemoveSelectedTag.Enabled = true;
+            btnEditRecipe.Text = "Save Updates";
+            lsvIngredients.Enabled = true;
+            lbxTags.Enabled = true;
+            btnPrint.Visible = true;
             
             }
             else
@@ -132,6 +136,8 @@ namespace GradeACatering
                     //if item matches, check unit and quantity
                         //if different, update from ingredient list
                     //if item in fs's list is not in ingredient list, remove it
+                  //  private void List<FoodStuff> fs_existingList 
+
 
                     foreach (ListViewItem lvi in lsvIngredients.Items)
                     {
@@ -215,7 +221,7 @@ namespace GradeACatering
 	
 	
 
-                    //then
+                    //then reset the form back into a readonly state
                     btnEditRecipe.Text = "Edit Recipe";
                     txtName.Enabled = false;
                     txtPriceSold.Enabled = false;
@@ -235,13 +241,11 @@ namespace GradeACatering
                     txtDirections.ReadOnly = true;
                     lblMessage.Text = "Data edit saved";
                     timer1.Start();
+                    lsvIngredients.Enabled = false;
+                    lbxTags.Enabled = false;
                 }
             }
-           
-            //foreach (TextBox textbox in frmDisplayRecipe.);
-            //{
-                
-            //}
+         
         }
 
         private void btnAddIng_Click(object sender, EventArgs e)
@@ -330,7 +334,31 @@ namespace GradeACatering
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "* Print Feature Coming Soon";
+         //   lblMessage.Text = "* Print Feature Coming Soon";
+
+            //Changed this to cancel button...simple returns everything back to a readonly state
+            
+            btnEditRecipe.Text = "Edit Recipe";
+            txtName.Enabled = false;
+            txtPriceSold.Enabled = false;
+            txtPrepTime.Enabled = false;
+            txtCookTime.Enabled = false;
+            txtDirections.Enabled = false;
+            txtTags.Enabled = false;
+            txtServingSize.Enabled = false;
+            cboIng.Enabled = false;
+            cboUnit.Enabled = false;
+            txtQty.Enabled = false;
+            btnAddIng.Enabled = false;
+            btnEditIng.Enabled = false;
+            btnDeleteIng.Enabled = false;
+            btnAddToTagList.Enabled = false;
+            btnRemoveSelectedTag.Enabled = false;
+            txtDirections.ReadOnly = true;
+            lsvIngredients.Enabled = false;
+            lbxTags.Enabled = false;
+            btnPrint.Visible = false;
+            lbxTags.Enabled = false;
         }
 
         private void lsvIngredients_SelectedIndexChanged(object sender, EventArgs e)
@@ -355,9 +383,6 @@ namespace GradeACatering
                         cboUnit.Text = eachItem.SubItems[1].Text;
                         lsvIngredients.Items.Remove(eachItem);
                     }
-               
-         
-
         }
 
         private void frmDisplayRecipe_Load(object sender, EventArgs e)

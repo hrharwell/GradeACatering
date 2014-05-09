@@ -478,7 +478,7 @@ namespace GradeACatering
         private void sOPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Opens SOP file
-            System.Diagnostics.Process.Start(@"C:\Users\Hunter\Desktop\\Grade A SOP.pdf");
+            System.Diagnostics.Process.Start(@"SOP.pdf");
         }
 
         private void deleteRecipeToolStripMenuItem_Click(object sender, EventArgs e)

@@ -227,7 +227,7 @@
             // sOPToolStripMenuItem
             // 
             this.sOPToolStripMenuItem.Name = "sOPToolStripMenuItem";
-            this.sOPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sOPToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.sOPToolStripMenuItem.Text = "S.O.P.  Form";
             this.sOPToolStripMenuItem.Click += new System.EventHandler(this.sOPToolStripMenuItem_Click);
             // 
