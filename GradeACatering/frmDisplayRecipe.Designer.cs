@@ -246,8 +246,14 @@
             this.cboUnit.Enabled = false;
             this.cboUnit.FormattingEnabled = true;
             this.cboUnit.Items.AddRange(new object[] {
-            "lb",
-            "oz"});
+            "tsp",
+            "tbsp",
+            "cup",
+            "pt",
+            "qt",
+            "gal",
+            "oz",
+            "lb"});
             this.cboUnit.Location = new System.Drawing.Point(60, 248);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(66, 21);
