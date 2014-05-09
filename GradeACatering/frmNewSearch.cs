@@ -465,7 +465,7 @@ namespace GradeACatering
             //lstDynAndOrBtns.Clear();
             lstDynCBOs.Clear();
             py = 3;
-
+            fsMasterlist = DataConnection.ListAllFoodstuffs();
             foreach (FoodStuff fs in fsMasterlist)
             {
                 ListViewItem lsvItem = new ListViewItem(fs.Name.ToString());
@@ -526,7 +526,7 @@ namespace GradeACatering
         {
             if (lsvSearch.SelectedIndices.Count > 0)
             {
-                deleteRecipeToolStripMenuItem.Enabled = true;
+
                 DialogResult confirm = MessageBox.Show("Do you really want to do this?  Deletion is irreversible!", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (confirm == DialogResult.Yes)
                 {
@@ -543,9 +543,9 @@ namespace GradeACatering
                         DataConnection.DeleteFoodstuff((fsMasterlist[lsvSearch.SelectedIndices[0]]).ID);
                     }
                     //then reload the foodstuffs to reflect the new listing
-                    lsvSearch.Items.Clear();
+                   
                     btnClear_Click(sender, e);
-                    frmNewSearch_Load(sender, e);
+                    
                 }
 
             }

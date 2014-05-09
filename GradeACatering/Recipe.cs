@@ -148,5 +148,50 @@ namespace GradeACatering
                 }
             }
           }
+
+        //overrides to allow comparison between objects.
+        //I don't even pretend to know what half of this stuff actually does
+        //thanks to StackOverflow for a guide though...
+        public override bool Equals(object obj)
+        {
+            //if parameter is null return false
+            if(obj == null)
+                return false;
+
+            //if parameter can't be cast to a Recipe object return false
+            Recipe p = obj as Recipe;
+            if((System.Object)p == null)
+                return false;
+
+            //compare contents of each parameter to see if they line up
+            bool match = true;
+            if (strMakes != p.Makes)
+                match = false;
+            if (strMadeOf != p.MadeOf)
+                match = false;
+            if (strUnit != p.Unit)
+                match = false;
+            if (FractionAmount() != p.FractionAmount())
+                match = false;
+
+            return match;
+
+        }
+
+        public static bool operator ==(Recipe r1, Recipe r2)
+        {
+            return r1.Equals(r2);
+        }
+
+        public static bool operator !=(Recipe r1, Recipe r2)
+        {
+            return !r1.Equals(r2);
+        }
+
+        public override int GetHashCode()
+        {
+            string hashable = this.Makes + " " + this.MadeOf + " " + this.Unit + " " + this.FractionAmount();
+            return hashable.GetHashCode();
+        }
     }
 }
