@@ -41,7 +41,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnRemoveSelectedTag = new System.Windows.Forms.Button();
             this.btnAddToTagList = new System.Windows.Forms.Button();
@@ -96,7 +95,6 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(24, 24);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 245);
@@ -186,15 +184,6 @@
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Item Name";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ID Number";
             // 
             // groupBox4
             // 
@@ -290,6 +279,7 @@
             this.txtDirections.Location = new System.Drawing.Point(18, 19);
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
+            this.txtDirections.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDirections.Size = new System.Drawing.Size(213, 249);
             this.txtDirections.TabIndex = 0;
             // 
@@ -488,7 +478,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnClear;

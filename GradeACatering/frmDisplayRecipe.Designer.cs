@@ -55,7 +55,6 @@
             this.colUnit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblID = new System.Windows.Forms.Label();
             this.txtServingSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCookTime = new System.Windows.Forms.TextBox();
@@ -66,7 +65,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox4.SuspendLayout();
@@ -165,6 +163,7 @@
             this.txtDirections.Multiline = true;
             this.txtDirections.Name = "txtDirections";
             this.txtDirections.ReadOnly = true;
+            this.txtDirections.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDirections.Size = new System.Drawing.Size(213, 249);
             this.txtDirections.TabIndex = 0;
             // 
@@ -257,6 +256,7 @@
             // btnEditIng
             // 
             this.btnEditIng.Enabled = false;
+            this.btnEditIng.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditIng.Location = new System.Drawing.Point(97, 191);
             this.btnEditIng.Name = "btnEditIng";
             this.btnEditIng.Size = new System.Drawing.Size(72, 23);
@@ -329,7 +329,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Controls.Add(this.txtServingSize);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtCookTime);
@@ -340,22 +339,12 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(35, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 245);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Info";
-            // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(70, 16);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(28, 13);
-            this.lblID.TabIndex = 10;
-            this.lblID.Text = "lblID";
             // 
             // txtServingSize
             // 
@@ -442,15 +431,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Item Name";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ID Number";
-            // 
             // lblMessage
             // 
             this.lblMessage.AutoSize = true;
@@ -519,7 +499,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
@@ -535,7 +514,6 @@
         private System.Windows.Forms.ListBox lbxTags;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblMessage;
-        private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Timer timer1;
 
     }

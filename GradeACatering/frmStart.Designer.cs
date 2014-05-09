@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSearchfrm = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSeeAllRecipes = new System.Windows.Forms.Button();
             this.btnNewRecipe = new System.Windows.Forms.Button();
             this.btnTestfrm = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -47,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(187, 76);
+            this.label1.Location = new System.Drawing.Point(187, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 13);
             this.label1.TabIndex = 0;
@@ -57,7 +56,7 @@
             // 
             this.btnSearchfrm.Location = new System.Drawing.Point(24, 31);
             this.btnSearchfrm.Name = "btnSearchfrm";
-            this.btnSearchfrm.Size = new System.Drawing.Size(124, 51);
+            this.btnSearchfrm.Size = new System.Drawing.Size(120, 50);
             this.btnSearchfrm.TabIndex = 2;
             this.btnSearchfrm.Text = "Search Recipes";
             this.btnSearchfrm.UseVisualStyleBackColor = true;
@@ -65,31 +64,20 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnSeeAllRecipes);
             this.groupBox1.Controls.Add(this.btnNewRecipe);
             this.groupBox1.Controls.Add(this.btnSearchfrm);
-            this.groupBox1.Location = new System.Drawing.Point(26, 168);
+            this.groupBox1.Location = new System.Drawing.Point(190, 55);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 106);
+            this.groupBox1.Size = new System.Drawing.Size(314, 106);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recipes";
-            // 
-            // btnSeeAllRecipes
-            // 
-            this.btnSeeAllRecipes.Location = new System.Drawing.Point(304, 31);
-            this.btnSeeAllRecipes.Name = "btnSeeAllRecipes";
-            this.btnSeeAllRecipes.Size = new System.Drawing.Size(124, 51);
-            this.btnSeeAllRecipes.TabIndex = 4;
-            this.btnSeeAllRecipes.Text = "Show All Recipes";
-            this.btnSeeAllRecipes.UseVisualStyleBackColor = true;
-            this.btnSeeAllRecipes.Click += new System.EventHandler(this.btnSeeAllRecipes_Click);
             // 
             // btnNewRecipe
             // 
             this.btnNewRecipe.Location = new System.Drawing.Point(164, 31);
             this.btnNewRecipe.Name = "btnNewRecipe";
-            this.btnNewRecipe.Size = new System.Drawing.Size(124, 51);
+            this.btnNewRecipe.Size = new System.Drawing.Size(120, 50);
             this.btnNewRecipe.TabIndex = 3;
             this.btnNewRecipe.Text = "Enter New Recipe";
             this.btnNewRecipe.UseVisualStyleBackColor = true;
@@ -109,7 +97,7 @@
             // 
             this.groupBox3.Controls.Add(this.bbtnShowAllIngredient);
             this.groupBox3.Controls.Add(this.btnAddIngr);
-            this.groupBox3.Location = new System.Drawing.Point(26, 289);
+            this.groupBox3.Location = new System.Drawing.Point(190, 167);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(314, 88);
             this.groupBox3.TabIndex = 8;
@@ -118,9 +106,9 @@
             // 
             // bbtnShowAllIngredient
             // 
-            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(175, 19);
+            this.bbtnShowAllIngredient.Location = new System.Drawing.Point(165, 19);
             this.bbtnShowAllIngredient.Name = "bbtnShowAllIngredient";
-            this.bbtnShowAllIngredient.Size = new System.Drawing.Size(123, 51);
+            this.bbtnShowAllIngredient.Size = new System.Drawing.Size(120, 50);
             this.bbtnShowAllIngredient.TabIndex = 3;
             this.bbtnShowAllIngredient.Text = "Show All Ingredients";
             this.bbtnShowAllIngredient.UseVisualStyleBackColor = true;
@@ -128,9 +116,9 @@
             // 
             // btnAddIngr
             // 
-            this.btnAddIngr.Location = new System.Drawing.Point(20, 19);
+            this.btnAddIngr.Location = new System.Drawing.Point(25, 19);
             this.btnAddIngr.Name = "btnAddIngr";
-            this.btnAddIngr.Size = new System.Drawing.Size(123, 51);
+            this.btnAddIngr.Size = new System.Drawing.Size(120, 50);
             this.btnAddIngr.TabIndex = 2;
             this.btnAddIngr.Text = "Add New Ingredient ";
             this.btnAddIngr.UseVisualStyleBackColor = true;
@@ -138,11 +126,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(398, 324);
+            this.button1.Location = new System.Drawing.Point(62, 190);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 35);
+            this.button1.Size = new System.Drawing.Size(78, 43);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Exit";
+            this.button1.Text = "Close Program";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -159,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 396);
+            this.ClientSize = new System.Drawing.Size(512, 275);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnTestfrm);
@@ -186,7 +174,6 @@
         private System.Windows.Forms.Button btnNewRecipe;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnAddIngr;
-        private System.Windows.Forms.Button btnSeeAllRecipes;
         private System.Windows.Forms.Button bbtnShowAllIngredient;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;

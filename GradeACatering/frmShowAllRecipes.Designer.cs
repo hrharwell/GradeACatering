@@ -113,9 +113,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 13);
+            this.label1.Size = new System.Drawing.Size(201, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Select a recipe to either display or edit.";
+            this.label1.Text = "Select a recipe to either display or delete.";
             // 
             // btnDelete
             // 
