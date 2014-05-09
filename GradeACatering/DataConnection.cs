@@ -24,8 +24,8 @@ namespace GradeACatering
         // See: http://www.codeproject.com/Articles/7775/Compact-and-Repair-Access-Database-using-C-and-lat
 
         private static int intMaintenanceCounter; //load this from the settings file? utility table?  registry? (ack!)
-       
-        private static string connstr= "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
+
+        private static string connstr = "Provider = Microsoft.Ace.OLEDB.15.0;" + //may need to use version checking to make sure this doesn't hamstring anything.
                                        "Data Source = GradeACatering.accdb;"; //defaults, we can make these changeable later if needed, looks in root directory currently.
         private static OleDbConnection conn = new OleDbConnection(connstr);
 
@@ -52,7 +52,7 @@ namespace GradeACatering
                 intMaintenanceCounter = 0;
 
             }
-            
+
         }
 
         //functions to read from, update in, and add to the database
@@ -167,7 +167,7 @@ namespace GradeACatering
 
         //        OleDbCommand cmd = new OleDbCommand();
         //        cmd.Connection = conn;    
-                
+
         //        //if statements for each value to add, and its associated parameter                           
         //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
         //        cmd.Parameters.Add("?", OleDbType.VarChar).Value = fs.Name;
@@ -322,14 +322,14 @@ namespace GradeACatering
         //    }
         //}
 
-        public static void UpdateFoodstuff(string fsID, FoodStuff updatedFS)
+        public static void UpdateFoodstuff(FoodStuff updatedFS)
         {
             //need some way of identifying the column without passing in the name itself which might change.
             //an enum won't work since that's just a bit of code associated with an integer.
 
             //TODO:
             //verify the record exists, if it does then update the designated column with the new value.
-            
+
             //Potentially ugly hack to make this work is to just update every field regardless of whether they were
             //altered or not, overwriting with the same values for unaltered fields.
             //it might be slower but would save the headache of trying to pick and choose the fields we need to write to.
@@ -341,13 +341,10 @@ namespace GradeACatering
 
                 OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
-                //fs.ID += Convert.ToInt32(rdItemCount[0]).ToString("0000#");
-                //if statements for each value to add, and its associated parameter   
-                query += "FoodstuffID = ?";        
-                cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.ID;// +Convert.ToInt32(rdItemCount[0]).ToString("0000#");
-                query += ",Name = ? ";
+               //if statements for each value to add, and its associated parameter   
+                query += "Name = ? ";
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.Name;
-                int intParameterCount = 2;
+                int intParameterCount = 1;
                 if (updatedFS.Directions != "")
                 {
                     query += ", Directions = ?";
@@ -386,14 +383,52 @@ namespace GradeACatering
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = updatedFS.GetTags();
                     intParameterCount++;
                 }
-                query += "where FoodstuffID = " + updatedFS.ID;
+                query += "where FoodstuffID = ?";
+                cmd.Parameters.Add("?",OleDbType.VarChar).Value = updatedFS.ID;
 
                 cmd.CommandText = query;
                 DataConnection.OpenConnection();
 
                 cmd.ExecuteNonQuery();
                 
-                //return "Item plus ingredients added.";
+                //item in fs's list isn't in ingredient list, so make (another) list of things we need to remove
+                //and do the exact opposite for those ingredients we need to add new entries for.
+                List<Recipe> IngredientsToDelete = new List<Recipe>();
+                List<Recipe> IngredientsToAdd = new List<Recipe>();
+
+                foreach (Recipe old_r in GetFoodstuffWithID(updatedFS.ID).ReturnIngredientsList())
+                {
+                    //needs to match at least one item
+                    bool match = false;
+                    foreach (Recipe new_r in updatedFS.ReturnIngredientsList())
+                        if (old_r == new_r)
+                            match = true;
+
+                    if (!match)
+                        IngredientsToDelete.Add(old_r);
+                }
+
+                foreach (Recipe new_r in updatedFS.ReturnIngredientsList())
+                {
+                    bool match = false;
+                    foreach (Recipe old_r in GetFoodstuffWithID(updatedFS.ID).ReturnIngredientsList())
+                        if (new_r == old_r)
+                            match = true;
+
+                    if(!match)
+                        IngredientsToAdd.Add(new_r);
+                }
+
+                if (IngredientsToDelete.Count > 0)
+                    foreach (Recipe r in IngredientsToDelete)                   
+                        DeleteRecipeMaterial(r);
+                   
+                if (IngredientsToAdd.Count > 0)
+                    foreach (Recipe r in IngredientsToAdd)
+                    {
+                        AddRecipeItem(r);
+                    }
+                
             }
             catch (Exception ex)
             {
@@ -416,19 +451,19 @@ namespace GradeACatering
                 //refactoring to build in only those parameters we actually need.
                 OleDbCommand cmd = new OleDbCommand();
                 string query = "insert into RecipeMaterials(Makes, MadeOf";
-                   
-                
+
+
 
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Makes;
                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.MadeOf;
                 int intParameterCounter = 2;
-                if(r.FractionAmount() != "")
+                if (r.FractionAmount() != "")
                 {
                     query += " , Quantity";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.FractionAmount();
                     intParameterCounter++;
                 }
-                if(r.Unit != "")
+                if (r.Unit != "")
                 {
                     query += ", Unit";
                     cmd.Parameters.Add("?", OleDbType.VarChar).Value = r.Unit;
@@ -437,9 +472,9 @@ namespace GradeACatering
                 query += ") Values(?";
 
                 for (int i = 1; i < intParameterCounter; i++) //counter is one-based
-			    {
-			          query += ",?";
-			    }
+                {
+                    query += ",?";
+                }
                 query += ")";
                 cmd.CommandText = query;
                 cmd.Connection = conn;
@@ -447,7 +482,7 @@ namespace GradeACatering
                 DataConnection.OpenConnection();
 
                 cmd.ExecuteNonQuery();
-                
+
                 return "Item added.";
             }
             catch (Exception ex)
@@ -458,15 +493,38 @@ namespace GradeACatering
             {
                 DataConnection.CloseConnection();
             }
-            
-        }        
+
+        }
+
+        public static void DeleteRecipeMaterial(Recipe recToDel)
+        {
+            try
+            {
+                string query = "delete from RecipeMaterials where Makes = ? and MadeOf = ?";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = recToDel.Makes;
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = recToDel.MadeOf;
+                
+                DataConnection.OpenConnection();
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                DataConnection.CloseConnection();
+            }
+        }
 
         public static List<Recipe> ListOfIngredients(string makesID = "")
         {
             //find all recipe elements that go into the foodstuff with this ID
             //if no id given, returns contents of entire BillofMaterials table
             List<Recipe> resultRMs = new List<Recipe>();
-            
+
             try
             {
                 string query = "select * from RecipeMaterials";
@@ -480,14 +538,14 @@ namespace GradeACatering
 
                 DataConnection.OpenConnection();
                 OleDbDataReader reader = cmd.ExecuteReader();
-               
-                
+
+
                 while (reader.Read())
                 {
-                    string[] results=new string[4];
+                    string[] results = new string[4];
                     results[0] = reader.GetString(0);
                     results[1] = reader.GetString(1);
-                   
+
                     if (reader[2] == DBNull.Value)
                         results[2] = "";
                     else
@@ -498,7 +556,7 @@ namespace GradeACatering
                     else
                         results[3] = reader.GetString(3);
 
-                    resultRMs.Add(new Recipe(results[0],results[1],results[2],results[3]));
+                    resultRMs.Add(new Recipe(results[0], results[1], results[2], results[3]));
                 }
                 reader.Close();
             }
@@ -518,25 +576,25 @@ namespace GradeACatering
             //are atomic items.  These are the ones we DO NOT want this function to return.
             List<FoodStuff> lstFoods = new List<FoodStuff>();
             try
-            {              
+            {
                 string query = "Select * from Foodstuff where FoodstuffID in (select Makes from RecipeMaterials where Makes <> MadeOf)"; //Not equals for Access is <> not !=
                 OleDbCommand cmd = new OleDbCommand(query, conn);
                 DataConnection.OpenConnection();
                 OleDbDataReader reader = cmd.ExecuteReader();
-                
+
                 while (reader.Read())
                 {
                     List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
 
                     FoodStuff fs = new FoodStuff(reader.GetString(0),
-                                               reader.GetString(1),
-                                               reader.GetString(2),
-                                               reader.GetInt32(3),
-                                               reader.GetInt32(4),
-                                               reader.GetDouble(5),
-                                               reader.GetInt32(6),
-                                               null,
-                                               lstMats);
+                                                 reader.GetString(1),
+                                                 reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                                 reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
+                                                 reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
+                                                 reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
+                                                 reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
+                                                 null,
+                                                 lstMats);
                     //tokenize the tags from their long string stored in the database.
 
                     if (!(reader[7] is System.DBNull))
@@ -547,7 +605,7 @@ namespace GradeACatering
                             foreach (string t in strTagList)
                                 fs.AddTag(t);
                         }
-                    } 
+                    }
                     lstFoods.Add(fs);
                 }
                 reader.Close();
@@ -558,7 +616,7 @@ namespace GradeACatering
                 ex.ToString();
             }
             finally
-             {
+            {
                 DataConnection.CloseConnection();
             }
             return lstFoods;
@@ -601,50 +659,50 @@ namespace GradeACatering
         {
             //return a list of foodstuffs whose names contain the passed in value
             //does not distinguish between base ingredients and final items.
-             List<FoodStuff> lstFoods = new List<FoodStuff>();
-             try
-             {
-                 string query = "Select * from Foodstuff where Name like ?";
-                 OleDbCommand cmd = new OleDbCommand(query, conn);
-                 cmd.Parameters.Add("?", OleDbType.VarChar).Value = inName;
-                 OleDbDataReader reader = cmd.ExecuteReader();
+            List<FoodStuff> lstFoods = new List<FoodStuff>();
+            try
+            {
+                string query = "Select * from Foodstuff where Name like ?";
+                OleDbCommand cmd = new OleDbCommand(query, conn);
+                cmd.Parameters.Add("?", OleDbType.VarChar).Value = inName;
+                OleDbDataReader reader = cmd.ExecuteReader();
 
-                 while (reader.Read())
-                 {
-                     List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
-                     FoodStuff fs = new FoodStuff(reader.GetString(0),
-                                                  reader.GetString(1),
-                                                  reader.IsDBNull(2) ? "" : reader.GetString(2),
-                                                  reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
-                                                  reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
-                                                  reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
-                                                  reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
-                                                  null,
-                                                  lstMats);
-
-
-                     //tokenize the tags from their long string stored in the database.
-
-                     string[] strTagList = reader.IsDBNull(7) ? new string[0] : reader.GetString(7).Split(',');
-
-                     foreach (string t in strTagList)
-                         fs.AddTag(t);
+                while (reader.Read())
+                {
+                    List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
+                    FoodStuff fs = new FoodStuff(reader.GetString(0),
+                                                 reader.GetString(1),
+                                                 reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                                 reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
+                                                 reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
+                                                 reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
+                                                 reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
+                                                 null,
+                                                 lstMats);
 
 
-                     lstFoods.Add(fs);
-                 }
-                 reader.Close();
-             }
-             catch (Exception ex)
-             {
+                    //tokenize the tags from their long string stored in the database.
 
-             }
+                    string[] strTagList = reader.IsDBNull(7) ? new string[0] : reader.GetString(7).Split(',');
+
+                    foreach (string t in strTagList)
+                        fs.AddTag(t);
+
+
+                    lstFoods.Add(fs);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
             finally
             {
-               
+
                 DataConnection.CloseConnection();
             }
-            
+
             return lstFoods;
         }
 
@@ -655,7 +713,7 @@ namespace GradeACatering
 
             try
             {
-                
+
                 if (TagsToMatch.Count > 0)
                 {
                     OleDbCommand cmd = new OleDbCommand();
@@ -679,11 +737,11 @@ namespace GradeACatering
 
                         FoodStuff fs = new FoodStuff(reader.GetString(0),
                                                    reader.GetString(1),
-                                                   reader.GetString(2),
-                                                   reader.GetInt32(3),
-                                                   reader.GetInt32(4),
-                                                   reader.GetDouble(5),
-                                                   reader.GetInt32(6),
+                                   reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                   reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
+                                   reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
+                                   reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
+                                   reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
                                                    null,
                                                    lstMats);
                         //tokenize the tags from their long string stored in the database.
@@ -705,7 +763,7 @@ namespace GradeACatering
             catch (Exception ex)
             {
 
-               // throw;
+                // throw;
             }
             finally
             {
@@ -718,7 +776,7 @@ namespace GradeACatering
         public static FoodStuff GetFoodstuffWithID(string fsID)
         {
             //really simple, match the foodstuff ID passed in with the ID in the table and return it.
-            FoodStuff fs=new FoodStuff();
+            FoodStuff fs = new FoodStuff();
             try
             {
                 string query = "Select * from Foodstuff where FoodstuffID like ?";
@@ -728,20 +786,20 @@ namespace GradeACatering
 
 
                 reader.Read();
-                string id = reader.IsDBNull(0) ? "":reader.GetString(0);
+                string id = reader.IsDBNull(0) ? "" : reader.GetString(0);
                 List<Recipe> lstMats = DataConnection.ListOfIngredients(reader.GetString(0));
 
                 fs = new FoodStuff(reader.GetString(0),
                                    reader.GetString(1),
                                    reader.IsDBNull(2) ? "" : reader.GetString(2),
                                    reader.IsDBNull(3) ? -1 : reader.GetInt32(3),
-                                   reader.IsDBNull(4) ? -1: reader.GetInt32(4),
+                                   reader.IsDBNull(4) ? -1 : reader.GetInt32(4),
                                    reader.IsDBNull(5) ? -1.0 : reader.GetDouble(5),
                                    reader.IsDBNull(6) ? -1 : reader.GetInt32(6),
                                    null,
                                    lstMats);
 
-                  
+
                 //tokenize the tags from their long string stored in the database.
 
                 string[] strTagList = reader.IsDBNull(7) ? new string[0] : reader.GetString(7).Split(',');
@@ -752,7 +810,7 @@ namespace GradeACatering
                         fs.AddTag(t);
                 }
                 reader.Close();
-               
+
             }
             catch (Exception ex)
             {
@@ -761,7 +819,7 @@ namespace GradeACatering
             finally
             {
                 DataConnection.CloseConnection();
-                
+
             }
             return fs;
         }
@@ -776,14 +834,14 @@ namespace GradeACatering
                 //if no results returned assume it's okay to delete.
                 string validationQuery = "Select * from RecipeMaterials where MadeOf = ? and Makes <> MadeOf";
                 OleDbCommand validationCmd = new OleDbCommand(validationQuery, conn);
-                validationCmd.Parameters.Add("?", OleDbType.VarChar).Value=id;
-                
+                validationCmd.Parameters.Add("?", OleDbType.VarChar).Value = id;
+
                 OleDbDataReader validReader = validationCmd.ExecuteReader();
-                
+
                 if (!validReader.Read())
                 {
                     validReader.Close();
-                
+
                     string deleteMaterials = "Delete from RecipeMaterials where Makes = ?";
                     OleDbCommand cmdDelMats = new OleDbCommand(deleteMaterials, conn);
                     cmdDelMats.Parameters.Add("?", OleDbType.VarChar).Value = id;
@@ -803,7 +861,7 @@ namespace GradeACatering
             finally
             {
                 DataConnection.CloseConnection();
-            }            
+            }
         }
 
         public static int NumFoodstuffs()
@@ -841,7 +899,7 @@ namespace GradeACatering
             catch (Exception ex)
             { return -1; }
             finally
-            { DataConnection.CloseConnection();}
+            { DataConnection.CloseConnection(); }
 
         }
 
@@ -881,7 +939,7 @@ namespace GradeACatering
                 resultset.Add(reader.GetString(0) + " " + reader.GetString(1));
             }
             reader.Close();
-            DataConnection.CloseConnection(); 
+            DataConnection.CloseConnection();
             return resultset;
         }
 
@@ -901,7 +959,7 @@ namespace GradeACatering
                 DataConnection.OpenConnection();
 
                 int rowsAdded = cmd.ExecuteNonQuery(); //for insertions
-               
+
                 return rowsAdded.ToString() + " rows added.";
             }
             catch (Exception ex)
@@ -912,7 +970,7 @@ namespace GradeACatering
             {
                 DataConnection.CloseConnection();
             }
-                
+
         }
 
 

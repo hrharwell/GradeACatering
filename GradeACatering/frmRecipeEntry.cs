@@ -42,8 +42,8 @@ namespace GradeACatering
                     txtQty.Text = "";
                     cboUnit.Text = "";
 
-                }
-                else if(System.Text.RegularExpressions.Regex.IsMatch(txtQty.Text,@"[1-9]?\w{0,1}[\d/\d]?"))
+                }                                                               //this gibberish should match a mixed number or fraction, like "2 1/3" or "3/4"
+                else if(System.Text.RegularExpressions.Regex.IsMatch(txtQty.Text,@"[1-9]?\w{0,1}[\d/\d]?")) 
                 {
                     int intI = lsvIngredients.Items.Count;
                     lsvIngredients.Items.Add(txtQty.Text);
@@ -62,8 +62,7 @@ namespace GradeACatering
             }
             else
             {
-                ErrMessage = "Please Enter an Ingredient";
-                MessageBox.Show(ErrMessage);
+                MessageBox.Show("Please Enter an Ingredient");
             }
         }
 
