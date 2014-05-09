@@ -162,7 +162,7 @@ namespace GradeACatering
                             //determine if the item does or doesn't exist in the ingredient list 
                          
                             Recipe recTestForExists;
-                            bool matchFound = false;
+                           // bool matchFound = false;
                             foreach (Recipe existing_r in fstoUpdate.ReturnIngredientsList())
                             {
                                 recTestForExists = existing_r;

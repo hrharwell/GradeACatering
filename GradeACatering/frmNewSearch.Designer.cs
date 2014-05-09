@@ -39,9 +39,8 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAddFilter = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnAndOr = new System.Windows.Forms.Button();
             this.btnDisplay = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +48,7 @@
             this.deleteRecipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkAndOr = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,7 +125,7 @@
             // 
             this.btnAddFilter.Location = new System.Drawing.Point(17, 26);
             this.btnAddFilter.Name = "btnAddFilter";
-            this.btnAddFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnAddFilter.Size = new System.Drawing.Size(62, 23);
             this.btnAddFilter.TabIndex = 8;
             this.btnAddFilter.Text = "Add Filter";
             this.btnAddFilter.UseVisualStyleBackColor = true;
@@ -141,15 +141,15 @@
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
-            // button1
+            // btnReturn
             // 
-            this.button1.Location = new System.Drawing.Point(8, 495);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 39);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Return";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnReturn.Location = new System.Drawing.Point(8, 495);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(75, 39);
+            this.btnReturn.TabIndex = 10;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClear
             // 
@@ -160,16 +160,6 @@
             this.btnClear.Text = "Clear Filters";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnAndOr
-            // 
-            this.btnAndOr.Location = new System.Drawing.Point(98, 26);
-            this.btnAndOr.Name = "btnAndOr";
-            this.btnAndOr.Size = new System.Drawing.Size(35, 23);
-            this.btnAndOr.TabIndex = 15;
-            this.btnAndOr.Text = "And";
-            this.btnAndOr.UseVisualStyleBackColor = true;
-            this.btnAndOr.Click += new System.EventHandler(this.btnAndOr_Click);
             // 
             // btnDisplay
             // 
@@ -231,15 +221,26 @@
             this.sOPToolStripMenuItem.Text = "S.O.P.  Form";
             this.sOPToolStripMenuItem.Click += new System.EventHandler(this.sOPToolStripMenuItem_Click);
             // 
+            // chkAndOr
+            // 
+            this.chkAndOr.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkAndOr.Location = new System.Drawing.Point(85, 26);
+            this.chkAndOr.Name = "chkAndOr";
+            this.chkAndOr.Size = new System.Drawing.Size(51, 23);
+            this.chkAndOr.TabIndex = 19;
+            this.chkAndOr.Text = "And/Or";
+            this.chkAndOr.UseVisualStyleBackColor = true;
+            this.chkAndOr.CheckedChanged += new System.EventHandler(this.chkAndOr_CheckedChanged);
+            // 
             // frmNewSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 546);
+            this.Controls.Add(this.chkAndOr);
             this.Controls.Add(this.btnDisplay);
-            this.Controls.Add(this.btnAndOr);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnAddFilter);
             this.Controls.Add(this.btnDelFilter);
@@ -264,7 +265,7 @@
         private System.Windows.Forms.ListView lsvSearch;
         private System.Windows.Forms.Button btnAddFilter;
         private System.Windows.Forms.Button btnApply;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -272,7 +273,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnAndOr;
         private System.Windows.Forms.Button btnDisplay;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -280,5 +280,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteRecipeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sOPToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chkAndOr;
     }
 }

@@ -20,6 +20,7 @@ namespace GradeACatering
         }
         private enum FilterType { Name, Tag, NumServings, PricePerServing }//and so on, can add more of these.
         //these correspond to the selectedindex of the filter type combo boxes in the dynamic panels
+        private enum NumericCompareType { LessThan, LessThanOrEqual, Equal, GreaterThanOrEqual, GreaterThan, NotEqual }
 
         private bool MatchAnything = false;
         private static int px = 3;
@@ -31,7 +32,7 @@ namespace GradeACatering
         private List<FoodStuff> fsMasterlist;
         private List<FoodStuff> fsFilteredlist; //Needs to have stuff added that meets criteria 
         List<ComboBox> lstDynCBOs = new List<ComboBox>();
-      //List<Button> lstDynAndOrBtns = new List<Button>();
+        //List<Button> lstDynAndOrBtns = new List<Button>();
 
         string[] strFilterTypes = { "Name", "Tag", "Serving Size", "Price Per Serving" };
         string[] strCboOperators = { "<", "<=", "=", "=>", ">", "<>" };
@@ -70,7 +71,7 @@ namespace GradeACatering
                 btn.Click += new System.EventHandler(this.btn_Click);
                 btn.Visible = false;
                 dynPanel.Controls.Add(btn);
-              //  lstDynAndOrBtns.Add(btn);
+                //  lstDynAndOrBtns.Add(btn);
 
             }
 
@@ -201,174 +202,218 @@ namespace GradeACatering
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            //First thing: have for loop looking at arraylist of comboboxes and see what filter type is and the combobox index:
-            // Ex. if 0 do the name search if 1 do the tag search etc.
-            //Need list of things we are searching for...
-
             if (pnlMain.Controls.Count > 0)
             {
-                for (int i = 0; i <= lstDynCBOs.Count - 1; i++)
+                fsFilteredlist.Clear();
+                foreach (FoodStuff fs in fsMasterlist)
                 {
-                    Panel dyn = (Panel)pnlMain.Controls[i];//ugly hack, if anything but panels are in pnlMain this WILL EXPLODE...
-                    string txtAndOr = "";
-                    foreach (Control ctrl in dyn.Controls)
-                        if (ctrl is Button)
-                            txtAndOr = ctrl.Text.ToUpper();
+                    List<bool> matches = new List<bool>();
+                    for (int i = 0; i <= lstDynCBOs.Count - 1; i++)
+                    {
+                        Panel dyn = (Panel)pnlMain.Controls[i];
+                        switch (lstDynCBOs[i].SelectedIndex)
+                        {
+                            case (int)FilterType.Name:
+                                foreach (Control ctrl in dyn.Controls)
+                                {
+                                    if (ctrl is TextBox)
+                                    {
+                                        if (fs.Name.ToUpper().Contains(ctrl.Text.ToUpper())) //REALLY need to use the culture settings I think...
+                                            matches.Add(true);
+                                        else
+                                            matches.Add(false);
+                                    }
+                                }
+                                break;
 
-                    if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Name)
-                    {
-                        foreach (Control ctrl in dyn.Controls)
-                        {
-                            if (ctrl is TextBox)
-                            {
-                                foreach (FoodStuff fs in fsMasterlist)
+                            case (int)FilterType.Tag:
+                                foreach (Control ctrl in dyn.Controls)
                                 {
-                                    if (fs.Name.ToUpper().Contains(ctrl.Text.ToUpper())) //REALLY need to use the culture settings I think...
-                                        fsFilteredlist.Add(fs);
-                                }
-                            }
-                        }
-                    }
-                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Tag)
-                    {
-                        foreach (Control ctrl in dyn.Controls)
-                        {
-                            if (ctrl is TextBox)
-                            {
-                                foreach (FoodStuff fs in fsMasterlist)
-                                {
-                                    if (fs.GetTags().Contains(ctrl.Text))
-                                        fsFilteredlist.Add(fs);
-                                }
-                            }
-                        }
-                    }
-                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.NumServings)
-                    {
-                        int ComparatorIndex = -1;
-                        foreach (Control ctrl in dyn.Controls)
-                        {
-                            //need comparator
-                            if (ctrl is ComboBox && strCboOperators.Contains<string>(ctrl.Text))
-                            {
-                                ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
-                            }
-                        }
-                        foreach (Control ctrl in dyn.Controls)
-                        {
-                            if (ctrl is TextBox)
-                            {
-                                int qty = 0;
-                                if (int.TryParse(ctrl.Text, out qty))
-                                {
-                                    foreach (FoodStuff fs in fsMasterlist)
+                                    if (ctrl is TextBox)
                                     {
-                                        if (ComparatorIndex == 0)
-                                        {   //less than
-                                            if (fs.Servings < qty)
-                                                fsFilteredlist.Add(fs);
+                                        if (fs.GetTags().Contains(ctrl.Text))
+                                            matches.Add(true);
+                                        else
+                                            matches.Add(false);
+                                    }
+                                }
+                                break;
+
+                            case (int)FilterType.NumServings:
+                                {
+                                    int ComparatorIndex = -1;
+                                    int Qty = 0;
+                                    foreach (Control ctrl in dyn.Controls)
+                                    {
+                                        //need comparator
+                                        if (ctrl is ComboBox && strCboOperators.Contains<string>(ctrl.Text))
+                                        {
+                                            ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
                                         }
-                                        else if (ComparatorIndex == 1)
-                                        {   //less than or equal to
-                                            if (fs.Servings <= qty)
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 2)
-                                        {   //equal to
-                                            if (fs.Servings == qty)
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 3)
-                                        {   //greater than or equal to
-                                            if (fs.Servings >= qty)
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 4)
-                                        {   //greater than
-                                            if (fs.Servings > qty)
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 5)
-                                        {   //not equal to
-                                            if (fs.Servings != qty)
-                                                fsFilteredlist.Add(fs);
+                                        else if (ctrl is TextBox)
+                                        {
+                                            if (int.TryParse(((TextBox)ctrl).Text, out Qty))
+                                            {
+                                                switch (ComparatorIndex)
+                                                {
+                                                    case (int)NumericCompareType.LessThan:
+                                                        if (fs.Servings < Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.LessThanOrEqual:
+                                                        if (fs.Servings <= Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.Equal:
+                                                        if (fs.Servings == Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.GreaterThanOrEqual:
+                                                        if (fs.Servings >= Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.GreaterThan:
+                                                        if (fs.Servings > Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.NotEqual:
+                                                        if (fs.Servings != Qty)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    default:
+                                                        MessageBox.Show("Error reading value comparison.  Did you select one?");
+                                                        break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("Error reading quantity for filter (did you enter a number?)", "Filter Error");
+                                                return; //exits method on error
+                                            }
                                         }
                                     }
                                 }
-                                else
+                                break;
+
+                            case (int)FilterType.PricePerServing:
                                 {
-                                    MessageBox.Show("Error reading quantity for filter (did you enter a number?)", "Filter Error");
-                                    return; //exits method on error
-                                }
-                            }
-                        }
-                    }
-                    else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.PricePerServing)
-                    {
-                        foreach (Control ctrl in dyn.Controls)
-                        {
-                            int ComparatorIndex = -1;
-                            //need comparator
-                            if (ctrl is ComboBox && ctrl.Tag == "Compare")
-                            {
-                                ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
-                            }
-                            if (ctrl is TextBox)
-                            {
-                                double ServingPrice = 0;
-                                if (double.TryParse(ctrl.Text, out ServingPrice))
-                                {
-                                    foreach (FoodStuff fs in fsMasterlist)
+                                    int ComparatorIndex = -1;
+                                    double PerServingPrice = 0.0;
+                                    foreach (Control ctrl in dyn.Controls)
                                     {
-                                        if (ComparatorIndex == 0)
-                                        {   //less than
-                                            if (ServingPrice < fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
+                                        if (ctrl is ComboBox && (string)ctrl.Tag == "Compare")
+                                        {
+                                            ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
                                         }
-                                        else if (ComparatorIndex == 1)
-                                        {   //less than or equal to
-                                            if (ServingPrice <= fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 2)
-                                        {   //equal to
-                                            if (ServingPrice == fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 3)
-                                        {   //greater than or equal to
-                                            if (ServingPrice >= fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 4)
-                                        {   //greater than
-                                            if (ServingPrice > fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
-                                        }
-                                        else if (ComparatorIndex == 5)
-                                        {   //not equal to
-                                            if (ServingPrice != fs.CostPerServing())
-                                                fsFilteredlist.Add(fs);
+                                        else if (ctrl is TextBox)
+                                        {
+                                            if (double.TryParse(ctrl.Text, out PerServingPrice))
+                                            {
+                                                switch (ComparatorIndex)
+                                                {
+                                                    case (int)NumericCompareType.LessThan:
+                                                        if (fs.CostPerServing() < PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.LessThanOrEqual:
+                                                        if (fs.CostPerServing() <= PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.Equal:
+                                                        if (fs.CostPerServing() == PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.GreaterThanOrEqual:
+                                                        if (fs.CostPerServing() >= PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.GreaterThan:
+                                                        if (fs.CostPerServing() > PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    case (int)NumericCompareType.NotEqual:
+                                                        if (fs.CostPerServing() != PerServingPrice)
+                                                            matches.Add(true);
+                                                        else
+                                                            matches.Add(false);
+                                                        break;
+                                                    default:
+                                                        MessageBox.Show("Error reading value comparison.  Did you select one?");
+                                                        break;
+                                                }
+                                            }
                                         }
                                     }
+                                    break;
                                 }
-                                else
-                                {
-                                    MessageBox.Show("Error reading price for filter (did you enter a number?)", "Filter Error");
-                                    return; //exits method on error
-                                }
-                            }
+                            default:
+                                MessageBox.Show("Invalid filter type selected.");
+                                break;
                         }
                     }
-                    //append additional filters here
+                    //if and is set, see that all items in matches are true
+                    //if true, add item to filteredlist
+                    if (!chkAndOr.Checked) //or flag is false, basically, or and flag is true...which way to read this?
+                    {
+                        bool FullMatch = true;
+                        foreach (bool b in matches)
+                            if (!b)
+                                FullMatch = false;
+
+                        if (FullMatch)
+                            AddItemToList<FoodStuff>(fsFilteredlist, fs);
+                    }
                     else
                     {
-                        fsFilteredlist = fsMasterlist;
+                        //if or is set, see that at least one item in matches is true
+                        //if true, add item to filteredlist
+                        bool PartialMatch = false;
+                        foreach (bool b in matches)
+                            if (b)
+                                PartialMatch = true;
+
+                        if (PartialMatch)
+                            AddItemToList<FoodStuff>(fsFilteredlist, fs);
                     }
+
+                }
+                if (fsFilteredlist.Count > 0)
+                {
                     lsvSearch.Items.Clear();// Clear Unfiltered list
                     PopulateListView(fsFilteredlist);
                 }
+                else
+                    MessageBox.Show("No items found that match your search.");
             }
+        }
+
+        private void AddItemToList<T>(List<T> TargetList, Object obj)
+        {
+            if (obj is T)
+                if (!TargetList.Contains((T)obj))
+                    TargetList.Add((T)obj);
         }
 
         private void frmNewSearch_Load(object sender, EventArgs e)
@@ -435,7 +480,7 @@ namespace GradeACatering
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnReturn_Click(object sender, EventArgs e)
         {
             ActiveForm.Close();
         }
@@ -450,29 +495,25 @@ namespace GradeACatering
 
         private void lsvSearch_DoubleClick(object sender, EventArgs e)
         {
-            frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
-            displayRecipe.LoadFoodstuff(fsMasterlist[lsvSearch.SelectedIndices[0]]);
-            displayRecipe.ShowDialog();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            btnDisplay_Click(sender, e);
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)
         {
-            frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
-            displayRecipe.LoadFoodstuff(fsMasterlist[lsvSearch.SelectedIndices[0]]);
-            displayRecipe.ShowDialog();
+            if (lsvSearch.SelectedIndices.Count > 0)
+            {
+                frmDisplayRecipe displayRecipe = new frmDisplayRecipe();
+                displayRecipe.LoadFoodstuff(fsMasterlist[lsvSearch.SelectedIndices[0]]);
+                displayRecipe.ShowDialog();
+            }
         }
 
         private void addNewRecipeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRecipeEntry RecipeEntry = new frmRecipeEntry();
-           RecipeEntry.ShowDialog();
-           lsvSearch.Items.Clear();
-           frmNewSearch_Load(sender,e);
+            RecipeEntry.ShowDialog();
+            lsvSearch.Items.Clear();
+            frmNewSearch_Load(sender, e);
         }
 
         private void sOPToolStripMenuItem_Click(object sender, EventArgs e)
@@ -506,7 +547,19 @@ namespace GradeACatering
                     btnClear_Click(sender, e);
                     frmNewSearch_Load(sender, e);
                 }
-             
+
+            }
+        }
+
+        private void chkAndOr_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAndOr.Checked)
+            {
+                chkAndOr.Text = "and/OR";
+            }
+            else
+            {
+                chkAndOr.Text = "AND/or";
             }
         }
     }
@@ -662,6 +715,185 @@ namespace GradeACatering
 //================================================================
 
 
+//}
+//First thing: have for loop looking at arraylist of comboboxes and see what filter type is and the combobox index:
+// Ex. if 0 do the name search if 1 do the tag search etc.
+//Need list of things we are searching for...
+
+//if (pnlMain.Controls.Count > 0)
+//{
+//    //after first pass, if fsFilterdList count > 0, run filters on it
+//    //else go thru master again.
+//    List<FoodStuff> fsWorkingList = new List<FoodStuff>();
+//    List<FoodStuff> fsSourceList = new List<FoodStuff>();
+
+//    for (int i = 0; i <= lstDynCBOs.Count - 1; i++)
+//    {
+//        Panel dyn = (Panel)pnlMain.Controls[i];//ugly hack, if anything but panels are in pnlMain this WILL EXPLODE...
+
+//        if (i >= 1 && fsFilteredlist.Count > 0)
+//            fsSourceList = fsFilteredlist;
+//        else
+//            fsSourceList = fsMasterlist;
+
+//        if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Name)
+//        {
+//            foreach (Control ctrl in dyn.Controls)
+//            {
+//                if (ctrl is TextBox)
+//                {
+//                    foreach (FoodStuff fs in fsSourceList)
+//                    {
+//                        if (fs.Name.ToUpper().Contains(ctrl.Text.ToUpper())) //REALLY need to use the culture settings I think...
+//                            AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                    }
+//                }
+//            }
+//        }
+//        else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.Tag)
+//        {
+//            foreach (Control ctrl in dyn.Controls)
+//            {
+//                if (ctrl is TextBox)
+//                {
+//                    foreach (FoodStuff fs in fsSourceList)
+//                    {
+//                        if (fs.GetTags().Contains(ctrl.Text))
+//                            AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                    }
+//                }
+//            }
+//        }
+//        else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.NumServings)
+//        {
+//            int ComparatorIndex = -1;
+//            foreach (Control ctrl in dyn.Controls)
+//            {
+//                //need comparator
+//                if (ctrl is ComboBox && strCboOperators.Contains<string>(ctrl.Text))
+//                {
+//                    ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
+//                }
+//            }
+//            foreach (Control ctrl in dyn.Controls)
+//            {
+//                if (ctrl is TextBox)
+//                {
+//                    int qty = 0;
+//                    if (int.TryParse(ctrl.Text, out qty))
+//                    {
+//                        foreach (FoodStuff fs in fsSourceList)
+//                        {
+//                            if (ComparatorIndex == 0)
+//                            {   //less than
+//                                if (fs.Servings < qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 1)
+//                            {   //less than or equal to
+//                                if (fs.Servings <= qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 2)
+//                            {   //equal to
+//                                if (fs.Servings == qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 3)
+//                            {   //greater than or equal to
+//                                if (fs.Servings >= qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 4)
+//                            {   //greater than
+//                                if (fs.Servings > qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 5)
+//                            {   //not equal to
+//                                if (fs.Servings != qty)
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                        }
+//                    }
+//                    else
+//                    {
+//                        MessageBox.Show("Error reading quantity for filter (did you enter a number?)", "Filter Error");
+//                        return; //exits method on error
+//                    }
+//                }
+//            }
+//        }
+//        else if (lstDynCBOs[i].SelectedIndex == (int)FilterType.PricePerServing)
+//        {
+//            foreach (Control ctrl in dyn.Controls)
+//            {
+//                int ComparatorIndex = -1;
+//                //need comparator
+//                if (ctrl is ComboBox && (string)ctrl.Tag == "Compare")
+//                {
+//                    ComparatorIndex = ((ComboBox)ctrl).SelectedIndex;
+//                }
+//                if (ctrl is TextBox)
+//                {
+//                    double ServingPrice = 0;
+//                    if (double.TryParse(ctrl.Text, out ServingPrice))
+//                    {
+//                        foreach (FoodStuff fs in fsSourceList)
+//                        {
+//                            if (ComparatorIndex == 0)
+//                            {   //less than
+//                                if (ServingPrice < fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 1)
+//                            {   //less than or equal to
+//                                if (ServingPrice <= fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 2)
+//                            {   //equal to
+//                                if (ServingPrice == fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 3)
+//                            {   //greater than or equal to
+//                                if (ServingPrice >= fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 4)
+//                            {   //greater than
+//                                if (ServingPrice > fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                            else if (ComparatorIndex == 5)
+//                            {   //not equal to
+//                                if (ServingPrice != fs.CostPerServing())
+//                                    AddItemToList<FoodStuff>(fsWorkingList, fs);
+//                            }
+//                        }
+//                    }
+//                    else
+//                    {
+//                        MessageBox.Show("Error reading price for filter (did you enter a number?)", "Filter Error");
+//                        return; //exits method on error
+//                    }
+
+//                }
+//            }
+//        }
+//        //append additional filters here
+//        else
+//        {
+//            //no filters matched anything?
+//            fsFilteredlist = fsMasterlist;
+//        }
+//        if (fsWorkingList.Count > 0)
+//            fsFilteredlist = fsWorkingList;
+//    }
+
+//    lsvSearch.Items.Clear();// Clear Unfiltered list
+//    PopulateListView(fsFilteredlist);
 //}
 
 
